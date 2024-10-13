@@ -15,6 +15,7 @@ public class RegistrarCliente extends javax.swing.JFrame {
      */
     public RegistrarCliente() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -26,6 +27,7 @@ public class RegistrarCliente extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        LabelIcono = new javax.swing.JLabel();
         LabelNombre = new javax.swing.JLabel();
         LabelContrasena = new javax.swing.JLabel();
         LabelIdentificacion = new javax.swing.JLabel();
@@ -34,72 +36,81 @@ public class RegistrarCliente extends javax.swing.JFrame {
         id = new javax.swing.JTextField();
         contraseña = new javax.swing.JPasswordField();
         correo = new javax.swing.JTextField();
-        jSeparator1 = new javax.swing.JSeparator();
-        jSeparator2 = new javax.swing.JSeparator();
-        jSeparator3 = new javax.swing.JSeparator();
-        jSeparator4 = new javax.swing.JSeparator();
         Registrar = new javax.swing.JButton();
         jLabelFondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        LabelIcono.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Icono.png"))); // NOI18N
+        getContentPane().add(LabelIcono, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 10, 200, 200));
+
+        LabelNombre.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         LabelNombre.setForeground(new java.awt.Color(255, 255, 255));
-        LabelNombre.setText("Nombre");
-        getContentPane().add(LabelNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 40, -1, -1));
+        LabelNombre.setText("Nombre :");
+        getContentPane().add(LabelNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 220, -1, -1));
 
+        LabelContrasena.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         LabelContrasena.setForeground(new java.awt.Color(255, 255, 255));
-        LabelContrasena.setText("Correo");
-        getContentPane().add(LabelContrasena, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 240, -1, -1));
+        LabelContrasena.setText("Correo :");
+        getContentPane().add(LabelContrasena, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 280, -1, -1));
 
+        LabelIdentificacion.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         LabelIdentificacion.setForeground(new java.awt.Color(255, 255, 255));
-        LabelIdentificacion.setText("Identificación");
-        getContentPane().add(LabelIdentificacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 40, -1, -1));
+        LabelIdentificacion.setText("Identificación :");
+        getContentPane().add(LabelIdentificacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 250, -1, -1));
 
+        LabelCorreo.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         LabelCorreo.setForeground(new java.awt.Color(255, 255, 255));
-        LabelCorreo.setText("Contraseña");
-        getContentPane().add(LabelCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 240, -1, -1));
+        LabelCorreo.setText("Contraseña :");
+        getContentPane().add(LabelCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 310, -1, -1));
 
+        nombre.setBackground(new java.awt.Color(0, 0, 102));
+        nombre.setForeground(new java.awt.Color(255, 255, 255));
         nombre.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        nombre.setCaretColor(new java.awt.Color(255, 255, 255));
         nombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 nombreActionPerformed(evt);
             }
         });
-        getContentPane().add(nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 70, 150, -1));
+        getContentPane().add(nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 220, 150, -1));
 
+        id.setBackground(new java.awt.Color(0, 0, 102));
+        id.setForeground(new java.awt.Color(255, 255, 255));
         id.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        id.setCaretColor(new java.awt.Color(242, 242, 242));
         id.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 idActionPerformed(evt);
             }
         });
-        getContentPane().add(id, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 70, 150, -1));
+        getContentPane().add(id, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 250, 150, -1));
 
-        contraseña.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                contraseñaActionPerformed(evt);
-            }
-        });
-        getContentPane().add(contraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 270, -1, -1));
+        contraseña.setBackground(new java.awt.Color(0, 0, 102));
+        contraseña.setForeground(new java.awt.Color(255, 255, 255));
+        contraseña.setCaretColor(new java.awt.Color(255, 255, 255));
+        getContentPane().add(contraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 310, -1, 20));
 
+        correo.setBackground(new java.awt.Color(0, 0, 102));
+        correo.setForeground(new java.awt.Color(255, 255, 255));
         correo.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        correo.setCaretColor(new java.awt.Color(255, 255, 255));
         correo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 correoActionPerformed(evt);
             }
         });
-        getContentPane().add(correo, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 270, 150, -1));
-        getContentPane().add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 60, 180, 10));
-        getContentPane().add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 60, 180, 10));
-        getContentPane().add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 260, 180, 10));
-        getContentPane().add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 260, 180, 10));
+        getContentPane().add(correo, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 280, 150, -1));
 
+        Registrar.setBackground(new java.awt.Color(0, 0, 51));
+        Registrar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        Registrar.setForeground(new java.awt.Color(255, 255, 255));
         Registrar.setText("Registrar cliente");
-        getContentPane().add(Registrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 330, -1, -1));
+        getContentPane().add(Registrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 360, -1, -1));
 
         jLabelFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Fondo.jpeg"))); // NOI18N
-        getContentPane().add(jLabelFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        getContentPane().add(jLabelFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 360, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -107,10 +118,6 @@ public class RegistrarCliente extends javax.swing.JFrame {
     private void nombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombreActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_nombreActionPerformed
-
-    private void contraseñaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_contraseñaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_contraseñaActionPerformed
 
     private void idActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_idActionPerformed
         // TODO add your handling code here:
@@ -159,6 +166,7 @@ public class RegistrarCliente extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel LabelContrasena;
     private javax.swing.JLabel LabelCorreo;
+    private javax.swing.JLabel LabelIcono;
     private javax.swing.JLabel LabelIdentificacion;
     private javax.swing.JLabel LabelNombre;
     private javax.swing.JButton Registrar;
@@ -166,10 +174,6 @@ public class RegistrarCliente extends javax.swing.JFrame {
     private javax.swing.JTextField correo;
     private javax.swing.JTextField id;
     private javax.swing.JLabel jLabelFondo;
-    private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JSeparator jSeparator3;
-    private javax.swing.JSeparator jSeparator4;
     private javax.swing.JTextField nombre;
     // End of variables declaration//GEN-END:variables
 }
