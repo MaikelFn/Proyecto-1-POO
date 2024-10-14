@@ -10,14 +10,13 @@ package GUI;
  */
 public class RegistrarCliente extends javax.swing.JFrame {
 
-    /**
-     * Creates new form IniciarSesion
-     */
-    public RegistrarCliente() {
+    private MenuPrincipal menuPrincipal; // Mantener referencia a la ventana anterior
+
+    public RegistrarCliente(MenuPrincipal menuPrincipal) {
         initComponents();
         this.setLocationRelativeTo(null);
+        this.menuPrincipal = menuPrincipal;
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -36,6 +35,7 @@ public class RegistrarCliente extends javax.swing.JFrame {
         id = new javax.swing.JTextField();
         contraseña = new javax.swing.JPasswordField();
         correo = new javax.swing.JTextField();
+        Volver = new javax.swing.JButton();
         Registrar = new javax.swing.JButton();
         jLabelFondo = new javax.swing.JLabel();
 
@@ -103,6 +103,17 @@ public class RegistrarCliente extends javax.swing.JFrame {
         });
         getContentPane().add(correo, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 280, 150, -1));
 
+        Volver.setBackground(new java.awt.Color(0, 0, 51));
+        Volver.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        Volver.setForeground(new java.awt.Color(255, 255, 255));
+        Volver.setText("Volver");
+        Volver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                VolverActionPerformed(evt);
+            }
+        });
+        getContentPane().add(Volver, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 70, -1));
+
         Registrar.setBackground(new java.awt.Color(0, 0, 51));
         Registrar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         Registrar.setForeground(new java.awt.Color(255, 255, 255));
@@ -126,6 +137,11 @@ public class RegistrarCliente extends javax.swing.JFrame {
     private void correoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_correoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_correoActionPerformed
+
+    private void VolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VolverActionPerformed
+        this.dispose(); 
+        menuPrincipal.setVisible(true);
+    }//GEN-LAST:event_VolverActionPerformed
 
     /**
      * @param args the command line arguments
@@ -158,7 +174,9 @@ public class RegistrarCliente extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new RegistrarCliente().setVisible(true);
+                MenuPrincipal menuPrincipal = new MenuPrincipal();
+                RegistrarCliente registrarCliente = new RegistrarCliente(menuPrincipal);
+                registrarCliente.setVisible(true);
             }
         });
     }
@@ -170,6 +188,7 @@ public class RegistrarCliente extends javax.swing.JFrame {
     private javax.swing.JLabel LabelIdentificacion;
     private javax.swing.JLabel LabelNombre;
     private javax.swing.JButton Registrar;
+    private javax.swing.JButton Volver;
     private javax.swing.JPasswordField contraseña;
     private javax.swing.JTextField correo;
     private javax.swing.JTextField id;
