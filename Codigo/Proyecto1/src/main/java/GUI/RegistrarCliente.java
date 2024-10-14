@@ -90,7 +90,7 @@ public class RegistrarCliente extends javax.swing.JFrame {
         contraseña.setBackground(new java.awt.Color(0, 0, 102));
         contraseña.setForeground(new java.awt.Color(255, 255, 255));
         contraseña.setCaretColor(new java.awt.Color(255, 255, 255));
-        getContentPane().add(contraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 310, -1, 20));
+        getContentPane().add(contraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 310, 150, 20));
 
         correo.setBackground(new java.awt.Color(0, 0, 102));
         correo.setForeground(new java.awt.Color(255, 255, 255));
