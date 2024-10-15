@@ -15,6 +15,7 @@ GUI\MenuPrincipal$3.class
 GUI\RegistrarCliente$1.class
 GUI\RegistrarCliente$3.class
 Clases\Banco.class
+Clases\XMLWriter.class
 GUI\RegistrarCliente$5.class
 Clases\Transaccion.class
 GUI\InterfazBanco.class

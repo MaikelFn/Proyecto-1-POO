@@ -4,33 +4,61 @@
  */
 package Clases;
 
+package Clases;
+
 /**
- *
- * @author Estudiante
+ * Clase que gestiona las comisiones generadas por depósitos y retiros.
  */
 public class Comision {
+
   private double totalComisiones;
   private double comisionesRetiros;
   private double comisionesDepositos;
-    
-  public double calcularComision(double pMonto, String pTipoTransaccion){
-    double Total;
-    Total= pMonto*0.02;
-    if(pTipoTransaccion.equals("D")){
-      comisionesDepositos+=Total;
-    }else if(pTipoTransaccion.equals("R")){
-      comisionesRetiros+=Total;
+
+  /**
+   * Calcula la comisión correspondiente según el tipo de transacción.
+   *
+   * @param pMonto Monto de la transacción.
+   * @param pTipoTransaccion Tipo de transacción ("D" para depósito, "R" para retiro).
+   * @return El monto de la comisión calculada.
+   */
+  public double calcularComision(double pMonto, String pTipoTransaccion) {
+    double total = pMonto * 0.02;
+
+    if (pTipoTransaccion.equals("D")) {
+      comisionesDepositos += total;
+    } else if (pTipoTransaccion.equals("R")) {
+      comisionesRetiros += total;
     }
-    totalComisiones+=Total;
-    return Total;
+
+    totalComisiones += total;
+    return total;
   }
-  public double getTotalComisiones(){
+
+  /**
+   * Obtiene el total de comisiones generadas.
+   *
+   * @return El total de comisiones.
+   */
+  public double getTotalComisiones() {
     return totalComisiones;
   }
-  public double getComisionesRetiros(){
+
+  /**
+   * Obtiene el total de comisiones por retiros.
+   *
+   * @return El total de comisiones por retiros.
+   */
+  public double getComisionesRetiros() {
     return comisionesRetiros;
   }
-  public double getComisionesDepositos(){
+
+  /**
+   * Obtiene el total de comisiones por depósitos.
+   *
+   * @return El total de comisiones por depósitos.
+   */
+  public double getComisionesDepositos() {
     return comisionesDepositos;
   }
 }
