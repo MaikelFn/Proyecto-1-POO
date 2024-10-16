@@ -65,11 +65,15 @@ public class Cuenta {
   
   public void realizarDeposito(double pMonto) {}
   
-  public boolean realizarRetiro(double pMonto) {}
+  public boolean realizarRetiro(double pMonto) {
+  return true;
+          }
   
   
   
-  private String cifrarPin(String pPin) {}
+  private String cifrarPin(String pPin) {
+  return "X";
+  }
   
   public double getSaldo() {
     return saldo;
