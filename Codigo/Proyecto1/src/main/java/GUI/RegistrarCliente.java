@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package GUI;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -120,6 +121,11 @@ public class RegistrarCliente extends javax.swing.JFrame {
         Registrar.setForeground(new java.awt.Color(255, 255, 255));
         Registrar.setText("Registrar cliente");
         Registrar.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        Registrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RegistrarActionPerformed(evt);
+            }
+        });
         getContentPane().add(Registrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 360, -1, 20));
 
         jLabelFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Fondo.jpeg"))); // NOI18N
@@ -144,6 +150,23 @@ public class RegistrarCliente extends javax.swing.JFrame {
         this.dispose(); 
         menuPrincipal.setVisible(true);
     }//GEN-LAST:event_VolverActionPerformed
+
+    private void RegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegistrarActionPerformed
+        if (nombre.getText().isEmpty() || 
+            contraseña.getText().isEmpty() || 
+            correo.getText().isEmpty() || 
+            id.getText().isEmpty()) {
+    
+            JOptionPane.showMessageDialog(null, "Todos los campos deben estar llenos.", "Error", JOptionPane.ERROR_MESSAGE);
+            
+        } else {
+            String nombreUsuario = nombre.getText();
+            String contraseñaUsuario = contraseña.getText();
+            String correoUsuario = correo.getText();
+            String idUsuario = id.getText();
+            
+        }
+    }//GEN-LAST:event_RegistrarActionPerformed
 
     /**
      * @param args the command line arguments
