@@ -1,8 +1,10 @@
 GUI\MenuPrincipal$2.class
+GUI\IniciarSesion.class
 GUI\RegistrarCliente$2.class
 Clases\Cajero.class
 GUI\GestionCliente.class
 GUI\RegistrarCliente.class
+GUI\IniciarSesion$1.class
 Clases\Cuenta.class
 GUI\RegistrarCliente$4.class
 GUI\MenuPrincipal.class
@@ -14,6 +16,7 @@ Clases\Comision.class
 GUI\MenuPrincipal$3.class
 GUI\RegistrarCliente$1.class
 GUI\RegistrarCliente$3.class
+GUI\IniciarSesion$2.class
 Clases\Banco.class
 Clases\XMLWriter.class
 GUI\RegistrarCliente$5.class

@@ -43,7 +43,7 @@ public class RegistrarCliente extends javax.swing.JFrame {
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         LabelIcono.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Icono.png"))); // NOI18N
-        getContentPane().add(LabelIcono, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 10, 200, 200));
+        getContentPane().add(LabelIcono, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 10, 200, 200));
 
         LabelNombre.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         LabelNombre.setForeground(new java.awt.Color(255, 255, 255));
@@ -67,7 +67,7 @@ public class RegistrarCliente extends javax.swing.JFrame {
 
         nombre.setBackground(new java.awt.Color(0, 0, 102));
         nombre.setForeground(new java.awt.Color(255, 255, 255));
-        nombre.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        nombre.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         nombre.setCaretColor(new java.awt.Color(255, 255, 255));
         nombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -78,7 +78,7 @@ public class RegistrarCliente extends javax.swing.JFrame {
 
         id.setBackground(new java.awt.Color(0, 0, 102));
         id.setForeground(new java.awt.Color(255, 255, 255));
-        id.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        id.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         id.setCaretColor(new java.awt.Color(242, 242, 242));
         id.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -89,12 +89,13 @@ public class RegistrarCliente extends javax.swing.JFrame {
 
         contraseña.setBackground(new java.awt.Color(0, 0, 102));
         contraseña.setForeground(new java.awt.Color(255, 255, 255));
+        contraseña.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         contraseña.setCaretColor(new java.awt.Color(255, 255, 255));
         getContentPane().add(contraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 310, 150, 20));
 
         correo.setBackground(new java.awt.Color(0, 0, 102));
         correo.setForeground(new java.awt.Color(255, 255, 255));
-        correo.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        correo.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         correo.setCaretColor(new java.awt.Color(255, 255, 255));
         correo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -118,7 +119,8 @@ public class RegistrarCliente extends javax.swing.JFrame {
         Registrar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         Registrar.setForeground(new java.awt.Color(255, 255, 255));
         Registrar.setText("Registrar cliente");
-        getContentPane().add(Registrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 360, -1, -1));
+        Registrar.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        getContentPane().add(Registrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 360, -1, 20));
 
         jLabelFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Fondo.jpeg"))); // NOI18N
         getContentPane().add(jLabelFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 360, -1));

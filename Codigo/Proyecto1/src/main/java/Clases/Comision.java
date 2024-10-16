@@ -4,7 +4,6 @@
  */
 package Clases;
 
-package Clases;
 
 /**
  * Clase que gestiona las comisiones generadas por depósitos y retiros.
