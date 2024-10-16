@@ -4,7 +4,7 @@
  */
 package GUI;
 import javax.swing.JOptionPane;
-
+import Clases.XMLWriter;
 /**
  *
  * @author Tayle
@@ -34,8 +34,8 @@ public class RegistrarCliente extends javax.swing.JFrame {
         LabelCorreo = new javax.swing.JLabel();
         nombre = new javax.swing.JTextField();
         id = new javax.swing.JTextField();
-        contraseña = new javax.swing.JPasswordField();
         correo = new javax.swing.JTextField();
+        telefono = new javax.swing.JTextField();
         Volver = new javax.swing.JButton();
         Registrar = new javax.swing.JButton();
         jLabelFondo = new javax.swing.JLabel();
@@ -63,7 +63,7 @@ public class RegistrarCliente extends javax.swing.JFrame {
 
         LabelCorreo.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         LabelCorreo.setForeground(new java.awt.Color(255, 255, 255));
-        LabelCorreo.setText("Contraseña :");
+        LabelCorreo.setText("Telefono :");
         getContentPane().add(LabelCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 310, -1, -1));
 
         nombre.setBackground(new java.awt.Color(0, 0, 102));
@@ -88,12 +88,6 @@ public class RegistrarCliente extends javax.swing.JFrame {
         });
         getContentPane().add(id, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 250, 150, -1));
 
-        contraseña.setBackground(new java.awt.Color(0, 0, 102));
-        contraseña.setForeground(new java.awt.Color(255, 255, 255));
-        contraseña.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        contraseña.setCaretColor(new java.awt.Color(255, 255, 255));
-        getContentPane().add(contraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 310, 150, 20));
-
         correo.setBackground(new java.awt.Color(0, 0, 102));
         correo.setForeground(new java.awt.Color(255, 255, 255));
         correo.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -104,6 +98,11 @@ public class RegistrarCliente extends javax.swing.JFrame {
             }
         });
         getContentPane().add(correo, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 280, 150, -1));
+
+        telefono.setBackground(new java.awt.Color(0, 0, 102));
+        telefono.setForeground(new java.awt.Color(255, 255, 255));
+        telefono.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        getContentPane().add(telefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 310, 150, 20));
 
         Volver.setBackground(new java.awt.Color(0, 0, 51));
         Volver.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -153,7 +152,7 @@ public class RegistrarCliente extends javax.swing.JFrame {
 
     private void RegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegistrarActionPerformed
         if (nombre.getText().isEmpty() || 
-            contraseña.getText().isEmpty() || 
+            telefono.getText().isEmpty() || 
             correo.getText().isEmpty() || 
             id.getText().isEmpty()) {
     
@@ -161,10 +160,13 @@ public class RegistrarCliente extends javax.swing.JFrame {
             
         } else {
             String nombreUsuario = nombre.getText();
-            String contraseñaUsuario = contraseña.getText();
+            String telefonoUsuario = telefono.getText();
             String correoUsuario = correo.getText();
             String idUsuario = id.getText();
-            
+            XMLWriter.agregarCliente(nombreUsuario, idUsuario, telefonoUsuario, correoUsuario, "clientes.xml");
+            JOptionPane.showMessageDialog(null, "Cliente rgistrado", "¡Éxito", JOptionPane.INFORMATION_MESSAGE);
+            this.dispose();
+            menuPrincipal.setVisible(true);
         }
     }//GEN-LAST:event_RegistrarActionPerformed
 
@@ -214,10 +216,10 @@ public class RegistrarCliente extends javax.swing.JFrame {
     private javax.swing.JLabel LabelNombre;
     private javax.swing.JButton Registrar;
     private javax.swing.JButton Volver;
-    private javax.swing.JPasswordField contraseña;
     private javax.swing.JTextField correo;
     private javax.swing.JTextField id;
     private javax.swing.JLabel jLabelFondo;
     private javax.swing.JTextField nombre;
+    private javax.swing.JTextField telefono;
     // End of variables declaration//GEN-END:variables
 }
