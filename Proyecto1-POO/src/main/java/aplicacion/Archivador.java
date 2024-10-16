@@ -6,28 +6,22 @@ package aplicacion;
 import java.util.LinkedList;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 import org.w3c.dom.Document;
-import org.w3c.dom.NodeList;
+import org.w3c.dom.Element;
+import java.io.File;
 
 /**
  *
  * @author Dillan
  */
 public class Archivador {
-  private final String tipoDato;
-  private final LinkedList<String> datos;
-  
-  public Archivador (){
-    tipoDato = "";
-    datos = new LinkedList<>();
-    try {
-      DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-      DocumentBuilder builder = factory.newDocumentBuilder();
-      Document document = builder.parse("archivo.xml");
-      document.getDocumentElement().normalize();
-    }
-    catch(Exception e){
-      e.printStackTrace();
-    }
+  public static void main(String[] args) {
+    String filePath = "archivo.xml"; // Especifica la ruta del archivo XML
+    File xmlFile = new File(filePath);
   }
 }
