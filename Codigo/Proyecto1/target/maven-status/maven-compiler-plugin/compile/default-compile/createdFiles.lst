@@ -5,6 +5,7 @@ Clases\Cajero.class
 GUI\GestionCliente.class
 GUI\RegistrarCliente.class
 GUI\IniciarSesion$1.class
+Clases\XMLReader.class
 Clases\Cuenta.class
 GUI\RegistrarCliente$4.class
 GUI\MenuPrincipal.class

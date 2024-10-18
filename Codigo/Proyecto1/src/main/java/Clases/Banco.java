@@ -4,10 +4,48 @@
  */
 package Clases;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Estudiante
  */
 public class Banco {
+    private final ArrayList<Cliente> clientes;
+
+    public Banco() {
+        clientes = new ArrayList<>();
+    }
+
+    public void agregarCliente(Cliente cliente) {
+        clientes.add(cliente);
+    }
+
+    public ArrayList<Cliente> getClientes() {
+        return clientes;
+    }
     
+    public void cargarClientes(String xmlPath) {
+        // Obtener la lista de clientes desde el archivo XML
+        ArrayList<Cliente> clientesDesdeXML = XMLReader.leerClientesDesdeXML(xmlPath);
+
+        // Agregar los clientes cargados al banco, evitando duplicados
+        for (Cliente cliente : clientesDesdeXML) {
+            boolean existeCliente = false;
+
+            for (Cliente clienteExistente : clientes) {
+                if (clienteExistente.getNombre().equalsIgnoreCase(cliente.getNombre())) {
+                    existeCliente = true;
+                    break;
+                }
+            }
+
+            if (!existeCliente) {
+                agregarCliente(cliente);
+                System.out.println("Cliente " + cliente.getNombre() + " agregado.");
+            } else {
+                System.out.println("El cliente " + cliente.getNombre() + " ya existe y no se agregará.");
+            }
+        }
+    }
 }

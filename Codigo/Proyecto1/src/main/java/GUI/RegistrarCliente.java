@@ -5,13 +5,14 @@
 package GUI;
 import javax.swing.JOptionPane;
 import Clases.XMLWriter;
+import Clases.Banco;
 /**
  *
  * @author Tayle
  */
 public class RegistrarCliente extends javax.swing.JFrame {
 
-    private MenuPrincipal menuPrincipal; // Mantener referencia a la ventana anterior
+    private final MenuPrincipal menuPrincipal; // Mantener referencia a la ventana anterior
 
     public RegistrarCliente(MenuPrincipal menuPrincipal) {
         initComponents();

@@ -4,6 +4,7 @@
  */
 package Clases;
 
+import Clases.Cliente;
 import java.time.LocalDate;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -23,6 +24,7 @@ public class Cuenta {
   private final ArrayList<Transaccion> transacciones;
   private final Comision gestionComisiones;  // Gestión de comisiones
   private int contadorTransacciones;  // Controla el número de transacciones
+  private Cliente cliente;
 
   private static final int LIMITE_TRANSACCIONES_GRATIS = 5;
 
@@ -32,8 +34,9 @@ public class Cuenta {
    * @param pNumeroCuenta Número de la cuenta.
    * @param pPin PIN de la cuenta (sin cifrar).
    * @param pSaldoInicial Saldo inicial de la cuenta.
+   * @param cliente Cliente dueño de la cuenta
    */
-  public Cuenta(int pNumeroCuenta, String pPin, double pSaldoInicial) {
+  public Cuenta(int pNumeroCuenta, String pPin, double pSaldoInicial, Cliente cliente) {
     this.numeroCuenta = pNumeroCuenta;
     this.pinCifrado = cifrarPin(pPin);
     this.saldo = pSaldoInicial;
@@ -42,6 +45,7 @@ public class Cuenta {
     this.transacciones = new ArrayList<>();
     this.gestionComisiones = new Comision();  // Nueva instancia de Comision
     this.contadorTransacciones = 0;
+    this.cliente = cliente;
   }
 
   /**
@@ -157,6 +161,7 @@ public class Cuenta {
       throw new RuntimeException("Error al cifrar el PIN", e);
     }
   }
+  
 
   // Getters
 
@@ -179,4 +184,8 @@ public class Cuenta {
   public LocalDate getFechaCreacion(){
     return fechaCreacion;
   }
+  
+  public Cliente getCliente() {
+        return cliente;
+    }
 }

@@ -4,6 +4,7 @@
  */
 package GUI;
 
+import Clases.Banco;
 /**
  *
  * @author Estudiante
@@ -112,6 +113,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
+                Banco banco = new Banco();
+                banco.cargarClientes("clientes.xml");
                 new MenuPrincipal().setVisible(true);
             }
         });
