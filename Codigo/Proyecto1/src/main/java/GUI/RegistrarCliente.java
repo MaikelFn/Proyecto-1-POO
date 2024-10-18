@@ -6,6 +6,7 @@ package GUI;
 import javax.swing.JOptionPane;
 import Clases.XMLWriter;
 import Clases.Banco;
+import Clases.Cliente;
 /**
  *
  * @author Tayle
@@ -13,11 +14,13 @@ import Clases.Banco;
 public class RegistrarCliente extends javax.swing.JFrame {
 
     private final MenuPrincipal menuPrincipal; // Mantener referencia a la ventana anterior
-
-    public RegistrarCliente(MenuPrincipal menuPrincipal) {
+    private final Banco banco;
+      
+    public RegistrarCliente(MenuPrincipal menuPrincipal, Banco banco) {
         initComponents();
         this.setLocationRelativeTo(null);
         this.menuPrincipal = menuPrincipal;
+        this.banco = banco;
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -164,10 +167,25 @@ public class RegistrarCliente extends javax.swing.JFrame {
             String telefonoUsuario = telefono.getText();
             String correoUsuario = correo.getText();
             String idUsuario = id.getText();
-            XMLWriter.agregarCliente(nombreUsuario, idUsuario, telefonoUsuario, correoUsuario, "clientes.xml");
-            JOptionPane.showMessageDialog(null, "Cliente rgistrado", "¡Éxito", JOptionPane.INFORMATION_MESSAGE);
-            this.dispose();
-            menuPrincipal.setVisible(true);
+            
+            boolean clienteExiste = false;
+            for (Cliente cliente : banco.getClientes()) {
+                if (cliente.getIdentificacion().equalsIgnoreCase(idUsuario)) {
+                    clienteExiste = true;
+                    break;
+                }
+            }
+            
+            if (clienteExiste) {
+                JOptionPane.showMessageDialog(null, "El cliente ya existe.", "Error", JOptionPane.ERROR_MESSAGE);
+            } else {
+                // Si no existe, agregar cliente
+                XMLWriter.agregarCliente(nombreUsuario, idUsuario, telefonoUsuario, correoUsuario, "clientes.xml");
+                banco.cargarClientes("clientes.xml");
+                JOptionPane.showMessageDialog(null, "Cliente registrado", "¡Éxito!", JOptionPane.INFORMATION_MESSAGE);
+                this.dispose();
+                menuPrincipal.setVisible(true);
+            }
         }
     }//GEN-LAST:event_RegistrarActionPerformed
 
@@ -201,10 +219,11 @@ public class RegistrarCliente extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                MenuPrincipal menuPrincipal = new MenuPrincipal();
-                RegistrarCliente registrarCliente = new RegistrarCliente(menuPrincipal);
-                registrarCliente.setVisible(true);
+        public void run() {
+            Banco banco = new Banco(); // Inicializar el banco
+            banco.cargarClientes("clientes.xml"); // Cargar clientes desde XML
+            MenuPrincipal menuPrincipal = new MenuPrincipal(banco); // Pasar el banco al MenuPrincipal
+            menuPrincipal.setVisible(true);
             }
         });
     }

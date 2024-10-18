@@ -4,6 +4,7 @@
  */
 package GUI;
 
+import Clases.Banco;
 /**
  *
  * @author Tayle
@@ -54,13 +55,13 @@ public class IniciarSesion extends javax.swing.JFrame {
 
         LabelNombre.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         LabelNombre.setForeground(new java.awt.Color(255, 255, 255));
-        LabelNombre.setText("Nombre :");
-        getContentPane().add(LabelNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 260, -1, -1));
+        LabelNombre.setText("Identificacion :");
+        getContentPane().add(LabelNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 260, -1, -1));
 
         LabelContraseña.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         LabelContraseña.setForeground(new java.awt.Color(255, 255, 255));
         LabelContraseña.setText("Contraseña :");
-        getContentPane().add(LabelContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 300, -1, -1));
+        getContentPane().add(LabelContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 300, -1, -1));
 
         Imagen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/iniciarsesion.png"))); // NOI18N
         getContentPane().add(Imagen, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 20, 210, 230));
@@ -123,7 +124,9 @@ public class IniciarSesion extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                MenuPrincipal menuPrincipal = new MenuPrincipal();
+                Banco banco = new Banco();
+                banco.cargarClientes("clientes.xml");
+                MenuPrincipal menuPrincipal = new MenuPrincipal(banco); // Pasar el banco al MenuPrincipal
                 IniciarSesion iniciarSesion = new IniciarSesion(menuPrincipal);
                 iniciarSesion.setVisible(true);
             }

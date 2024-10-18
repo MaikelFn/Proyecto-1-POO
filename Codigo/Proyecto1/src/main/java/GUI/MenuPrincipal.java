@@ -11,12 +11,16 @@ import Clases.Banco;
  */
 public class MenuPrincipal extends javax.swing.JFrame {
 
+    private final Banco banco;
     /**
      * Creates new form MenuPrincipal
      */
-    public MenuPrincipal() {
+    public MenuPrincipal(Banco banco) {
         initComponents();
         this.setLocationRelativeTo(null);
+        banco = new Banco();
+        banco.cargarClientes("clientes.xml");
+        this.banco = banco;
     }
 
     /**
@@ -79,7 +83,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         this.setVisible(false);
-        RegistrarCliente registrarCliente = new RegistrarCliente(this);
+        RegistrarCliente registrarCliente = new RegistrarCliente(this, banco); // Pasar el objeto banco
         registrarCliente.setVisible(true); 
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -115,7 +119,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
             public void run() {
                 Banco banco = new Banco();
                 banco.cargarClientes("clientes.xml");
-                new MenuPrincipal().setVisible(true);
+                new MenuPrincipal(banco).setVisible(true);
             }
         });
     }
