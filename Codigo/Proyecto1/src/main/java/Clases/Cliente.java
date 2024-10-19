@@ -16,6 +16,7 @@ import java.util.regex.Pattern;
  * Clase que representa un cliente del banco.
  */
 public class Cliente {
+<<<<<<< Updated upstream
     private String nombreCompleto;
     private String identificación;
     private String númeroTelefono;
