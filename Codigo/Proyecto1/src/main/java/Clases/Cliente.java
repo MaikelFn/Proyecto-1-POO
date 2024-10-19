@@ -1,62 +1,13 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Clases;
-<<<<<<< Updated upstream
-import java.util.ArrayList;
-=======
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 
->>>>>>> Stashed changes
 /**
  * Clase que representa un cliente del banco.
  */
 public class Cliente {
-<<<<<<< Updated upstream
-    private String nombreCompleto;
-    private String identificación;
-    private String númeroTelefono;
-    private String correo;
-    private ArrayList<Cuenta> listacuentas;
-    
-    
-    public Cliente(String pNombreCompleto, String pIdentificacion, String pTelefono, String pCorreoElectronico){
-        this.nombreCompleto = pNombreCompleto;
-        this.identificación = pIdentificacion;
-        this.númeroTelefono = pTelefono;
-        this.correo = pCorreoElectronico;
-        this.listacuentas = new ArrayList<>();
-    }
-    
-    public void agregarCuenta(Cuenta cuenta) {
-        listacuentas.add(cuenta);
-    }
-
-    public ArrayList<Cuenta> getListaCuentas() {
-        return listacuentas;
-    }
-    
-      public String getNombre() {
-        return nombreCompleto;
-    }
-
-    public String getIdentificacion() {
-        return identificación;
-    }
-
-    public String getTelefono() {
-        return númeroTelefono;
-    }
-
-    public String getCorreo() {
-        return correo;
-    }
-
-=======
 
   private final String nombreCompleto;
   private final String identificacion;
@@ -174,5 +125,4 @@ public class Cliente {
   public String getCorreo() {
     return correo;
   }
->>>>>>> Stashed changes
 }

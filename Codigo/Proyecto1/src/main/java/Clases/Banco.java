@@ -34,7 +34,7 @@ public class Banco {
             boolean existeCliente = false;
 
             for (Cliente clienteExistente : clientes) {
-                if (clienteExistente.getNombre().equalsIgnoreCase(cliente.getNombre())) {
+                if (clienteExistente.getNombreCompleto().equalsIgnoreCase(cliente.getNombreCompleto())) {
                     existeCliente = true;
                     break;
                 }
@@ -42,9 +42,9 @@ public class Banco {
 
             if (!existeCliente) {
                 agregarCliente(cliente);
-                System.out.println("Cliente " + cliente.getNombre() + " agregado.");
+                System.out.println("Cliente " + cliente.getNombreCompleto() + " agregado.");
             } else {
-                System.out.println("El cliente " + cliente.getNombre() + " ya existe y no se agregará.");
+                System.out.println("El cliente " + cliente.getNombreCompleto() + " ya existe y no se agregará.");
             }
         }
     }
