@@ -87,15 +87,15 @@ public class IniciarSesion extends javax.swing.JFrame {
     }//GEN-LAST:event_VolverActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        String idUsuario = nombre.getText().trim();
+        Banco banco = new Banco();
+        String idUsuario = nombre.getText();
+        banco.cargarClientes("clientes.xml");
 
         if (idUsuario.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Por favor, ingrese su identificación.", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
-        Banco banco = new Banco();
-        banco.cargarClientes("clientes.xml");
         Cliente clienteEncontrado = null;
 
         for (Cliente cliente : banco.getClientes()) {

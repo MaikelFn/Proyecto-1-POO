@@ -32,17 +32,17 @@ public class InterfazCliente extends javax.swing.JFrame {
 
     private void cargarCuentas() {
         banco.cargarClientes("clientes.xml");
-        // Limpiamos el contenido del FrameCuentas antes de añadir los elementos.
-        FrameCuentas.getContentPane().removeAll();
+        // Limpiar el contenido del PanelCuentas antes de añadir los elementos.
+        PanelCuentas.removeAll();
 
-        // Si el cliente no tiene cuentas, mostramos un mensaje.
+        // Si el cliente no tiene cuentas, mostrar un mensaje.
         if (cliente.getCuentas().isEmpty()) {
             JLabel labelSinCuentas = new JLabel("¡No posees ninguna cuenta!");
-            FrameCuentas.getContentPane().add(labelSinCuentas);
+            PanelCuentas.add(labelSinCuentas); // Añadir al PanelCuentas
         } else {
             int yPosition = 20; // Posición inicial para colocar los botones.
-            
-            // Iteramos por cada cuenta del cliente.
+
+            // Iterar por cada cuenta del cliente.
             for (Cuenta cuenta : cliente.getCuentas()) {
                 JButton botonCuenta = new JButton("Cuenta: " + cuenta.getNumeroCuenta());
                 botonCuenta.setBounds(20, yPosition, 200, 30);
@@ -52,21 +52,21 @@ public class InterfazCliente extends javax.swing.JFrame {
                 botonCuenta.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        // Aquí abres la ventana con los detalles de la cuenta seleccionada.
-                        JLabel labelSinCuentas = new JLabel("Sin dudas que seleccionaste una cuenta eh!");
-                        FrameCuentas.getContentPane().add(labelSinCuentas);
+                        JLabel labelDetalles = new JLabel("Has seleccionado la cuenta: " + cuenta.getNumeroCuenta());
+                        PanelCuentas.add(labelDetalles);
+                        PanelCuentas.revalidate();
+                        PanelCuentas.repaint();
                     }
                 });
-                
-                // Añadimos el botón al FrameCuentas.
-                FrameCuentas.getContentPane().add(botonCuenta);
+                PanelCuentas.add(botonCuenta); 
             }
         }
 
-        // Refrescamos el Frame para mostrar los cambios.
-        FrameCuentas.revalidate();
-        FrameCuentas.repaint();
+        // Refrescamos el PanelCuentas para mostrar los cambios.
+        PanelCuentas.revalidate();
+        PanelCuentas.repaint();
     }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -79,29 +79,71 @@ public class InterfazCliente extends javax.swing.JFrame {
 
         FrameCuentas = new javax.swing.JInternalFrame();
         ScrollBarCuentas = new javax.swing.JScrollBar();
+        PanelCuentas = new javax.swing.JPanel();
+        EliminarCuenta = new javax.swing.JButton();
+        AgregarCuenta = new javax.swing.JButton();
         BotonVolver = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        Configuracion = new javax.swing.JButton();
         LabelFondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        FrameCuentas.setBackground(new java.awt.Color(0, 0, 0));
+        FrameCuentas.setBorder(null);
+        FrameCuentas.setForeground(new java.awt.Color(255, 255, 255));
+        FrameCuentas.setTitle("Cuentas del cliente");
         FrameCuentas.setVisible(true);
+
+        PanelCuentas.setPreferredSize(new java.awt.Dimension(392, 300));
+
+        javax.swing.GroupLayout PanelCuentasLayout = new javax.swing.GroupLayout(PanelCuentas);
+        PanelCuentas.setLayout(PanelCuentasLayout);
+        PanelCuentasLayout.setHorizontalGroup(
+            PanelCuentasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 524, Short.MAX_VALUE)
+        );
+        PanelCuentasLayout.setVerticalGroup(
+            PanelCuentasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
 
         javax.swing.GroupLayout FrameCuentasLayout = new javax.swing.GroupLayout(FrameCuentas.getContentPane());
         FrameCuentas.getContentPane().setLayout(FrameCuentasLayout);
         FrameCuentasLayout.setHorizontalGroup(
             FrameCuentasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, FrameCuentasLayout.createSequentialGroup()
-                .addGap(0, 398, Short.MAX_VALUE)
-                .addComponent(ScrollBarCuentas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(PanelCuentas, javax.swing.GroupLayout.PREFERRED_SIZE, 524, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(ScrollBarCuentas, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(25, 25, 25))
         );
         FrameCuentasLayout.setVerticalGroup(
             FrameCuentasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(ScrollBarCuentas, javax.swing.GroupLayout.DEFAULT_SIZE, 264, Short.MAX_VALUE)
+            .addGroup(FrameCuentasLayout.createSequentialGroup()
+                .addGroup(FrameCuentasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(PanelCuentas, javax.swing.GroupLayout.DEFAULT_SIZE, 340, Short.MAX_VALUE)
+                    .addComponent(ScrollBarCuentas, javax.swing.GroupLayout.DEFAULT_SIZE, 340, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
-        getContentPane().add(FrameCuentas, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 420, 300));
+        getContentPane().add(FrameCuentas, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 10, 560, 370));
+
+        EliminarCuenta.setBackground(new java.awt.Color(0, 0, 51));
+        EliminarCuenta.setForeground(new java.awt.Color(255, 255, 255));
+        EliminarCuenta.setText("Eliminar Cuenta");
+        getContentPane().add(EliminarCuenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 210, -1, -1));
+
+        AgregarCuenta.setBackground(new java.awt.Color(0, 0, 51));
+        AgregarCuenta.setForeground(new java.awt.Color(255, 255, 255));
+        AgregarCuenta.setText("Agregar Cuenta");
+        AgregarCuenta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AgregarCuentaActionPerformed(evt);
+            }
+        });
+        getContentPane().add(AgregarCuenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, -1, -1));
 
         BotonVolver.setBackground(new java.awt.Color(0, 0, 102));
         BotonVolver.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -109,16 +151,29 @@ public class InterfazCliente extends javax.swing.JFrame {
         BotonVolver.setText("Volver");
         getContentPane().add(BotonVolver, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
-        jButton1.setBackground(new java.awt.Color(0, 0, 51));
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Configuración");
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 0, -1, -1));
+        Configuracion.setBackground(new java.awt.Color(0, 0, 51));
+        Configuracion.setForeground(new java.awt.Color(255, 255, 255));
+        Configuracion.setText("Configuración");
+        Configuracion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ConfiguracionActionPerformed(evt);
+            }
+        });
+        getContentPane().add(Configuracion, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 270, -1, -1));
 
         LabelFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Fondo.jpeg"))); // NOI18N
         getContentPane().add(LabelFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void AgregarCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AgregarCuentaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_AgregarCuentaActionPerformed
+
+    private void ConfiguracionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConfiguracionActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ConfiguracionActionPerformed
 
     /**
      * @param args the command line arguments
@@ -171,10 +226,13 @@ public class InterfazCliente extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton AgregarCuenta;
     private javax.swing.JButton BotonVolver;
+    private javax.swing.JButton Configuracion;
+    private javax.swing.JButton EliminarCuenta;
     private javax.swing.JInternalFrame FrameCuentas;
     private javax.swing.JLabel LabelFondo;
+    private javax.swing.JPanel PanelCuentas;
     private javax.swing.JScrollBar ScrollBarCuentas;
-    private javax.swing.JButton jButton1;
     // End of variables declaration//GEN-END:variables
 }

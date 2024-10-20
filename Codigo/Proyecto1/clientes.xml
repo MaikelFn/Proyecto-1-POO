@@ -1,6 +1,122 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <Clientes>
+                                        
+    
+    
+    
+    
+    
+    
+    
+    
+    <Cliente>
+                                                                                
+        
+        
+        
+        
+        
+        
+        
+        
+        <NombreCompleto>Tayler Wynta</NombreCompleto>
+                                                                                
+        
+        
+        
+        
+        
+        
+        
+        
+        <Identificacion>703300251</Identificacion>
+                                                                                
+        
+        
+        
+        
+        
+        
+        
+        
+        <Telefono>83996112</Telefono>
+                                                                                
+        
+        
+        
+        
+        
+        
+        
+        
+        <CorreoElectronico>tayler1203@gmal.com</CorreoElectronico>
+                                                                            
+    
+    
+    
+    
+    
+    
+    
+    
+    </Cliente>
+                                    
+    
+    
+    
+    
+    
+    
+    
+    
+    <Cliente>
+                                                                        
+        
+        
+        
+        
+        
+        
+        
+        <NombreCompleto>Maikel Flores Navarro</NombreCompleto>
+                                                                        
+        
+        
+        
+        
+        
+        
+        
+        <Identificacion>703120605</Identificacion>
+                                                                        
+        
+        
+        
+        
+        
+        
+        
+        <Telefono>63779197</Telefono>
+                                                                        
+        
+        
+        
+        
+        
+        
+        
+        <CorreoElectronico>maikelflores0512@gmail.com</CorreoElectronico>
+                                                                    
+    
+    
+    
+    
+    
+    
+    
+    </Cliente>
                                 
+    
     
     
     
@@ -15,7 +131,7 @@
         
         
         
-        <NombreCompleto>Tayler Wynta</NombreCompleto>
+        <NombreCompleto>Pepe el mago</NombreCompleto>
                                                                 
         
         
@@ -23,7 +139,7 @@
         
         
         
-        <Identificacion>703300251</Identificacion>
+        <Identificacion>66559835</Identificacion>
                                                                 
         
         
@@ -31,7 +147,7 @@
         
         
         
-        <Telefono>83996112</Telefono>
+        <Telefono>11002424</Telefono>
                                                                 
         
         
@@ -39,7 +155,7 @@
         
         
         
-        <CorreoElectronico>tayler1203@gmal.com</CorreoElectronico>
+        <CorreoElectronico>soynica@gmail.com</CorreoElectronico>
                                                             
     
     
@@ -62,28 +178,28 @@
         
         
         
-        <NombreCompleto>Maikel Flores Navarro</NombreCompleto>
+        <NombreCompleto>arroz</NombreCompleto>
                                                         
         
         
         
         
         
-        <Identificacion>703120605</Identificacion>
+        <Identificacion>44663534</Identificacion>
                                                         
         
         
         
         
         
-        <Telefono>63779197</Telefono>
+        <Telefono>77685644</Telefono>
                                                         
         
         
         
         
         
-        <CorreoElectronico>maikelflores0512@gmail.com</CorreoElectronico>
+        <CorreoElectronico>pepelmago@mancos.com</CorreoElectronico>
                                                     
     
     
@@ -92,43 +208,7 @@
     
     </Cliente>
                         
-    
-    
-    
-    
-    
-    <Cliente>
-                                                
-        
-        
-        
-        
-        <NombreCompleto>Pepe el mago</NombreCompleto>
-                                                
-        
-        
-        
-        
-        <Identificacion>66559835</Identificacion>
-                                                
-        
-        
-        
-        
-        <Telefono>11002424</Telefono>
-                                                
-        
-        
-        
-        
-        <CorreoElectronico>soynica@gmail.com</CorreoElectronico>
-                                            
-    
-    
-    
-    
-    </Cliente>
-                    
+            
     
     
     
@@ -138,53 +218,65 @@
         
         
         
-        <NombreCompleto>arroz</NombreCompleto>
+        <NombreCompleto>asasa</NombreCompleto>
                                         
         
         
         
-        <Identificacion>44663534</Identificacion>
+        <Identificacion>1</Identificacion>
                                         
         
         
         
-        <Telefono>77685644</Telefono>
+        <Telefono>ascscf</Telefono>
                                         
         
         
         
-        <CorreoElectronico>pepelmago@mancos.com</CorreoElectronico>
+        <CorreoElectronico>asac</CorreoElectronico>
                                     
     
     
     
     </Cliente>
                 
-            
+    
     
     
     <Cliente>
                         
         
-        <NombreCompleto>asasa</NombreCompleto>
+        <NombreCompleto>as</NombreCompleto>
                         
         
-        <Identificacion>1</Identificacion>
+        <Identificacion>12</Identificacion>
                         
         
-        <Telefono>ascscf</Telefono>
+        <Telefono>asa</Telefono>
                         
         
-        <CorreoElectronico>asac</CorreoElectronico>
+        <CorreoElectronico>asa</CorreoElectronico>
                     
     
     </Cliente>
         
     
     <Cliente>
-        <NombreCompleto>as</NombreCompleto>
-        <Identificacion>12</Identificacion>
-        <Telefono>asa</Telefono>
-        <CorreoElectronico>asa</CorreoElectronico>
+                
+        <NombreCompleto>asas</NombreCompleto>
+                
+        <Identificacion>1</Identificacion>
+                
+        <Telefono>44556789</Telefono>
+                
+        <CorreoElectronico>pepelmago@gmail.com</CorreoElectronico>
+            
+    </Cliente>
+    
+    <Cliente>
+        <NombreCompleto>asas</NombreCompleto>
+        <Identificacion>1</Identificacion>
+        <Telefono>44345676</Telefono>
+        <CorreoElectronico>tayler1203@gmail.com</CorreoElectronico>
     </Cliente>
 </Clientes>
