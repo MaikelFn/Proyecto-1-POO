@@ -12,6 +12,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import java.awt.FlowLayout;
 /**
  *
  * @author Tayle
@@ -38,7 +39,11 @@ public class InterfazCliente extends javax.swing.JFrame {
         // Si el cliente no tiene cuentas, mostrar un mensaje.
         if (cliente.getCuentas().isEmpty()) {
             JLabel labelSinCuentas = new JLabel("¡No posees ninguna cuenta!");
-            PanelCuentas.add(labelSinCuentas); // Añadir al PanelCuentas
+            labelSinCuentas.setFont(new java.awt.Font("Arial", java.awt.Font.BOLD, 20));
+            labelSinCuentas.setForeground(java.awt.Color.BLACK);
+            labelSinCuentas.setHorizontalAlignment(JLabel.CENTER);
+            PanelCuentas.setLayout(new java.awt.FlowLayout(FlowLayout.CENTER));
+            PanelCuentas.add(labelSinCuentas);
         } else {
             int yPosition = 20; // Posición inicial para colocar los botones.
 
@@ -48,7 +53,7 @@ public class InterfazCliente extends javax.swing.JFrame {
                 botonCuenta.setBounds(20, yPosition, 200, 30);
                 yPosition += 40; // Espacio entre botones.
 
-                // Añadimos ActionListener a cada botón.
+                // Añadir ActionListener a cada botón.
                 botonCuenta.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
@@ -61,8 +66,7 @@ public class InterfazCliente extends javax.swing.JFrame {
                 PanelCuentas.add(botonCuenta); 
             }
         }
-
-        // Refrescamos el PanelCuentas para mostrar los cambios.
+        // Refrescar el PanelCuentas para mostrar los cambios.
         PanelCuentas.revalidate();
         PanelCuentas.repaint();
     }
