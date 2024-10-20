@@ -1,3 +1,5 @@
+GUI\IniciarSesion$3.class
+GUI\VentanaDetallesCuenta$1.class
 GUI\MenuPrincipal$2.class
 GUI\IniciarSesion.class
 GUI\RegistrarCliente$2.class
@@ -21,6 +23,7 @@ GUI\IniciarSesion$2.class
 GUI\RegistrarCliente$6.class
 Clases\Banco.class
 Clases\XMLWriter.class
+GUI\VentanaDetallesCuenta.class
 GUI\RegistrarCliente$5.class
 Clases\Transaccion.class
 GUI\InterfazBanco.class

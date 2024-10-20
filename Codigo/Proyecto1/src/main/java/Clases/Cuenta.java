@@ -4,7 +4,6 @@
  */
 package Clases;
 
-import Clases.Cliente;
 import java.time.LocalDate;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -24,7 +23,7 @@ public class Cuenta {
   private final ArrayList<Transaccion> transacciones;
   private final Comision gestionComisiones;  // Gestión de comisiones
   private int contadorTransacciones;  // Controla el número de transacciones
-  private Cliente cliente;
+  private final Cliente cliente;
 
   private static final int LIMITE_TRANSACCIONES_GRATIS = 5;
 

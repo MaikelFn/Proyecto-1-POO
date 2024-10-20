@@ -5,22 +5,21 @@
 package GUI;
 
 import Clases.Banco;
+import Clases.Cliente;
+import javax.swing.JOptionPane;
 /**
  *
  * @author Tayle
  */
 public class IniciarSesion extends javax.swing.JFrame {
 
-       private MenuPrincipal menuPrincipal;
-    /**
-     * Creates new form IniciarSesion
-     */
+    private final MenuPrincipal menuPrincipal;
+
     public IniciarSesion(MenuPrincipal menuPrincipal) {
-        initComponents();
+        initComponents();  // Esta es generada automáticamente por NetBeans
         this.setLocationRelativeTo(null);
         this.menuPrincipal = menuPrincipal;
-    }
-
+    }                          
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -32,10 +31,8 @@ public class IniciarSesion extends javax.swing.JFrame {
 
         Volver = new javax.swing.JButton();
         LabelNombre = new javax.swing.JLabel();
-        LabelContraseña = new javax.swing.JLabel();
         Imagen = new javax.swing.JLabel();
         nombre = new javax.swing.JTextField();
-        contraseña = new javax.swing.JPasswordField();
         jButton1 = new javax.swing.JButton();
         jLabelFondo = new javax.swing.JLabel();
 
@@ -56,12 +53,7 @@ public class IniciarSesion extends javax.swing.JFrame {
         LabelNombre.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         LabelNombre.setForeground(new java.awt.Color(255, 255, 255));
         LabelNombre.setText("Identificacion :");
-        getContentPane().add(LabelNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 260, -1, -1));
-
-        LabelContraseña.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        LabelContraseña.setForeground(new java.awt.Color(255, 255, 255));
-        LabelContraseña.setText("Contraseña :");
-        getContentPane().add(LabelContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 300, -1, -1));
+        getContentPane().add(LabelNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 290, -1, -1));
 
         Imagen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/iniciarsesion.png"))); // NOI18N
         getContentPane().add(Imagen, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 20, 210, 230));
@@ -69,18 +61,18 @@ public class IniciarSesion extends javax.swing.JFrame {
         nombre.setBackground(new java.awt.Color(0, 0, 102));
         nombre.setForeground(new java.awt.Color(255, 255, 255));
         nombre.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        getContentPane().add(nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 260, 140, 20));
-
-        contraseña.setBackground(new java.awt.Color(0, 0, 102));
-        contraseña.setForeground(new java.awt.Color(255, 255, 255));
-        contraseña.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        getContentPane().add(contraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 300, 140, 20));
+        getContentPane().add(nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 290, 140, 20));
 
         jButton1.setBackground(new java.awt.Color(0, 0, 51));
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setText("Iniciar sesión");
         jButton1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 360, -1, -1));
 
         jLabelFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Fondo.jpeg"))); // NOI18N
@@ -90,9 +82,37 @@ public class IniciarSesion extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void VolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VolverActionPerformed
-        this.dispose(); 
+        this.dispose();
         menuPrincipal.setVisible(true);
     }//GEN-LAST:event_VolverActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        String idUsuario = nombre.getText().trim();
+
+        if (idUsuario.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Por favor, ingrese su identificación.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        Banco banco = new Banco();
+        banco.cargarClientes("clientes.xml");
+        Cliente clienteEncontrado = null;
+
+        for (Cliente cliente : banco.getClientes()) {
+            if (cliente.getIdentificacion().equals(idUsuario)) {
+                clienteEncontrado = cliente;
+                break;
+            }
+        }
+
+        if (clienteEncontrado != null) {
+            JOptionPane.showMessageDialog(this, "Bienvenido, " + clienteEncontrado.getNombreCompleto(), "Inicio de Sesión", JOptionPane.INFORMATION_MESSAGE);
+            this.dispose();
+            new InterfazCliente(banco, clienteEncontrado, idUsuario).setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(this, "Cliente no encontrado o no registrado", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -126,7 +146,7 @@ public class IniciarSesion extends javax.swing.JFrame {
             public void run() {
                 Banco banco = new Banco();
                 banco.cargarClientes("clientes.xml");
-                MenuPrincipal menuPrincipal = new MenuPrincipal(banco); // Pasar el banco al MenuPrincipal
+                MenuPrincipal menuPrincipal = new MenuPrincipal(banco);
                 IniciarSesion iniciarSesion = new IniciarSesion(menuPrincipal);
                 iniciarSesion.setVisible(true);
             }
@@ -135,10 +155,8 @@ public class IniciarSesion extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Imagen;
-    private javax.swing.JLabel LabelContraseña;
     private javax.swing.JLabel LabelNombre;
     private javax.swing.JButton Volver;
-    private javax.swing.JPasswordField contraseña;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabelFondo;
     private javax.swing.JTextField nombre;

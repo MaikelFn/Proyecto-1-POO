@@ -25,6 +25,15 @@ public class Banco {
         return clientes;
     }
     
+    public Cliente buscarClientePorID(String id) {
+        for (Cliente cliente : clientes) {
+            if (cliente.getIdentificacion().equals(id)) {
+             return cliente; // Retorna el cliente si coincide el ID.
+            }
+        }
+        return null; // Retorna null si no encuentra el cliente.
+    }
+    
     public void cargarClientes(String xmlPath) {
         // Obtener la lista de clientes desde el archivo XML
         ArrayList<Cliente> clientesDesdeXML = XMLReader.leerClientesDesdeXML(xmlPath);
