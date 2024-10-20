@@ -200,19 +200,24 @@ public class XMLWriter {
   }
 
   // Método auxiliar para crear un elemento XML.
-  private static Element crearElemento(Document pDoc, String pNombre, String pValor) {
-    Element elemento = pDoc.createElement(pNombre);
-    elemento.setTextContent(pValor);
-    return elemento;
-  }
-
-  // Método para guardar cambios en el archivo XML.
   private static void guardarCambios(Document pDoc, File pArchivo) throws TransformerException {
     TransformerFactory transformerFactory = TransformerFactory.newInstance();
     Transformer transformer = transformerFactory.newTransformer();
-    transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+
+    // Eliminar indentación y saltos de línea.
+    transformer.setOutputProperty(OutputKeys.INDENT, "no");
+    transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "no");
+    transformer.setOutputProperty(OutputKeys.METHOD, "xml");
+    transformer.setOutputProperty(OutputKeys.STANDALONE, "yes");
+
+    pDoc.normalizeDocument();
     DOMSource source = new DOMSource(pDoc);
     StreamResult result = new StreamResult(pArchivo);
+
     transformer.transform(source, result);
-  }
+}
+
+    private static Node crearElemento(Document doc, String tipo, String pTipoTransaccion) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }
