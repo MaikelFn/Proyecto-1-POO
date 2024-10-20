@@ -78,8 +78,8 @@ public class InterfazCliente extends javax.swing.JFrame {
     private void initComponents() {
 
         FrameCuentas = new javax.swing.JInternalFrame();
-        ScrollBarCuentas = new javax.swing.JScrollBar();
         PanelCuentas = new javax.swing.JPanel();
+        ScrollBarCuentas = new javax.swing.JScrollBar();
         EliminarCuenta = new javax.swing.JButton();
         AgregarCuenta = new javax.swing.JButton();
         BotonVolver = new javax.swing.JButton();
@@ -101,11 +101,14 @@ public class InterfazCliente extends javax.swing.JFrame {
         PanelCuentas.setLayout(PanelCuentasLayout);
         PanelCuentasLayout.setHorizontalGroup(
             PanelCuentasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 524, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelCuentasLayout.createSequentialGroup()
+                .addContainerGap(527, Short.MAX_VALUE)
+                .addComponent(ScrollBarCuentas, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         PanelCuentasLayout.setVerticalGroup(
             PanelCuentasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addComponent(ScrollBarCuentas, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 340, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout FrameCuentasLayout = new javax.swing.GroupLayout(FrameCuentas.getContentPane());
@@ -114,17 +117,13 @@ public class InterfazCliente extends javax.swing.JFrame {
             FrameCuentasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, FrameCuentasLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(PanelCuentas, javax.swing.GroupLayout.PREFERRED_SIZE, 524, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(ScrollBarCuentas, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(25, 25, 25))
+                .addComponent(PanelCuentas, javax.swing.GroupLayout.PREFERRED_SIZE, 552, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(22, 22, 22))
         );
         FrameCuentasLayout.setVerticalGroup(
             FrameCuentasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(FrameCuentasLayout.createSequentialGroup()
-                .addGroup(FrameCuentasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(PanelCuentas, javax.swing.GroupLayout.DEFAULT_SIZE, 340, Short.MAX_VALUE)
-                    .addComponent(ScrollBarCuentas, javax.swing.GroupLayout.DEFAULT_SIZE, 340, Short.MAX_VALUE))
+                .addComponent(PanelCuentas, javax.swing.GroupLayout.DEFAULT_SIZE, 340, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
