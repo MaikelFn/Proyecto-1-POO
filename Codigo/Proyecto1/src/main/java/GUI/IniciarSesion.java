@@ -33,7 +33,7 @@ public class IniciarSesion extends javax.swing.JFrame {
         Volver = new javax.swing.JButton();
         LabelNombre = new javax.swing.JLabel();
         Imagen = new javax.swing.JLabel();
-        nombre = new javax.swing.JTextField();
+        txtidentificacion = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jLabelFondo = new javax.swing.JLabel();
 
@@ -59,10 +59,10 @@ public class IniciarSesion extends javax.swing.JFrame {
         Imagen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/iniciarsesion.png"))); // NOI18N
         getContentPane().add(Imagen, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 20, 210, 230));
 
-        nombre.setBackground(new java.awt.Color(0, 0, 102));
-        nombre.setForeground(new java.awt.Color(255, 255, 255));
-        nombre.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        getContentPane().add(nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 290, 140, 20));
+        txtidentificacion.setBackground(new java.awt.Color(0, 0, 102));
+        txtidentificacion.setForeground(new java.awt.Color(255, 255, 255));
+        txtidentificacion.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        getContentPane().add(txtidentificacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 290, 140, 20));
 
         jButton1.setBackground(new java.awt.Color(0, 0, 51));
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -93,7 +93,7 @@ public class IniciarSesion extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         Banco banco = new Banco();
-        String idUsuario = nombre.getText();
+        String idUsuario = txtidentificacion.getText();
         banco.cargarClientes("clientes.xml");
 
         if (idUsuario.isEmpty()) {
@@ -114,6 +114,7 @@ public class IniciarSesion extends javax.swing.JFrame {
             clienteAutenticado = clienteEncontrado; // Asignar el cliente autenticado
             JOptionPane.showMessageDialog(this, "Bienvenido, " + clienteAutenticado.getNombreCompleto(), "Inicio de Sesión", JOptionPane.INFORMATION_MESSAGE);
             new InterfazCliente(banco, clienteAutenticado, idUsuario).setVisible(true);
+            this.dispose();
         } else {
             JOptionPane.showMessageDialog(this, "Cliente no encontrado o no registrado", "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -164,6 +165,6 @@ public class IniciarSesion extends javax.swing.JFrame {
     private javax.swing.JButton Volver;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabelFondo;
-    private javax.swing.JTextField nombre;
+    private javax.swing.JTextField txtidentificacion;
     // End of variables declaration//GEN-END:variables
 }

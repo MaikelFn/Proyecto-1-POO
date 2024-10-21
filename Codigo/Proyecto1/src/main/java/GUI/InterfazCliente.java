@@ -30,7 +30,7 @@ public class InterfazCliente extends javax.swing.JFrame {
         this.cliente = cliente;
         cargarCuentas();
     }
-    
+
     private String encontrarClientePorID(){
         for (Cliente cliente : banco.getClientes()) {
             if (cliente.getIdentificacion().equals(idUsuario)) {
@@ -51,7 +51,7 @@ public class InterfazCliente extends javax.swing.JFrame {
         }
         return null;
     }
-    
+
     private void cargarCuentas() {
         banco.cargarClientes("clientes.xml");
         // Limpiar el contenido del PanelCuentas antes de añadir los elementos.
@@ -208,7 +208,7 @@ public class InterfazCliente extends javax.swing.JFrame {
         this.dispose();
         MenuPrincipal referencia = new MenuPrincipal(banco);
         IniciarSesion ventana = new IniciarSesion(referencia);
-        ventana.setVisible(true);
+        referencia.setVisible(true);
     }//GEN-LAST:event_BotonVolverActionPerformed
 
     /**
@@ -220,17 +220,6 @@ public class InterfazCliente extends javax.swing.JFrame {
         public void run() {
             Banco banco = new Banco();
             banco.cargarClientes("clientes.xml");
-
-            // Buscar al cliente por la identificación
-            String idUsuario = "1";
-            Cliente cliente = banco.buscarClientePorID(idUsuario);
-            
-            if (cliente != null) {
-                // Si el cliente se encuentra, cargamos la interfaz.
-                new InterfazCliente(banco, cliente, cliente.getIdentificacion()).setVisible(true);
-            } else {
-                System.out.println("Cliente no encontrado.");
-            }
         }
     });
 }

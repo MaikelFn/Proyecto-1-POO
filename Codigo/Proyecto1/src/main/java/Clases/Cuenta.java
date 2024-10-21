@@ -16,7 +16,7 @@ import java.util.List;
 public class Cuenta {
 
   private final int numeroCuenta;
-  private final LocalDate fechaCreacion;
+  private LocalDate fechaCreacion;
   private boolean estatus;  // Activa/Inactiva
   private double saldo;
   private String pinCifrado;  // Almacena el PIN cifrado
@@ -187,4 +187,13 @@ public class Cuenta {
   public Cliente getCliente() {
         return cliente;
     }
+  
+  //Setters
+  public void setEstatus(boolean status){
+    this.estatus = status;
+  }
+  
+  public void setFechaCreacion(LocalDate fecha) {
+      this.fechaCreacion = fecha;
+  }
 }
