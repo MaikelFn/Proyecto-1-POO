@@ -21,35 +21,22 @@ public class InterfazCliente extends javax.swing.JFrame {
 
     private final Banco banco;
     private final Cliente cliente;
-    private final String idUsuario;
+    private final IniciarSesion iniciarSesion;
+    private final String idCliente;
 
-    public InterfazCliente(Banco banco, Cliente cliente, String id) {
+    public InterfazCliente(Banco banco, Cliente cliente, IniciarSesion ventana) {
         initComponents();
-        this.idUsuario = id;
         this.banco = banco;
         this.cliente = cliente;
+        this.iniciarSesion = ventana;
+        this.idCliente = cliente.getIdentificacion();
         cargarCuentas();
-    }
-
-    private String encontrarClientePorID(){
-        for (Cliente cliente : banco.getClientes()) {
-            if (cliente.getIdentificacion().equals(idUsuario)) {
-                String clienteId = cliente.getIdentificacion();
-                return clienteId;
-            }
-        }
-        return "0";
+        this.setLocationRelativeTo(null);
     }
     
-    private Cliente obtenerCliente(){
-        Cliente clienteEncontrado = null;
-        for (Cliente cliente : banco.getClientes()) {
-            if (cliente.getIdentificacion().equals(idUsuario)) {
-                clienteEncontrado = cliente;
-                return clienteEncontrado;
-            }
-        }
-        return null;
+     public String getTexto() {
+        String obtener = iniciarSesion.getTexto();
+        return obtener;
     }
 
     private void cargarCuentas() {
@@ -91,7 +78,6 @@ public class InterfazCliente extends javax.swing.JFrame {
         PanelCuentas.revalidate();
         PanelCuentas.repaint();
     }
-
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -197,7 +183,8 @@ public class InterfazCliente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void AgregarCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AgregarCuentaActionPerformed
-        // TODO add your handling code here:
+        this.setVisible(false);
+        new AgregarCuenta(cliente, this).setVisible(true);
     }//GEN-LAST:event_AgregarCuentaActionPerformed
 
     private void ConfiguracionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConfiguracionActionPerformed
@@ -206,9 +193,7 @@ public class InterfazCliente extends javax.swing.JFrame {
 
     private void BotonVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonVolverActionPerformed
         this.dispose();
-        MenuPrincipal referencia = new MenuPrincipal(banco);
-        IniciarSesion ventana = new IniciarSesion(referencia);
-        referencia.setVisible(true);
+        iniciarSesion.setVisible(true);
     }//GEN-LAST:event_BotonVolverActionPerformed
 
     /**

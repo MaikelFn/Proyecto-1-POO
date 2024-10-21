@@ -86,6 +86,11 @@ public class IniciarSesion extends javax.swing.JFrame {
         return clienteAutenticado;
     }
     
+    public String getTexto() {
+        String texto = txtidentificacion.getText();
+        return texto;
+    }
+    
     private void VolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VolverActionPerformed
         this.dispose();
         menuPrincipal.setVisible(true);
@@ -113,7 +118,7 @@ public class IniciarSesion extends javax.swing.JFrame {
          if (clienteEncontrado != null) {
             clienteAutenticado = clienteEncontrado; // Asignar el cliente autenticado
             JOptionPane.showMessageDialog(this, "Bienvenido, " + clienteAutenticado.getNombreCompleto(), "Inicio de Sesión", JOptionPane.INFORMATION_MESSAGE);
-            new InterfazCliente(banco, clienteAutenticado, idUsuario).setVisible(true);
+            new InterfazCliente(banco, clienteAutenticado, this).setVisible(true);
             this.dispose();
         } else {
             JOptionPane.showMessageDialog(this, "Cliente no encontrado o no registrado", "Error", JOptionPane.ERROR_MESSAGE);
@@ -168,3 +173,4 @@ public class IniciarSesion extends javax.swing.JFrame {
     private javax.swing.JTextField txtidentificacion;
     // End of variables declaration//GEN-END:variables
 }
+

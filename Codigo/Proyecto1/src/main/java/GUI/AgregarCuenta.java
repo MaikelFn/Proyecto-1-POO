@@ -5,6 +5,11 @@
 package GUI;
 import Clases.Banco;
 import Clases.Cliente;
+import Clases.Cuenta;
+import Clases.XMLWriter;
+import javax.swing.JOptionPane;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 /**
  *
  * @author Tayle
@@ -13,13 +18,18 @@ public class AgregarCuenta extends javax.swing.JFrame {
 
     private final Cliente cliente;
     private final Banco banco;
+    private final InterfazCliente ventana;
     /**
      * Creates new form AgregarCuenta
      */
-    public AgregarCuenta(Cliente cliente, Banco banco) {
+    public AgregarCuenta(Cliente cliente, InterfazCliente interfaz) {
         initComponents();
         this.cliente = cliente;
+        Banco banco = new Banco();
+        banco.cargarClientes("clientes.xml");
         this.banco = banco;
+        this.ventana = interfaz;
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -61,6 +71,11 @@ public class AgregarCuenta extends javax.swing.JFrame {
         Agregar.setForeground(new java.awt.Color(255, 255, 255));
         Agregar.setText("Agregar cuenta");
         Agregar.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        Agregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AgregarActionPerformed(evt);
+            }
+        });
         getContentPane().add(Agregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 370, -1, -1));
 
         LabelPin.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -104,8 +119,55 @@ public class AgregarCuenta extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void CancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelarActionPerformed
-        // TODO add your handling code here:
+        this.dispose();
+        ventana.setVisible(true);
     }//GEN-LAST:event_CancelarActionPerformed
+
+    private void AgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AgregarActionPerformed
+        // Verificar si el campo de PIN está vacío
+        if (txtPinCuenta.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Por favor, ingrese su PIN de cuenta.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // Verificar si el campo de saldo está vacío
+        if (txtSaldoInicial.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Por favor, ingrese un saldo inicial.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // Verificar si el campo de número de cuenta está vacío
+        if (txtnumeroCuenta.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Por favor, ingrese el número de cuenta.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // Obtener los valores de los campos de texto
+        String pin = txtPinCuenta.getText();
+        String saldoTexto = txtSaldoInicial.getText();
+        String numeroCuenta = txtnumeroCuenta.getText();
+
+        try {
+            // Convertir el saldo a un valor numérico (double)
+            double saldoInicial = Double.parseDouble(saldoTexto);
+
+            // Aquí puedes agregar la lógica para crear una cuenta o agregarla a un cliente
+            // Ejemplo: crear una instancia de Cuenta y agregarla al cliente
+            Cuenta nuevaCuenta = new Cuenta(Integer.parseInt(numeroCuenta), pin, saldoInicial, cliente);
+            LocalDate fechaActual = LocalDate.now();
+            DateTimeFormatter formateador = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            String fechaComoString = fechaActual.format(formateador);
+            XMLWriter.agregarCuenta(cliente.getIdentificacion(), numeroCuenta, fechaComoString, "Activa", saldoInicial, pin, "clientes.xml");
+            cliente.agregarCuenta(nuevaCuenta);
+            JOptionPane.showMessageDialog(this, "Cuenta agregada con éxito.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+            this.dispose();
+            ventana.setVisible(true);
+            
+        } catch (NumberFormatException e) {
+            // Si el saldo no es un número válido, mostrar un error
+            JOptionPane.showMessageDialog(this, "El saldo ingresado no es válido.", "Error", JOptionPane.ERROR_MESSAGE);
+        }       
+    }//GEN-LAST:event_AgregarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -139,7 +201,6 @@ public class AgregarCuenta extends javax.swing.JFrame {
             public void run() {
                 Banco banco = new Banco();
                 banco.cargarClientes("clentes.xml");
-                new AgregarCuenta(null, banco).setVisible(true);
             }
         });
     }

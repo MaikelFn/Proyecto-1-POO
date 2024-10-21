@@ -15,6 +15,7 @@ public class ConfigurarCuenta extends javax.swing.JFrame {
      */
     public ConfigurarCuenta() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**
