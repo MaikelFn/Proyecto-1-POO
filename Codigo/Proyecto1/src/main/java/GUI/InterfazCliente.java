@@ -23,14 +23,35 @@ public class InterfazCliente extends javax.swing.JFrame {
     private final Cliente cliente;
     private final String idUsuario;
 
-    public InterfazCliente(Banco banco, Cliente cliente, String idUsuario) {
+    public InterfazCliente(Banco banco, Cliente cliente, String id) {
         initComponents();
-        this.idUsuario = idUsuario;
+        this.idUsuario = id;
         this.banco = banco;
         this.cliente = cliente;
         cargarCuentas();
     }
-
+    
+    private String encontrarClientePorID(){
+        for (Cliente cliente : banco.getClientes()) {
+            if (cliente.getIdentificacion().equals(idUsuario)) {
+                String clienteId = cliente.getIdentificacion();
+                return clienteId;
+            }
+        }
+        return "0";
+    }
+    
+    private Cliente obtenerCliente(){
+        Cliente clienteEncontrado = null;
+        for (Cliente cliente : banco.getClientes()) {
+            if (cliente.getIdentificacion().equals(idUsuario)) {
+                clienteEncontrado = cliente;
+                return clienteEncontrado;
+            }
+        }
+        return null;
+    }
+    
     private void cargarCuentas() {
         banco.cargarClientes("clientes.xml");
         // Limpiar el contenido del PanelCuentas antes de añadir los elementos.
@@ -151,7 +172,12 @@ public class InterfazCliente extends javax.swing.JFrame {
         BotonVolver.setBackground(new java.awt.Color(0, 0, 102));
         BotonVolver.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         BotonVolver.setForeground(new java.awt.Color(255, 255, 255));
-        BotonVolver.setText("Volver");
+        BotonVolver.setText("Cerrar sesión");
+        BotonVolver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BotonVolverActionPerformed(evt);
+            }
+        });
         getContentPane().add(BotonVolver, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         Configuracion.setBackground(new java.awt.Color(0, 0, 51));
@@ -178,55 +204,36 @@ public class InterfazCliente extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_ConfiguracionActionPerformed
 
+    private void BotonVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonVolverActionPerformed
+        this.dispose();
+        MenuPrincipal referencia = new MenuPrincipal(banco);
+        IniciarSesion ventana = new IniciarSesion(referencia);
+        ventana.setVisible(true);
+    }//GEN-LAST:event_BotonVolverActionPerformed
+
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
+    /* Create and display the form */
+    java.awt.EventQueue.invokeLater(new Runnable() {
+        public void run() {
+            Banco banco = new Banco();
+            banco.cargarClientes("clientes.xml");
+
+            // Buscar al cliente por la identificación
+            String idUsuario = "1";
+            Cliente cliente = banco.buscarClientePorID(idUsuario);
+            
+            if (cliente != null) {
+                // Si el cliente se encuentra, cargamos la interfaz.
+                new InterfazCliente(banco, cliente, cliente.getIdentificacion()).setVisible(true);
+            } else {
+                System.out.println("Cliente no encontrado.");
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(InterfazCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(InterfazCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(InterfazCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(InterfazCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                Banco banco = new Banco();
-                banco.cargarClientes("clientes.xml");
-                
-                String idUsuario = "1";
-
-                // Busca al cliente por la identificación
-                Cliente cliente = banco.buscarClientePorID(idUsuario);
-
-                if (cliente != null) {
-                    // Si el cliente se encuentra, obtenemos su identificación y cargamos la interfaz.
-                    String identificacion = cliente.getIdentificacion();
-                    new InterfazCliente(banco, cliente, identificacion).setVisible(true);
-                } else {
-                    System.out.println("Cliente no encontrado.");
-                }
-            }
-        });
-
-    }
+    });
+}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AgregarCuenta;

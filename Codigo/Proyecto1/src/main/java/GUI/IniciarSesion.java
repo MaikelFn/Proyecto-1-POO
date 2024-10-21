@@ -14,6 +14,7 @@ import javax.swing.JOptionPane;
 public class IniciarSesion extends javax.swing.JFrame {
 
     private final MenuPrincipal menuPrincipal;
+    private Cliente clienteAutenticado;
 
     public IniciarSesion(MenuPrincipal menuPrincipal) {
         initComponents();  // Esta es generada automáticamente por NetBeans
@@ -81,6 +82,10 @@ public class IniciarSesion extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public Cliente getClienteAutenticado() {
+        return clienteAutenticado;
+    }
+    
     private void VolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VolverActionPerformed
         this.dispose();
         menuPrincipal.setVisible(true);
@@ -105,10 +110,10 @@ public class IniciarSesion extends javax.swing.JFrame {
             }
         }
 
-        if (clienteEncontrado != null) {
-            JOptionPane.showMessageDialog(this, "Bienvenido, " + clienteEncontrado.getNombreCompleto(), "Inicio de Sesión", JOptionPane.INFORMATION_MESSAGE);
-            this.dispose();
-            new InterfazCliente(banco, clienteEncontrado, idUsuario).setVisible(true);
+         if (clienteEncontrado != null) {
+            clienteAutenticado = clienteEncontrado; // Asignar el cliente autenticado
+            JOptionPane.showMessageDialog(this, "Bienvenido, " + clienteAutenticado.getNombreCompleto(), "Inicio de Sesión", JOptionPane.INFORMATION_MESSAGE);
+            new InterfazCliente(banco, clienteAutenticado, idUsuario).setVisible(true);
         } else {
             JOptionPane.showMessageDialog(this, "Cliente no encontrado o no registrado", "Error", JOptionPane.ERROR_MESSAGE);
         }
