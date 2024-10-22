@@ -91,6 +91,10 @@ public class IniciarSesion extends javax.swing.JFrame {
         return texto;
     }
     
+    public void vaciarTexto() {
+        txtidentificacion.setText("");
+    }
+    
     private void VolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VolverActionPerformed
         this.dispose();
         menuPrincipal.setVisible(true);

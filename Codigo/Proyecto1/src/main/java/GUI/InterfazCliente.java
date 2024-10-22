@@ -32,6 +32,7 @@ public class InterfazCliente extends javax.swing.JFrame {
         this.idCliente = cliente.getIdentificacion();
         cargarCuentas();
         this.setLocationRelativeTo(null);
+        String idUsuario  = ventana.getTexto();
     }
     
      public String getTexto() {
@@ -193,6 +194,7 @@ public class InterfazCliente extends javax.swing.JFrame {
 
     private void BotonVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonVolverActionPerformed
         this.dispose();
+        iniciarSesion.vaciarTexto();
         iniciarSesion.setVisible(true);
     }//GEN-LAST:event_BotonVolverActionPerformed
 
