@@ -71,12 +71,4 @@ public class Mensaje {
       System.err.println("Error al enviar el correo: " + e.getMessage());
     }
   }
-  
-  public static void main(String[] args) {
-      
-        String contraseñaGenerada = generarContraseña();
-        System.out.println(contraseñaGenerada);
-        Mensaje mensaje = new Mensaje("maikelflores0405@gmail.com", "Codigo de Verificacion", "Su codigo de verificacion es: "+contraseñaGenerada);
-        mensaje.enviar();
-    }
 }

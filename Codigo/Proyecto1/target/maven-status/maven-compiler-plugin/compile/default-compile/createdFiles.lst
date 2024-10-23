@@ -8,6 +8,7 @@ GUI\RegistrarCliente$2.class
 Clases\Cajero.class
 GUI\ConfigurarCuenta.class
 GUI\AgregarCuenta$1.class
+Clases\Main.class
 GUI\RegistrarCliente.class
 Clases\Mensaje$1.class
 GUI\IniciarSesion$1.class
