@@ -5,6 +5,7 @@
 
 package Clases;
 
+import static Clases.GeneradorContraseña.generarContraseña;
 import jakarta.mail.*;
 import jakarta.mail.internet.InternetAddress;
 import jakarta.mail.internet.MimeMessage;
@@ -45,8 +46,8 @@ public class Mensaje {
     propiedades.put("mail.smtp.starttls.enable", "true");
 
     // Autenticación del correo remitente
-    String correoRemitente = "tucorreo@gmail.com";
-    String contraseña = "tucontraseña";
+    String correoRemitente = "bancoprofit@gmail.com";
+    String contraseña = "w z a i o c r o u m h pl m i z";
 
     Session sesion = Session.getInstance(propiedades, new Authenticator() {
       @Override
@@ -70,4 +71,12 @@ public class Mensaje {
       System.err.println("Error al enviar el correo: " + e.getMessage());
     }
   }
+  
+  public static void main(String[] args) {
+      
+        String contraseñaGenerada = generarContraseña();
+        System.out.println(contraseñaGenerada);
+        Mensaje mensaje = new Mensaje("maikelflores0405@gmail.com", "Codigo de Verificacion", "Su codigo de verificacion es: "+contraseñaGenerada);
+        mensaje.enviar();
+    }
 }
