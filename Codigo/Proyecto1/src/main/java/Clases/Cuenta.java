@@ -15,7 +15,7 @@ import java.util.List;
  */
 public class Cuenta {
 
-  private final int numeroCuenta;
+  private String numeroCuenta;
   private LocalDate fechaCreacion;
   private boolean estatus;  // Activa/Inactiva
   private double saldo;
@@ -35,7 +35,7 @@ public class Cuenta {
    * @param pSaldoInicial Saldo inicial de la cuenta.
    * @param cliente Cliente dueño de la cuenta
    */
-  public Cuenta(int pNumeroCuenta, String pPin, double pSaldoInicial, Cliente cliente) {
+  public Cuenta(String pNumeroCuenta, String pPin, double pSaldoInicial, Cliente cliente) {
     this.numeroCuenta = pNumeroCuenta;
     this.pinCifrado = cifrarPin(pPin);
     this.saldo = pSaldoInicial;
@@ -54,7 +54,7 @@ public class Cuenta {
    * @return true si el PIN es correcto; false en caso contrario.
    */
   public boolean validarPin(String pPin) {
-    return cifrarPin(pPin).equals(pinCifrado);
+    return cifrarPin(pPin).equalsIgnoreCase(pinCifrado);
   }
 
   /**
@@ -168,7 +168,7 @@ public class Cuenta {
     return saldo;
   }
 
-  public int getNumeroCuenta() {
+  public String getNumeroCuenta() {
     return numeroCuenta;
   }
 

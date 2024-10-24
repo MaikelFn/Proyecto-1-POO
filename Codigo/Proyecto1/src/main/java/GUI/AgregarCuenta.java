@@ -160,7 +160,7 @@ public class AgregarCuenta extends javax.swing.JFrame {
 
             // Aquí puedes agregar la lógica para crear una cuenta o agregarla a un cliente
             // Ejemplo: crear una instancia de Cuenta y agregarla al cliente
-            Cuenta nuevaCuenta = new Cuenta(Integer.parseInt(numeroCuenta), pin, saldoInicial, cliente);
+            Cuenta nuevaCuenta = new Cuenta(numeroCuenta, pin, saldoInicial, cliente);
             LocalDate fechaActual = LocalDate.now();
             DateTimeFormatter formateador = DateTimeFormatter.ofPattern("dd/MM/yyyy");
             String fechaComoString = fechaActual.format(formateador);

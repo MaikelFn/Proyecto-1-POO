@@ -56,7 +56,7 @@ public class XMLReader {
                         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
                         // Leer los datos de cada cuenta
-                        int numeroCuenta = Integer.parseInt(cuentaElement.getElementsByTagName("Numero").item(0).getTextContent());
+                        String numeroCuenta = cuentaElement.getElementsByTagName("Numero").item(0).getTextContent();
                         String pinCifrado = cuentaElement.getElementsByTagName("Pin").item(0).getTextContent();
                         double saldo = Double.parseDouble(cuentaElement.getElementsByTagName("Saldo").item(0).getTextContent());
                         boolean estatus = Boolean.parseBoolean(cuentaElement.getElementsByTagName("Estatus").item(0).getTextContent());
@@ -65,7 +65,8 @@ public class XMLReader {
                         // Crear la cuenta y agregarla al cliente
                         Cuenta cuenta = new Cuenta(numeroCuenta, pinCifrado, saldo, nuevoCliente);
                         cuenta.setEstatus(estatus);  // Establecer el estado de la cuenta
-                        cuenta.setFechaCreacion(LocalDate.parse(fechaCreacionStr, formatter)); // Establecer la fecha de creación utilizando el formatter
+                        LocalDate fechaCreacion = LocalDate.parse(fechaCreacionStr, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+                        cuenta.setFechaCreacion(fechaCreacion); // Establecer la fecha de creación utilizando el formatter
 
                         nuevoCliente.agregarCuenta(cuenta);
                     }

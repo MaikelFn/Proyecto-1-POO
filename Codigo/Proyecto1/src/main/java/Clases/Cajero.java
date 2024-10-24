@@ -37,10 +37,10 @@ public class Cajero {
      * @param pNumeroCuenta Número de la cuenta.
      * @return Un Optional con la cuenta encontrada o vacío si no se encuentra.
      */
-    private Optional<Cuenta> buscarCuenta(int pNumeroCuenta) {
+    private Optional<Cuenta> buscarCuenta(String pNumeroCuenta) {
         for (Cliente cliente : banco.getClientes()) {
             for (Cuenta cuenta : cliente.getCuentas()) {
-                if (cuenta.getNumeroCuenta() == pNumeroCuenta) {
+                if (cuenta.getNumeroCuenta().equalsIgnoreCase(pNumeroCuenta)) {
                     return Optional.of(cuenta);
                 }
             }
@@ -107,7 +107,7 @@ public class Cajero {
         }
     }
     
-    public boolean validarPin(int pNumeroCuenta, String pPinIngresado) {
+    public boolean validarPin(String pNumeroCuenta, String pPinIngresado) {
     Optional<Cuenta> cuentaOpt = buscarCuenta(pNumeroCuenta);
     if (cuentaOpt.isPresent()) {
         Cuenta cuenta = cuentaOpt.get();
@@ -118,7 +118,7 @@ public class Cajero {
     }
     }
     
-    public void realizarTransaccion(int pNumeroCuenta, double pMonto, String pTipoTransaccion) {
+    public void realizarTransaccion(String pNumeroCuenta, double pMonto, String pTipoTransaccion) {
     Optional<Cuenta> cuentaOpt = buscarCuenta(pNumeroCuenta);
     if (cuentaOpt.isPresent()) {
         Cuenta cuenta = cuentaOpt.get();

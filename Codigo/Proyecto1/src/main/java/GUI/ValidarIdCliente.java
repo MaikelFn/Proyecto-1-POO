@@ -117,6 +117,8 @@ public class ValidarIdCliente extends javax.swing.JFrame {
             if (clienteEncontrado != null) {
                 clienteAutenticado = clienteEncontrado;
                 this.setVisible(false);
+                RellenarDatosCuenta redireccionar = new RellenarDatosCuenta();
+                redireccionar.setVisible(true);
                 }
             else {
             JOptionPane.showMessageDialog(this, "Cliente no encontrado o no registrado", "Error", JOptionPane.ERROR_MESSAGE);

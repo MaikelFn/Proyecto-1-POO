@@ -5,8 +5,11 @@
 package GUI;
 import Clases.Cliente;
 import Clases.Banco;
+import Clases.XMLWriter;
 import javax.swing.JOptionPane;
 import java.text.DecimalFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 /**
  *
  * @author Tayle
@@ -105,7 +108,7 @@ public class RellenarDatosCuenta extends javax.swing.JFrame {
             }
             
             try {
-                int monto = Integer.parseInt(txtMonto.getText());
+                double monto = Double.parseDouble(txtMonto.getText());
                 if (monto <= 0) {
                     JOptionPane.showMessageDialog(this, "El monto debe ser mayor a cero.");
                     return;
@@ -125,7 +128,14 @@ public class RellenarDatosCuenta extends javax.swing.JFrame {
                     "Nombre del dueño de la cuenta: " + clienteEncontrado.getNombreCompleto()
                 );
                 
-                // Aquí se guardan los datos, ej: cliente.agregarCuenta(nuevacuenta);
+                LocalDate fechaActual = LocalDate.now();
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                String fechaComoString = fechaActual.format(formatter);
+                XMLWriter.agregarCuenta(idUsuario, numeroCuenta, fechaComoString, estatusCuenta, monto, pin, "clientes.xml");
+                banco.cargarClientes("clientes.xml");
+                MenuPrincipal menu = new MenuPrincipal(banco);
+                menu.setVisible(true);
+                this.dispose();
                 
             } catch (NumberFormatException e) {
                 JOptionPane.showMessageDialog(this, "El monto debe ser un número entero.");

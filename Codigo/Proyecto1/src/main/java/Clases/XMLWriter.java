@@ -217,7 +217,17 @@ public class XMLWriter {
     transformer.transform(source, result);
 }
 
-    private static Node crearElemento(Document doc, String tipo, String pTipoTransaccion) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+     /**
+    * Método auxiliar para crear un elemento XML.
+    *
+    * @param doc El documento XML en el que se creará el elemento.
+    * @param tipo El nombre del elemento que se va a crear.
+    * @param valor El valor de texto que se asignará al elemento.
+    * @return El elemento XML creado.
+    */
+    private static Node crearElemento(Document doc, String tipo, String valor) {
+        Element elemento = doc.createElement(tipo);
+        elemento.appendChild(doc.createTextNode(valor));
+        return elemento;
     }
 }

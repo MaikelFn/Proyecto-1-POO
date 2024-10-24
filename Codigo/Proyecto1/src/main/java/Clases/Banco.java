@@ -27,7 +27,7 @@ public class Banco {
     
     public Cliente buscarClientePorID(String id) {
         for (Cliente cliente : clientes) {
-            if (cliente.getIdentificacion().equals(id)) {
+            if (cliente.getIdentificacion().equalsIgnoreCase(id)) {
              return cliente; // Retorna el cliente si coincide el ID.
             }
         }
@@ -38,7 +38,7 @@ public class Banco {
         clientes = XMLReader.leerClientesDesdeXML("clientes.xml");
     }
      
-    public void depositarEnDolares(int pNumeroCuenta, double montoDolares) {
+    public void depositarEnDolares(String pNumeroCuenta, double montoDolares) {
     Optional<Cuenta> cuentaOpt = buscarCuenta(pNumeroCuenta);
     if (cuentaOpt.isPresent()) {
         Cuenta cuenta = cuentaOpt.get();
@@ -57,7 +57,7 @@ public class Banco {
     }
     }
     
-    public void retirarEnDolares(int pNumeroCuenta, double montoDolares) {
+    public void retirarEnDolares(String pNumeroCuenta, double montoDolares) {
     Optional<Cuenta> cuentaOpt = buscarCuenta(pNumeroCuenta);
     if (cuentaOpt.isPresent()) {
         Cuenta cuenta = cuentaOpt.get();
@@ -76,7 +76,7 @@ public class Banco {
     }
     }
     
-    public void mostrarSaldoEnDolares(int pNumeroCuenta) {
+    public void mostrarSaldoEnDolares(String pNumeroCuenta) {
     Optional<Cuenta> cuentaOpt = buscarCuenta(pNumeroCuenta);
     if (cuentaOpt.isPresent()) {
         Cuenta cuenta = cuentaOpt.get();
@@ -97,10 +97,10 @@ public class Banco {
 
 
 
-    private Optional<Cuenta> buscarCuenta(int pNumeroCuenta) {
+    private Optional<Cuenta> buscarCuenta(String pNumeroCuenta) {
     for (Cliente cliente : getClientes()) {
         for (Cuenta cuenta : cliente.getCuentas()) {
-            if (cuenta.getNumeroCuenta() == pNumeroCuenta) {
+            if (cuenta.getNumeroCuenta().equalsIgnoreCase(pNumeroCuenta)) {
                 return Optional.of(cuenta);
             }
         }

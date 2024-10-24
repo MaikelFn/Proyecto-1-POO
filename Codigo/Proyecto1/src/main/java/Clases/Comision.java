@@ -24,9 +24,9 @@ public class Comision {
   public double calcularComision(double pMonto, String pTipoTransaccion) {
     double total = pMonto * 0.02;
 
-    if (pTipoTransaccion.equals("D")) {
+    if (pTipoTransaccion.equalsIgnoreCase("D")) {
       comisionesDepositos += total;
-    } else if (pTipoTransaccion.equals("R")) {
+    } else if (pTipoTransaccion.equalsIgnoreCase("R")) {
       comisionesRetiros += total;
     }
 

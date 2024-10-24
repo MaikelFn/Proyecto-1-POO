@@ -5,6 +5,9 @@
 package GUI;
 
 import Clases.Banco;
+import GUI.IniciarSesion;
+import GUI.RegistrarCliente;
+import GUI.ValidarIdCliente;
 /**
  *
  * @author Estudiante
@@ -42,7 +45,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jLabel2.setText("jLabel2");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(717, 406));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jButton3.setBackground(new java.awt.Color(0, 153, 204));
