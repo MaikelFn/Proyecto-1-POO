@@ -6,77 +6,82 @@ import java.util.ArrayList;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import org.w3c.dom.*;
-
+import java.time.format.DateTimeFormatter;
 public class XMLReader {
 
     // Método que lee clientes y sus cuentas desde el archivo XML
-   public static ArrayList<Cliente> leerClientesDesdeXML(String xmlPath) {
-        ArrayList<Cliente> clientesCargados = new ArrayList<>();
+  public static ArrayList<Cliente> leerClientesDesdeXML(String xmlPath) {
+    ArrayList<Cliente> clientesCargados = new ArrayList<>();
 
-        try {
-            // Preparar el analizador de XML
-            File inputFile = new File(xmlPath);
-            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-            Document doc = dBuilder.parse(inputFile);
-            doc.getDocumentElement().normalize();
+    try {
+        // Preparar el analizador de XML
+        File inputFile = new File(xmlPath);
+        DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+        Document doc = dBuilder.parse(inputFile);
+        doc.getDocumentElement().normalize();
 
-            // Obtener todos los elementos "Cliente" del archivo XML
-            NodeList nList = doc.getElementsByTagName("Cliente");
+        // Obtener todos los elementos "Cliente" del archivo XML
+        NodeList nList = doc.getElementsByTagName("Cliente");
 
-            for (int i = 0; i < nList.getLength(); i++) {
-                Node node = nList.item(i);
+        // Recorremos todos los nodos de Cliente
+        for (int i = 0; i < nList.getLength(); i++) {
+            Node node = nList.item(i);
 
-                if (node.getNodeType() == Node.ELEMENT_NODE) {
-                    Element element = (Element) node;
+            if (node.getNodeType() == Node.ELEMENT_NODE) {
+                Element element = (Element) node;
 
-                    // Leer los datos del cliente desde las etiquetas del XML
-                    String nombreCompleto = element.getElementsByTagName("NombreCompleto").item(0).getTextContent();
-                    String identificacion = element.getElementsByTagName("Identificacion").item(0).getTextContent();
-                    String telefono = element.getElementsByTagName("Telefono").item(0).getTextContent();
-                    String correoElectronico = element.getElementsByTagName("CorreoElectronico").item(0).getTextContent();
+                // Leer los datos del cliente desde las etiquetas del XML
+                String nombreCompleto = element.getElementsByTagName("NombreCompleto").item(0).getTextContent();
+                String identificacion = element.getElementsByTagName("Identificacion").item(0).getTextContent();
+                String telefono = element.getElementsByTagName("Telefono").item(0).getTextContent();
+                String correoElectronico = element.getElementsByTagName("CorreoElectronico").item(0).getTextContent();
 
-                    // Crear el objeto Cliente
-                    Cliente nuevoCliente = new Cliente(nombreCompleto, identificacion, telefono, correoElectronico);
+                // Crear el objeto Cliente
+                Cliente nuevoCliente = new Cliente(nombreCompleto, identificacion, telefono, correoElectronico);
 
-                    // Leer la etiqueta "Cuentas" del cliente
-                    NodeList cuentasNodeList = element.getElementsByTagName("Cuentas");
+                // Leer la etiqueta "Cuentas" del cliente
+                NodeList cuentasNodeList = element.getElementsByTagName("Cuentas");
 
-                    if (cuentasNodeList.getLength() > 0) {
-                        Element cuentasElement = (Element) cuentasNodeList.item(0); // Etiqueta Cuentas
+                if (cuentasNodeList.getLength() > 0) {
+                    Element cuentasElement = (Element) cuentasNodeList.item(0); // Etiqueta Cuentas
 
-                        // Leer las etiquetas "Cuenta" dentro de "Cuentas"
-                        NodeList cuentasList = cuentasElement.getElementsByTagName("Cuenta");
+                    // Leer las etiquetas "Cuenta" dentro de "Cuentas"
+                    NodeList cuentasList = cuentasElement.getElementsByTagName("Cuenta");
 
-                        for (int j = 0; j < cuentasList.getLength(); j++) {
-                            Element cuentaElement = (Element) cuentasList.item(j);
+                    for (int j = 0; j < cuentasList.getLength(); j++) {
+                        Element cuentaElement = (Element) cuentasList.item(j);
 
-                            // Leer los datos de cada cuenta
-                            int numeroCuenta = Integer.parseInt(cuentaElement.getElementsByTagName("Numero").item(0).getTextContent());
-                            String pin = cuentaElement.getElementsByTagName("Pin").item(0).getTextContent();
-                            double saldo = Double.parseDouble(cuentaElement.getElementsByTagName("Saldo").item(0).getTextContent());
-                            boolean estatus = Boolean.parseBoolean(cuentaElement.getElementsByTagName("Estatus").item(0).getTextContent());
-                            String fechaCreacionStr = cuentaElement.getElementsByTagName("FechaCreacion").item(0).getTextContent();
-                        
-                            // Aquí se usa el constructor actualizado de Cuenta
-                            Cuenta cuenta = new Cuenta(numeroCuenta, pin, saldo, nuevoCliente);
-                            cuenta.setEstatus(estatus);  // Establecer el estado de la cuenta
-                            // Aquí, si quieres manejar la fecha, puedes añadir un método o atributo en Cuenta para esto
+                        // Definir el formato de fecha que estás utilizando
+                        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
-                            nuevoCliente.agregarCuenta(cuenta);  // Agregar la cuenta al cliente
-                        }
+                        // Leer los datos de cada cuenta
+                        int numeroCuenta = Integer.parseInt(cuentaElement.getElementsByTagName("Numero").item(0).getTextContent());
+                        String pinCifrado = cuentaElement.getElementsByTagName("Pin").item(0).getTextContent();
+                        double saldo = Double.parseDouble(cuentaElement.getElementsByTagName("Saldo").item(0).getTextContent());
+                        boolean estatus = Boolean.parseBoolean(cuentaElement.getElementsByTagName("Estatus").item(0).getTextContent());
+                        String fechaCreacionStr = cuentaElement.getElementsByTagName("FechaCreacion").item(0).getTextContent();
+
+                        // Crear la cuenta y agregarla al cliente
+                        Cuenta cuenta = new Cuenta(numeroCuenta, pinCifrado, saldo, nuevoCliente);
+                        cuenta.setEstatus(estatus);  // Establecer el estado de la cuenta
+                        cuenta.setFechaCreacion(LocalDate.parse(fechaCreacionStr, formatter)); // Establecer la fecha de creación utilizando el formatter
+
+                        nuevoCliente.agregarCuenta(cuenta);
                     }
-
-                    // Agregar el cliente a la lista de clientes cargados
-                    clientesCargados.add(nuevoCliente);
                 }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
 
-        return clientesCargados; // Devolver la lista de clientes cargados
+                // Agregar el cliente a la lista de clientes cargados
+                clientesCargados.add(nuevoCliente);
+            }
+        }
+    } catch (Exception e) {
+        e.printStackTrace();
     }
+
+    return clientesCargados; // Devolver la lista de clientes cargados
+}
+
 
     
     public static ArrayList<Transaccion> leerTransaccionesPorNumeroCuenta(String xmlPath, int numeroCuentaBuscado) {
