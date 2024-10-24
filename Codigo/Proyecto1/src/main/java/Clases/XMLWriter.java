@@ -230,4 +230,79 @@ public class XMLWriter {
         elemento.appendChild(doc.createTextNode(valor));
         return elemento;
     }
+    
+    /**
+    * Reemplaza el número de teléfono de un cliente en el archivo XML.
+    *
+    * @param pIdentificacion Identificación del cliente.
+    * @param pNuevoTelefono Nuevo número de teléfono.
+    * @param pArchivoXML Ruta del archivo XML.
+    */
+    public static void reemplazarTelefono(String pIdentificacion, String pNuevoTelefono, String pArchivoXML) {
+        try {
+            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder builder = factory.newDocumentBuilder();
+            Document doc = builder.parse(new File(pArchivoXML));
+            NodeList clientes = doc.getElementsByTagName("Cliente");
+
+            for (int i = 0; i < clientes.getLength(); i++) {
+                Element cliente = (Element) clientes.item(i);
+                String id = cliente.getElementsByTagName("Identificacion").item(0).getTextContent();
+
+                if (id.equals(pIdentificacion)) {
+                    Element telefonoElem = (Element) cliente.getElementsByTagName("Telefono").item(0);
+                    if (telefonoElem != null) {
+                        telefonoElem.setTextContent(pNuevoTelefono);
+                        guardarCambios(doc, new File(pArchivoXML));
+                        System.out.println("Teléfono reemplazado con éxito para el cliente: " + pIdentificacion);
+                    } else {
+                        System.out.println("No se encontró el elemento Teléfono para el cliente: " + pIdentificacion);
+                    }
+                    return;
+                }
+            }
+
+            System.out.println("Cliente con identificación " + pIdentificacion + " no encontrado.");
+        } catch (IOException | ParserConfigurationException | SAXException | TransformerException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+    * Reemplaza el correo electrónico de un cliente en el archivo XML.
+    *
+    * @param pIdentificacion Identificación del cliente.
+    * @param pNuevoCorreo Nuevo correo electrónico.
+    * @param pArchivoXML Ruta del archivo XML.
+    */
+    public static void reemplazarCorreo(String pIdentificacion, String pNuevoCorreo, String pArchivoXML) {
+        try {
+            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder builder = factory.newDocumentBuilder();
+            Document doc = builder.parse(new File(pArchivoXML));
+            NodeList clientes = doc.getElementsByTagName("Cliente");
+
+            for (int i = 0; i < clientes.getLength(); i++) {
+                Element cliente = (Element) clientes.item(i);
+                String id = cliente.getElementsByTagName("Identificacion").item(0).getTextContent();
+
+                if (id.equals(pIdentificacion)) {
+                    Element correoElem = (Element) cliente.getElementsByTagName("CorreoElectronico").item(0);
+                    if (correoElem != null) {
+                        correoElem.setTextContent(pNuevoCorreo);
+                        guardarCambios(doc, new File(pArchivoXML));
+                        System.out.println("Correo reemplazado con éxito para el cliente: " + pIdentificacion);
+                    } else {
+                        System.out.println("No se encontró el elemento Correo Electrónico para el cliente: " + pIdentificacion);
+                    }
+                    return;
+                }
+            }
+
+            System.out.println("Cliente con identificación " + pIdentificacion + " no encontrado.");
+        } catch (IOException | ParserConfigurationException | SAXException | TransformerException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

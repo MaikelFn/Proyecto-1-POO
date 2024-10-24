@@ -42,10 +42,8 @@ public class InterfazCliente extends javax.swing.JFrame {
 
     private void cargarCuentas() {
         banco.cargarClientes("clientes.xml");
-        // Limpiar el contenido del PanelCuentas antes de añadir los elementos.
         PanelCuentas.removeAll();
 
-        // Si el cliente no tiene cuentas, mostrar un mensaje.
         if (cliente.getCuentas().isEmpty()) {
             JLabel labelSinCuentas = new JLabel("¡No posees ninguna cuenta!");
             labelSinCuentas.setFont(new java.awt.Font("Arial", java.awt.Font.BOLD, 20));
@@ -54,30 +52,28 @@ public class InterfazCliente extends javax.swing.JFrame {
             PanelCuentas.setLayout(new java.awt.FlowLayout(FlowLayout.CENTER));
             PanelCuentas.add(labelSinCuentas);
         } else {
-            int yPosition = 20; // Posición inicial para colocar los botones.
+            int yPosition = 20;
+            int contador = 1;
 
-            // Iterar por cada cuenta del cliente.
             for (Cuenta cuenta : cliente.getCuentas()) {
-                JButton botonCuenta = new JButton("Cuenta: " + cuenta.getNumeroCuenta());
+                JButton botonCuenta = new JButton("Cuenta " + contador);
                 botonCuenta.setBounds(20, yPosition, 200, 30);
-                yPosition += 40; // Espacio entre botones.
+                yPosition += 40;
 
-                // Añadir ActionListener a cada botón.
                 botonCuenta.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        JOptionPane.showMessageDialog(PanelCuentas, "Has seleccionado la cuenta: " + cuenta.getNumeroCuenta());
-                        PanelCuentas.revalidate();
-                        PanelCuentas.repaint();
+                        JOptionPane.showMessageDialog(PanelCuentas, "Has seleccionado la cuenta de nombre: " + cuenta.getNumeroCuenta());
                     }
                 });
-                PanelCuentas.add(botonCuenta); 
+                PanelCuentas.add(botonCuenta);
+                contador++;
             }
         }
-        // Refrescar el PanelCuentas para mostrar los cambios.
         PanelCuentas.revalidate();
         PanelCuentas.repaint();
     }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
