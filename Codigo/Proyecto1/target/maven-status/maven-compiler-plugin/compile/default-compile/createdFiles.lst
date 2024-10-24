@@ -21,11 +21,13 @@ GUI\ValidarIdCliente$3.class
 GUI\RegistrarCliente$5.class
 GUI\ValidarIdCliente.class
 GUI\InterfazBanco.class
+GUI\MenuPrincipal$5.class
 GUI\RellenarDatosCuenta.class
 GUI\IniciarSesion$3.class
 GUI\ValidarIdCliente$4.class
 GUI\MenuPrincipal$2.class
 GUI\Verificacion$3.class
+GUI\InterfazCliente$1$1.class
 GUI\IniciarSesion.class
 GUI\RellenarDatosCuenta$1.class
 Clases\Cajero.class

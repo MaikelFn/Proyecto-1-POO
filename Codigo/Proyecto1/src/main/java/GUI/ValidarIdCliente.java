@@ -25,6 +25,7 @@ public class ValidarIdCliente extends javax.swing.JFrame {
         Banco banco = new Banco();
         banco.cargarClientes("clientes.xml");
         this.banco = banco;
+        this.setLocationRelativeTo(null);
         
         
     }

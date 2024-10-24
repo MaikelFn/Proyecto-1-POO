@@ -171,6 +171,10 @@ public class Cuenta {
   public String getNumeroCuenta() {
     return numeroCuenta;
   }
+  
+  public String getPin(){
+      return pinCifrado;
+  }
 
   public List<Transaccion> getTransacciones() {
     return transacciones;

@@ -36,10 +36,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel2 = new javax.swing.JLabel();
-        jButton3 = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        AgregarCuenta = new javax.swing.JButton();
+        IniciarSesion = new javax.swing.JButton();
+        Registrarse = new javax.swing.JButton();
+        Salir = new javax.swing.JButton();
+        Logo = new javax.swing.JLabel();
         JLabelFondo = new javax.swing.JLabel();
 
         jLabel2.setText("jLabel2");
@@ -47,41 +48,52 @@ public class MenuPrincipal extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jButton3.setBackground(new java.awt.Color(0, 153, 204));
-        jButton3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton3.setForeground(new java.awt.Color(255, 255, 255));
-        jButton3.setText("Agregar cuenta");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        AgregarCuenta.setBackground(new java.awt.Color(0, 153, 204));
+        AgregarCuenta.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        AgregarCuenta.setForeground(new java.awt.Color(255, 255, 255));
+        AgregarCuenta.setText("Agregar cuenta");
+        AgregarCuenta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                AgregarCuentaActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 300, -1, 50));
+        getContentPane().add(AgregarCuenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 300, -1, 50));
 
-        jButton1.setBackground(new java.awt.Color(0, 153, 204));
-        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Iniciar sesión");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        IniciarSesion.setBackground(new java.awt.Color(0, 153, 204));
+        IniciarSesion.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        IniciarSesion.setForeground(new java.awt.Color(255, 255, 255));
+        IniciarSesion.setText("Iniciar sesión");
+        IniciarSesion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                IniciarSesionActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 300, 120, 50));
+        getContentPane().add(IniciarSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 300, 120, 50));
 
-        jButton2.setBackground(new java.awt.Color(0, 153, 204));
-        jButton2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jButton2.setText("Registrarse");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        Registrarse.setBackground(new java.awt.Color(0, 153, 204));
+        Registrarse.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        Registrarse.setForeground(new java.awt.Color(255, 255, 255));
+        Registrarse.setText("Registrarse");
+        Registrarse.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                RegistrarseActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 300, 110, 50));
+        getContentPane().add(Registrarse, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 300, 110, 50));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/LogoBanco.png"))); // NOI18N
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 10, 490, 270));
+        Salir.setBackground(new java.awt.Color(0, 153, 204));
+        Salir.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        Salir.setForeground(new java.awt.Color(255, 255, 255));
+        Salir.setText("Salir");
+        Salir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SalirActionPerformed(evt);
+            }
+        });
+        getContentPane().add(Salir, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 70, -1));
+
+        Logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/LogoBanco.png"))); // NOI18N
+        getContentPane().add(Logo, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 10, 490, 270));
 
         JLabelFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Fondo.jpeg"))); // NOI18N
         getContentPane().add(JLabelFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 400));
@@ -89,23 +101,27 @@ public class MenuPrincipal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void IniciarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IniciarSesionActionPerformed
         this.setVisible(false);
         IniciarSesion iniciarSesion = new IniciarSesion(this);
         iniciarSesion.setVisible(true);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_IniciarSesionActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void RegistrarseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegistrarseActionPerformed
         this.setVisible(false);
         RegistrarCliente registrarCliente = new RegistrarCliente(this, banco); // Pasar el objeto banco
         registrarCliente.setVisible(true); 
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_RegistrarseActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void AgregarCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AgregarCuentaActionPerformed
         ValidarIdCliente referencia = new ValidarIdCliente(this);
         referencia.setVisible(true);
         this.setVisible(false);
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_AgregarCuentaActionPerformed
+
+    private void SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SalirActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_SalirActionPerformed
 
     /**
      * @param args the command line arguments
@@ -145,11 +161,12 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton AgregarCuenta;
+    private javax.swing.JButton IniciarSesion;
     private javax.swing.JLabel JLabelFondo;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel Logo;
+    private javax.swing.JButton Registrarse;
+    private javax.swing.JButton Salir;
     private javax.swing.JLabel jLabel2;
     // End of variables declaration//GEN-END:variables
 }

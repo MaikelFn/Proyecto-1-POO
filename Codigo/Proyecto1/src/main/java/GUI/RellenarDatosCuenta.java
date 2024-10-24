@@ -28,6 +28,7 @@ public class RellenarDatosCuenta extends javax.swing.JFrame {
         this.banco = banco;
         this.cliente = cliente;
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**
