@@ -75,7 +75,7 @@ public class Cliente {
    * @param pCuenta Cuenta a agregar.
    */
   public void agregarCuenta(Cuenta pCuenta) {
-    cuentas.add(pCuenta);
+    this.cuentas.add(pCuenta);
     System.out.println("Cuenta agregada con éxito al cliente.");
   }
 

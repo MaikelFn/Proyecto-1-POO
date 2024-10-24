@@ -10,7 +10,7 @@ import org.w3c.dom.*;
 public class XMLReader {
 
     // Método que lee clientes y sus cuentas desde el archivo XML
-    public static ArrayList<Cliente> leerClientesDesdeXML(String xmlPath) {
+   public static ArrayList<Cliente> leerClientesDesdeXML(String xmlPath) {
         ArrayList<Cliente> clientesCargados = new ArrayList<>();
 
         try {
@@ -52,16 +52,16 @@ public class XMLReader {
                             Element cuentaElement = (Element) cuentasList.item(j);
 
                             // Leer los datos de cada cuenta
-                            int numeroCuenta = Integer.parseInt(cuentaElement.getElementsByTagName("NumeroCuenta").item(0).getTextContent());
-                            String pinCifrado = cuentaElement.getElementsByTagName("PinCifrado").item(0).getTextContent();
+                            int numeroCuenta = Integer.parseInt(cuentaElement.getElementsByTagName("Numero").item(0).getTextContent());
+                            String pin = cuentaElement.getElementsByTagName("Pin").item(0).getTextContent();
                             double saldo = Double.parseDouble(cuentaElement.getElementsByTagName("Saldo").item(0).getTextContent());
                             boolean estatus = Boolean.parseBoolean(cuentaElement.getElementsByTagName("Estatus").item(0).getTextContent());
-                            LocalDate fechaCreacion = LocalDate.parse(cuentaElement.getElementsByTagName("FechaCreacion").item(0).getTextContent());
-
-                            // Crear la cuenta y agregarla al cliente
-                            Cuenta cuenta = new Cuenta(numeroCuenta, pinCifrado, saldo, nuevoCliente);
+                            String fechaCreacionStr = cuentaElement.getElementsByTagName("FechaCreacion").item(0).getTextContent();
+                        
+                            // Aquí se usa el constructor actualizado de Cuenta
+                            Cuenta cuenta = new Cuenta(numeroCuenta, pin, saldo, nuevoCliente);
                             cuenta.setEstatus(estatus);  // Establecer el estado de la cuenta
-                            cuenta.setFechaCreacion(fechaCreacion);  // Establecer la fecha de creación
+                            // Aquí, si quieres manejar la fecha, puedes añadir un método o atributo en Cuenta para esto
 
                             nuevoCliente.agregarCuenta(cuenta);  // Agregar la cuenta al cliente
                         }
@@ -77,6 +77,7 @@ public class XMLReader {
 
         return clientesCargados; // Devolver la lista de clientes cargados
     }
+
     
     public static ArrayList<Transaccion> leerTransaccionesPorNumeroCuenta(String xmlPath, int numeroCuentaBuscado) {
         ArrayList<Transaccion> transacciones = new ArrayList<>();

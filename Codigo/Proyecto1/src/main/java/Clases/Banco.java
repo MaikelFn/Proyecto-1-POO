@@ -4,14 +4,20 @@
  */
 package Clases;
 
+import org.w3c.dom.*;
+import javax.xml.parsers.*;
+import javax.xml.transform.*;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+import java.io.File;
 import java.util.ArrayList;
-
+import java.util.List;
 /**
  *
  * @author Estudiante
  */
 public class Banco {
-    private final ArrayList<Cliente> clientes;
+    private ArrayList<Cliente> clientes;
 
     public Banco() {
         clientes = new ArrayList<>();
@@ -34,27 +40,7 @@ public class Banco {
         return null; // Retorna null si no encuentra el cliente.
     }
     
-    public void cargarClientes(String xmlPath) {
-        // Obtener la lista de clientes desde el archivo XML
-        ArrayList<Cliente> clientesDesdeXML = XMLReader.leerClientesDesdeXML(xmlPath);
-
-        // Agregar los clientes cargados al banco, evitando duplicados
-        for (Cliente cliente : clientesDesdeXML) {
-            boolean existeCliente = false;
-
-            for (Cliente clienteExistente : clientes) {
-                if (clienteExistente.getNombreCompleto().equalsIgnoreCase(cliente.getNombreCompleto())) {
-                    existeCliente = true;
-                    break;
-                }
-            }
-
-            if (!existeCliente) {
-                agregarCliente(cliente);
-                System.out.println("Cliente " + cliente.getNombreCompleto() + " agregado.");
-            } else {
-                System.out.println("El cliente " + cliente.getNombreCompleto() + " ya existe y no se agregará.");
-            }
-        }
+     public void cargarClientes(String xmlPath) {
+        clientes = XMLReader.leerClientesDesdeXML("clientes.xml");
     }
 }
