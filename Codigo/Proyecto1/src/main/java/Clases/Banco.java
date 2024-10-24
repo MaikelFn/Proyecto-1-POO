@@ -4,14 +4,8 @@
  */
 package Clases;
 
-import org.w3c.dom.*;
-import javax.xml.parsers.*;
-import javax.xml.transform.*;
-import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.stream.StreamResult;
-import java.io.File;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Optional;
 /**
  *
  * @author Estudiante
@@ -42,5 +36,75 @@ public class Banco {
     
      public void cargarClientes(String xmlPath) {
         clientes = XMLReader.leerClientesDesdeXML("clientes.xml");
+    }
+     
+    public void depositarEnDolares(int pNumeroCuenta, double montoDolares) {
+    Optional<Cuenta> cuentaOpt = buscarCuenta(pNumeroCuenta);
+    if (cuentaOpt.isPresent()) {
+        Cuenta cuenta = cuentaOpt.get();
+        String tipoCambioVenta = Cajero.consultarTipoCambio("venta");
+        double numero = 0;
+        try {
+            numero = Double.parseDouble(tipoCambioVenta);
+}       catch (NumberFormatException e) {
+            System.out.println("Error: la cadena no es un número válido.");
+}
+        double montoEnColones = montoDolares * numero;
+        cuenta.realizarDeposito(montoEnColones);
+        System.out.println("Depósito realizado con éxito. Monto en colones: " + montoEnColones);
+    } else {
+        System.out.println("Cuenta no encontrada.");
+    }
+    }
+    
+    public void retirarEnDolares(int pNumeroCuenta, double montoDolares) {
+    Optional<Cuenta> cuentaOpt = buscarCuenta(pNumeroCuenta);
+    if (cuentaOpt.isPresent()) {
+        Cuenta cuenta = cuentaOpt.get();
+        String tipoCambioVenta = Cajero.consultarTipoCambio("compra");
+        double numero = 0;
+        try {
+            numero = Double.parseDouble(tipoCambioVenta);
+        }catch (NumberFormatException e) {
+            System.out.println("Error: la cadena no es un número válido.");
+        }
+        double montoEnColones = montoDolares * numero;
+        cuenta.realizarRetiro(montoEnColones);  // Suponiendo que `realizarRetiro` ya está implementado en colones
+        System.out.println("Retiro realizado con éxito. Monto en colones: " + montoEnColones);
+    } else {
+        System.out.println("Cuenta no encontrada.");
+    }
+    }
+    
+    public void mostrarSaldoEnDolares(int pNumeroCuenta) {
+    Optional<Cuenta> cuentaOpt = buscarCuenta(pNumeroCuenta);
+    if (cuentaOpt.isPresent()) {
+        Cuenta cuenta = cuentaOpt.get();
+        String tipoCambioVenta = Cajero.consultarTipoCambio("compra");
+        double numero = 0;
+        try {
+            numero = Double.parseDouble(tipoCambioVenta);
+        }catch (NumberFormatException e) {
+            System.out.println("Error: la cadena no es un número válido.");
+        }
+        double saldoEnColones = cuenta.getSaldo();
+        double saldoEnDolares = saldoEnColones / numero;
+        System.out.println("El saldo en dólares es: " + saldoEnDolares);
+    } else {
+        System.out.println("Cuenta no encontrada.");
+    }
+}
+
+
+
+    private Optional<Cuenta> buscarCuenta(int pNumeroCuenta) {
+    for (Cliente cliente : getClientes()) {
+        for (Cuenta cuenta : cliente.getCuentas()) {
+            if (cuenta.getNumeroCuenta() == pNumeroCuenta) {
+                return Optional.of(cuenta);
+            }
+        }
+    }
+    return Optional.empty();
     }
 }

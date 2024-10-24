@@ -48,7 +48,7 @@ public class Cajero {
         return Optional.empty();
     }
     
-    public static void consultarTipoCambio(String tipo) {
+    public static String consultarTipoCambio(String tipo) {
         try {
 
             LocalDate fechaInicio = LocalDate.now();
@@ -78,11 +78,12 @@ public class Cajero {
             String xmlEscapado = content.toString();
             String xmlDesEscapado = StringEscapeUtils.unescapeXml(xmlEscapado);
 
-            System.out.println("Respuesta del BCCR (" + tipo + "): " + leerValorNumDesdeXML(xmlDesEscapado));
+            return leerValorNumDesdeXML(xmlDesEscapado);
 
         } catch (IOException e) {
             System.err.println("Error al consultar el tipo de cambio: " + e.getMessage());
         }
+        return null;
     }
     
     public static String leerValorNumDesdeXML(String xmlString) {
