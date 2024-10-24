@@ -22,10 +22,11 @@ public class RellenarDatosCuenta extends javax.swing.JFrame {
     /**
      * Creates new form RellenarDatosCuenta
      */
-    public RellenarDatosCuenta() {
+    public RellenarDatosCuenta(Cliente cliente) {
         Banco banco = new Banco();
         banco.cargarClientes("clientes.xml");
         this.banco = banco;
+        this.cliente = cliente;
         initComponents();
     }
 
@@ -85,7 +86,7 @@ public class RellenarDatosCuenta extends javax.swing.JFrame {
     }//GEN-LAST:event_txtPinActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        String idUsuario = JOptionPane.showInputDialog("Ingrese su identificación:");
+        String idUsuario = cliente.getIdentificacion();
         
         // Buscar cliente
         Cliente clienteEncontrado = null;
@@ -175,7 +176,8 @@ public class RellenarDatosCuenta extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new RellenarDatosCuenta().setVisible(true);
+                Banco banco = new Banco();
+                banco.cargarClientes("clilentes.xml");
             }
         });
     }

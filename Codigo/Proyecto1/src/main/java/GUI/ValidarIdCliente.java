@@ -117,7 +117,7 @@ public class ValidarIdCliente extends javax.swing.JFrame {
             if (clienteEncontrado != null) {
                 clienteAutenticado = clienteEncontrado;
                 this.setVisible(false);
-                RellenarDatosCuenta redireccionar = new RellenarDatosCuenta();
+                RellenarDatosCuenta redireccionar = new RellenarDatosCuenta(clienteAutenticado);
                 redireccionar.setVisible(true);
                 }
             else {

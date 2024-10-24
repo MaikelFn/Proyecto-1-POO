@@ -66,8 +66,7 @@ public class InterfazCliente extends javax.swing.JFrame {
                 botonCuenta.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        JLabel labelDetalles = new JLabel("Has seleccionado la cuenta: " + cuenta.getNumeroCuenta());
-                        PanelCuentas.add(labelDetalles);
+                        JOptionPane.showMessageDialog(PanelCuentas, "Has seleccionado la cuenta: " + cuenta.getNumeroCuenta());
                         PanelCuentas.revalidate();
                         PanelCuentas.repaint();
                     }
@@ -92,8 +91,6 @@ public class InterfazCliente extends javax.swing.JFrame {
         FrameCuentas = new javax.swing.JInternalFrame();
         PanelCuentas = new javax.swing.JPanel();
         ScrollBarCuentas = new javax.swing.JScrollBar();
-        EliminarCuenta = new javax.swing.JButton();
-        AgregarCuenta = new javax.swing.JButton();
         BotonVolver = new javax.swing.JButton();
         Configuracion = new javax.swing.JButton();
         LabelFondo = new javax.swing.JLabel();
@@ -141,21 +138,6 @@ public class InterfazCliente extends javax.swing.JFrame {
 
         getContentPane().add(FrameCuentas, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 10, 560, 370));
 
-        EliminarCuenta.setBackground(new java.awt.Color(0, 0, 51));
-        EliminarCuenta.setForeground(new java.awt.Color(255, 255, 255));
-        EliminarCuenta.setText("Eliminar Cuenta");
-        getContentPane().add(EliminarCuenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 210, -1, -1));
-
-        AgregarCuenta.setBackground(new java.awt.Color(0, 0, 51));
-        AgregarCuenta.setForeground(new java.awt.Color(255, 255, 255));
-        AgregarCuenta.setText("Agregar Cuenta");
-        AgregarCuenta.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                AgregarCuentaActionPerformed(evt);
-            }
-        });
-        getContentPane().add(AgregarCuenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, -1, -1));
-
         BotonVolver.setBackground(new java.awt.Color(0, 0, 102));
         BotonVolver.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         BotonVolver.setForeground(new java.awt.Color(255, 255, 255));
@@ -175,18 +157,13 @@ public class InterfazCliente extends javax.swing.JFrame {
                 ConfiguracionActionPerformed(evt);
             }
         });
-        getContentPane().add(Configuracion, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 270, -1, -1));
+        getContentPane().add(Configuracion, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, -1, 60));
 
         LabelFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Fondo.jpeg"))); // NOI18N
         getContentPane().add(LabelFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void AgregarCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AgregarCuentaActionPerformed
-        this.setVisible(false);
-        new AgregarCuenta(cliente, this).setVisible(true);
-    }//GEN-LAST:event_AgregarCuentaActionPerformed
 
     private void ConfiguracionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConfiguracionActionPerformed
         // TODO add your handling code here:
@@ -212,10 +189,8 @@ public class InterfazCliente extends javax.swing.JFrame {
 }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton AgregarCuenta;
     private javax.swing.JButton BotonVolver;
     private javax.swing.JButton Configuracion;
-    private javax.swing.JButton EliminarCuenta;
     private javax.swing.JInternalFrame FrameCuentas;
     private javax.swing.JLabel LabelFondo;
     private javax.swing.JPanel PanelCuentas;
