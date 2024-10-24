@@ -66,7 +66,7 @@ public class AgregarCuenta extends javax.swing.JFrame {
                 CancelarActionPerformed(evt);
             }
         });
-        getContentPane().add(Cancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 60, 20));
+        getContentPane().add(Cancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 60, 20));
 
         Agregar.setBackground(new java.awt.Color(0, 0, 51));
         Agregar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N

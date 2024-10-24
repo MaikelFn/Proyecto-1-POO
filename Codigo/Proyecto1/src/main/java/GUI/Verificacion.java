@@ -75,14 +75,14 @@ public class Verificacion extends javax.swing.JFrame {
         Volver.setForeground(new java.awt.Color(255, 255, 255));
         Volver.setText("Volver");
         Volver.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        getContentPane().add(Volver, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, -1, -1));
+        getContentPane().add(Volver, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/padlock.png"))); // NOI18N
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 90, -1, -1));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 80, -1, -1));
 
         BG.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Fondo.jpeg"))); // NOI18N
         BG.setText("jLabel1");
-        getContentPane().add(BG, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 360, 410));
+        getContentPane().add(BG, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 360, 400));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

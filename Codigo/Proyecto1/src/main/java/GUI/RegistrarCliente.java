@@ -161,7 +161,15 @@ public class RegistrarCliente extends javax.swing.JFrame {
             id.getText().isEmpty()) {
     
             JOptionPane.showMessageDialog(null, "Todos los campos deben estar llenos.", "Error", JOptionPane.ERROR_MESSAGE);
-            
+        
+        if (telefono.getText().length() != 8) {
+            JOptionPane.showMessageDialog(null, "El número de teléfono debe tener 8 dígitos.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        
+        if (!correo.getText().matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$")) {
+            JOptionPane.showMessageDialog(null, "Formato de correo inválido.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        
         } else {
             String nombreUsuario = nombre.getText();
             String telefonoUsuario = telefono.getText();
@@ -179,10 +187,14 @@ public class RegistrarCliente extends javax.swing.JFrame {
             if (clienteExiste) {
                 JOptionPane.showMessageDialog(null, "El cliente ya existe.", "Error", JOptionPane.ERROR_MESSAGE);
             } else {
-                // Si no existe, agregar cliente
                 XMLWriter.agregarCliente(nombreUsuario, idUsuario, telefonoUsuario, correoUsuario, "clientes.xml");
                 banco.cargarClientes("clientes.xml");
-                JOptionPane.showMessageDialog(null, "Cliente registrado", "¡Éxito!", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Se ha creado un nuevo cliente en el sistema.\n" +
+                                                    "Nombre completo: " + nombreUsuario + "\n" +
+                                                    "Identificación: " + idUsuario + "\n" +
+                                                    "Número de teléfono: " + telefonoUsuario + "\n" +
+                                                    "Dirección de correo electrónico: " + correoUsuario, 
+                                                    "Cliente Registrado", JOptionPane.INFORMATION_MESSAGE);
                 this.dispose();
                 menuPrincipal.setVisible(true);
             }
