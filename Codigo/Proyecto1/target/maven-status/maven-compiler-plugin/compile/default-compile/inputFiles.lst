@@ -4,9 +4,9 @@ C:\Users\Maikel\Documents\GitHub\Proyecto-1-POO\Codigo\Proyecto1\src\main\java\C
 C:\Users\Maikel\Documents\GitHub\Proyecto-1-POO\Codigo\Proyecto1\src\main\java\Clases\Comision.java
 C:\Users\Maikel\Documents\GitHub\Proyecto-1-POO\Codigo\Proyecto1\src\main\java\Clases\Cuenta.java
 C:\Users\Maikel\Documents\GitHub\Proyecto-1-POO\Codigo\Proyecto1\src\main\java\Clases\GeneradorContraseña.java
-C:\Users\Maikel\Documents\GitHub\Proyecto-1-POO\Codigo\Proyecto1\src\main\java\Clases\Main.java
 C:\Users\Maikel\Documents\GitHub\Proyecto-1-POO\Codigo\Proyecto1\src\main\java\Clases\Mensaje.java
 C:\Users\Maikel\Documents\GitHub\Proyecto-1-POO\Codigo\Proyecto1\src\main\java\Clases\Transaccion.java
+C:\Users\Maikel\Documents\GitHub\Proyecto-1-POO\Codigo\Proyecto1\src\main\java\Clases\XMLParser.java
 C:\Users\Maikel\Documents\GitHub\Proyecto-1-POO\Codigo\Proyecto1\src\main\java\Clases\XMLReader.java
 C:\Users\Maikel\Documents\GitHub\Proyecto-1-POO\Codigo\Proyecto1\src\main\java\Clases\XMLWriter.java
 C:\Users\Maikel\Documents\GitHub\Proyecto-1-POO\Codigo\Proyecto1\src\main\java\GUI\AgregarCuenta.java
@@ -16,3 +16,5 @@ C:\Users\Maikel\Documents\GitHub\Proyecto-1-POO\Codigo\Proyecto1\src\main\java\G
 C:\Users\Maikel\Documents\GitHub\Proyecto-1-POO\Codigo\Proyecto1\src\main\java\GUI\InterfazCliente.java
 C:\Users\Maikel\Documents\GitHub\Proyecto-1-POO\Codigo\Proyecto1\src\main\java\GUI\MenuPrincipal.java
 C:\Users\Maikel\Documents\GitHub\Proyecto-1-POO\Codigo\Proyecto1\src\main\java\GUI\RegistrarCliente.java
+C:\Users\Maikel\Documents\GitHub\Proyecto-1-POO\Codigo\Proyecto1\src\main\java\GUI\Retiro.java
+C:\Users\Maikel\Documents\GitHub\Proyecto-1-POO\Codigo\Proyecto1\src\main\java\GUI\Verificacion.java

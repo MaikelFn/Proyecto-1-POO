@@ -21,6 +21,8 @@ public class AgregarCuenta extends javax.swing.JFrame {
     private final InterfazCliente ventana;
     /**
      * Creates new form AgregarCuenta
+     * @param cliente
+     * @param interfaz
      */
     public AgregarCuenta(Cliente cliente, InterfazCliente interfaz) {
         initComponents();
@@ -71,6 +73,11 @@ public class AgregarCuenta extends javax.swing.JFrame {
         Agregar.setForeground(new java.awt.Color(255, 255, 255));
         Agregar.setText("Agregar cuenta");
         Agregar.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        Agregar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                AgregarMouseClicked(evt);
+            }
+        });
         Agregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 AgregarActionPerformed(evt);
@@ -113,7 +120,7 @@ public class AgregarCuenta extends javax.swing.JFrame {
 
         Fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Fondo.jpeg"))); // NOI18N
         Fondo.setText("jLabel1");
-        getContentPane().add(Fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 360, -1));
+        getContentPane().add(Fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 370, 410));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -159,6 +166,7 @@ public class AgregarCuenta extends javax.swing.JFrame {
             String fechaComoString = fechaActual.format(formateador);
             XMLWriter.agregarCuenta(cliente.getIdentificacion(), numeroCuenta, fechaComoString, "Activa", saldoInicial, pin, "clientes.xml");
             cliente.agregarCuenta(nuevaCuenta);
+            banco.cargarClientes("clientes.xml");
             JOptionPane.showMessageDialog(this, "Cuenta agregada con éxito.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
             this.dispose();
             ventana.setVisible(true);
@@ -168,6 +176,10 @@ public class AgregarCuenta extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "El saldo ingresado no es válido.", "Error", JOptionPane.ERROR_MESSAGE);
         }       
     }//GEN-LAST:event_AgregarActionPerformed
+
+    private void AgregarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AgregarMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_AgregarMouseClicked
 
     /**
      * @param args the command line arguments
@@ -197,11 +209,9 @@ public class AgregarCuenta extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                Banco banco = new Banco();
-                banco.cargarClientes("clentes.xml");
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            Banco banco1 = new Banco();
+            banco1.cargarClientes("clentes.xml");
         });
     }
 
