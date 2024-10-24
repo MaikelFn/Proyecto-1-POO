@@ -87,8 +87,7 @@ public class XMLmanager {
           if (nodo.getNodeType() == Node.ELEMENT_NODE) {
             Element elemento = (Element) nodo;
             System.out.print(elemento.getAttribute("id") );
-            if(){
-            }
+            
             if (elemento.getAttribute("id").equals(IDetiqueta)){
               estructurar(datos, etiquetas, baseDatos, elemento, nuevaEtiqueta, IDnuevaEtiqueta);
               break;

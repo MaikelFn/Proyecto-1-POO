@@ -106,9 +106,38 @@ public class Cajero {
         }
     }
     
-    public static void main(String[] args) {
-        // Probar la consulta para el tipo de cambio de compra y venta
-        consultarTipoCambio("compra");
-        consultarTipoCambio("venta");
+    public boolean validarPin(int pNumeroCuenta, String pPinIngresado) {
+    Optional<Cuenta> cuentaOpt = buscarCuenta(pNumeroCuenta);
+    if (cuentaOpt.isPresent()) {
+        Cuenta cuenta = cuentaOpt.get();
+        return cuenta.validarPin(pPinIngresado);  // Suponiendo que Cuenta tiene un método validarPin
+    } else {
+        System.out.println("Cuenta no encontrada.");
+        return false;
     }
+    }
+    
+    public void realizarTransaccion(int pNumeroCuenta, double pMonto, String pTipoTransaccion) {
+    Optional<Cuenta> cuentaOpt = buscarCuenta(pNumeroCuenta);
+    if (cuentaOpt.isPresent()) {
+        Cuenta cuenta = cuentaOpt.get();
+        if (pTipoTransaccion.equalsIgnoreCase("deposito")) {
+            cuenta.realizarDeposito(pMonto);  // Suponiendo que `Cuenta` tiene un método realizarDeposito
+        } else if (pTipoTransaccion.equalsIgnoreCase("retiro")) {
+            cuenta.realizarRetiro(pMonto);  // Suponiendo que `Cuenta` tiene un método realizarRetiro
+        } else {
+            System.out.println("Tipo de transacción no válida.");
+        }
+    } else {
+        System.out.println("Cuenta no encontrada.");
+    }
+    }
+    
+    public void enviarMensajeTexto(String correoElectronico, String mensaje) {
+    
+    Mensaje Correo = new Mensaje(correoElectronico,"Codigo de Verificacion","Su codigo de verificacion es: "+mensaje);
+    Correo.enviar();
+    
+    }
+
 }
