@@ -92,6 +92,7 @@ public class InterfazCliente extends javax.swing.JFrame {
                             if (cuenta.getNumeroCuenta().equals(pinIngresado)) {
                                 JOptionPane.showMessageDialog(ventanaVerificar, "¡Acceso concedido!");
                                 ventanaVerificar.dispose();
+                                
                             } else {
                                 intentos++;
 
