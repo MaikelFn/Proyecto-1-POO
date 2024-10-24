@@ -180,7 +180,7 @@ public class InterfazCliente extends javax.swing.JFrame {
 
         getContentPane().add(FrameCuentas, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 10, 560, 370));
 
-        BotonVolver.setBackground(new java.awt.Color(0, 0, 102));
+        BotonVolver.setBackground(new java.awt.Color(0, 0, 51));
         BotonVolver.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         BotonVolver.setForeground(new java.awt.Color(255, 255, 255));
         BotonVolver.setText("Cerrar sesión");

@@ -53,6 +53,9 @@ public class ValidarIdCliente extends javax.swing.JFrame {
         jLabel2.setText("Identificación :");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 190, -1, -1));
 
+        txtId.setBackground(new java.awt.Color(0, 0, 51));
+        txtId.setForeground(new java.awt.Color(255, 255, 255));
+        txtId.setCaretColor(new java.awt.Color(255, 255, 255));
         txtId.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtIdActionPerformed(evt);
@@ -60,6 +63,9 @@ public class ValidarIdCliente extends javax.swing.JFrame {
         });
         getContentPane().add(txtId, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 190, 140, -1));
 
+        Cancelar.setBackground(new java.awt.Color(0, 0, 51));
+        Cancelar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        Cancelar.setForeground(new java.awt.Color(255, 255, 255));
         Cancelar.setText("Cancelar");
         Cancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -68,6 +74,9 @@ public class ValidarIdCliente extends javax.swing.JFrame {
         });
         getContentPane().add(Cancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
+        Verificar.setBackground(new java.awt.Color(0, 0, 51));
+        Verificar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        Verificar.setForeground(new java.awt.Color(255, 255, 255));
         Verificar.setText("Verificar");
         Verificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

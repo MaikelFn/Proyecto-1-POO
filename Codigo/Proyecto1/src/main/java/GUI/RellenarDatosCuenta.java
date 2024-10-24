@@ -55,12 +55,21 @@ public class RellenarDatosCuenta extends javax.swing.JFrame {
         LabelPin.setText("Pin :");
         getContentPane().add(LabelPin, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 230, -1, -1));
 
+        txtPin.setBackground(new java.awt.Color(0, 0, 51));
+        txtPin.setForeground(new java.awt.Color(255, 255, 255));
+        txtPin.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        txtPin.setCaretColor(new java.awt.Color(255, 255, 255));
         txtPin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtPinActionPerformed(evt);
             }
         });
         getContentPane().add(txtPin, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 230, 120, -1));
+
+        txtMonto.setBackground(new java.awt.Color(0, 0, 51));
+        txtMonto.setForeground(new java.awt.Color(255, 255, 255));
+        txtMonto.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        txtMonto.setCaretColor(new java.awt.Color(255, 255, 255));
         getContentPane().add(txtMonto, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 270, 120, -1));
 
         LabelMonto.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -68,13 +77,17 @@ public class RellenarDatosCuenta extends javax.swing.JFrame {
         LabelMonto.setText("Monto inicial :");
         getContentPane().add(LabelMonto, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 270, -1, -1));
 
+        jButton1.setBackground(new java.awt.Color(0, 0, 51));
+        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setText("Crear");
+        jButton1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 340, -1, -1));
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 340, 80, -1));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Fondo.jpeg"))); // NOI18N
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 360, -1));
