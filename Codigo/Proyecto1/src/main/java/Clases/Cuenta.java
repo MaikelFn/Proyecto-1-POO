@@ -66,7 +66,7 @@ public class Cuenta {
     this.pinCifrado = cifrarPin(pNuevoPin);
     System.out.println("El PIN ha sido cambiado con éxito.");
   }
-
+  
   /**
    * Realiza un depósito en la cuenta.
    *

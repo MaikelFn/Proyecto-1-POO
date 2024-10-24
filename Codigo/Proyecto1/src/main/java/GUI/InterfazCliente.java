@@ -208,7 +208,8 @@ public class InterfazCliente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void ConfiguracionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConfiguracionActionPerformed
-        // TODO add your handling code here:
+        this.setVisible(false);
+        new ConfigurarCliente(cliente, this).setVisible(true);
     }//GEN-LAST:event_ConfiguracionActionPerformed
 
     private void BotonVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonVolverActionPerformed

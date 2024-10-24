@@ -6,6 +6,7 @@ GUI\RegistrarCliente$2.class
 GUI\RegistrarCliente.class
 Clases\Mensaje$1.class
 GUI\IniciarSesion$1.class
+GUI\ConfigurarCliente.class
 Clases\Cuenta.class
 GUI\MenuPrincipal.class
 GUI\RellenarDatosCuenta$3.class
@@ -13,9 +14,11 @@ GUI\InterfazBanco$1.class
 GUI\MenuPrincipal$1.class
 Clases\Cliente.class
 Clases\Comision.class
+GUI\ConfigurarCliente$4.class
 GUI\RegistrarCliente$1.class
 Clases\GeneradorContraseña.class
 GUI\IniciarSesion$2.class
+GUI\ConfigurarCliente$1.class
 GUI\InterfazCliente$2.class
 GUI\ValidarIdCliente$3.class
 GUI\RegistrarCliente$5.class
@@ -31,8 +34,8 @@ GUI\InterfazCliente$1$1.class
 GUI\IniciarSesion.class
 GUI\RellenarDatosCuenta$1.class
 Clases\Cajero.class
-GUI\ConfigurarCuenta.class
 Clases\XMLReader.class
+GUI\ConfigurarCliente$2.class
 GUI\RegistrarCliente$4.class
 GUI\ValidarIdCliente$1.class
 Clases\Mensaje.class
@@ -47,8 +50,8 @@ Clases\Banco.class
 GUI\Verificacion$2.class
 GUI\InterfazCliente.class
 Clases\XMLWriter.class
-GUI\ConfigurarCuenta$1.class
 Clases\Transaccion.class
 GUI\InterfazCliente$1.class
 GUI\ValidarIdCliente$2.class
+GUI\ConfigurarCliente$3.class
 GUI\InterfazCliente$4.class

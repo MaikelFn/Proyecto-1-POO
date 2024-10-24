@@ -108,6 +108,14 @@ public class Cliente {
     return Pattern.matches(REGEX_CORREO, pCorreo);
   }
 
+  public void setCorreo(String pCorreo) {
+      this.correo = pCorreo;
+  }
+  
+  public void setTelefono(String pTelefono) {
+      this.telefono = pTelefono;
+  }
+  
   // Getters
 
   public String getNombreCompleto() {
