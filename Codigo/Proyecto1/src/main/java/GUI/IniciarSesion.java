@@ -34,7 +34,7 @@ public class IniciarSesion extends javax.swing.JFrame {
         LabelNombre = new javax.swing.JLabel();
         Imagen = new javax.swing.JLabel();
         txtidentificacion = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        verificarSesion = new javax.swing.JButton();
         jLabelFondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -64,17 +64,17 @@ public class IniciarSesion extends javax.swing.JFrame {
         txtidentificacion.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         getContentPane().add(txtidentificacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 290, 140, 20));
 
-        jButton1.setBackground(new java.awt.Color(0, 0, 51));
-        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Iniciar sesión");
-        jButton1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        verificarSesion.setBackground(new java.awt.Color(0, 0, 51));
+        verificarSesion.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        verificarSesion.setForeground(new java.awt.Color(255, 255, 255));
+        verificarSesion.setText("Iniciar sesión");
+        verificarSesion.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        verificarSesion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                verificarSesionActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 360, -1, -1));
+        getContentPane().add(verificarSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 360, -1, -1));
 
         jLabelFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Fondo.jpeg"))); // NOI18N
         getContentPane().add(jLabelFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 360, -1));
@@ -100,7 +100,7 @@ public class IniciarSesion extends javax.swing.JFrame {
         menuPrincipal.setVisible(true);
     }//GEN-LAST:event_VolverActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void verificarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verificarSesionActionPerformed
         Banco banco = new Banco();
         String idUsuario = txtidentificacion.getText();
         banco.cargarClientes("clientes.xml");
@@ -120,14 +120,17 @@ public class IniciarSesion extends javax.swing.JFrame {
         }
 
          if (clienteEncontrado != null) {
-            clienteAutenticado = clienteEncontrado; // Asignar el cliente autenticado
-            JOptionPane.showMessageDialog(this, "Bienvenido, " + clienteAutenticado.getNombreCompleto(), "Inicio de Sesión", JOptionPane.INFORMATION_MESSAGE);
+            clienteAutenticado = clienteEncontrado;
+            JOptionPane.showMessageDialog(null, "Datos del cliente:\n"
+                                                + "Nombre: " + clienteAutenticado.getNombreCompleto() + "\n"
+                                                + "Teléfono actual: " + clienteAutenticado.getTelefono() + "\n"
+                                                + "Correo electrónico: " + clienteAutenticado.getCorreo());
             new InterfazCliente(banco, clienteAutenticado, this).setVisible(true);
             this.dispose();
         } else {
             JOptionPane.showMessageDialog(this, "Cliente no encontrado o no registrado", "Error", JOptionPane.ERROR_MESSAGE);
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_verificarSesionActionPerformed
 
     
     /**
@@ -173,9 +176,9 @@ public class IniciarSesion extends javax.swing.JFrame {
     private javax.swing.JLabel Imagen;
     private javax.swing.JLabel LabelNombre;
     private javax.swing.JButton Volver;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabelFondo;
     private javax.swing.JTextField txtidentificacion;
+    private javax.swing.JButton verificarSesion;
     // End of variables declaration//GEN-END:variables
 }
 
