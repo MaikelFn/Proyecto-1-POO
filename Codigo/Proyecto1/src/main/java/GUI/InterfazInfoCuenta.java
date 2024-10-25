@@ -7,13 +7,22 @@ import Clases.Cuenta;
 import Clases.Banco;
 import Clases.Comision;
 import Clases.XMLWriter;
+import java.awt.FlowLayout;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+import Clases.Cajero;
+import Clases.Cliente;
+import Clases.GeneradorContraseña;
+import Clases.Mensaje;
 /**
  *
  * @author Tayle
  */
 public class InterfazInfoCuenta extends javax.swing.JFrame {
-
+    private Cliente cliente;
     private Cuenta cuenta;
     private InterfazCliente ventana;
     private Banco banco;
@@ -28,6 +37,7 @@ public class InterfazInfoCuenta extends javax.swing.JFrame {
         Banco banco = new Banco();
         banco.cargarClientes("clientes.xml");
         this.banco = banco;
+        this.cliente = cuenta.getCliente();
     }
 
     /**
@@ -49,7 +59,6 @@ public class InterfazInfoCuenta extends javax.swing.JFrame {
         RealizarTransferencia = new javax.swing.JButton();
         ConsultarTransferencias = new javax.swing.JButton();
         ConsultarCompra = new javax.swing.JButton();
-        ConsultarVenta = new javax.swing.JButton();
         ConsultarSaldo = new javax.swing.JButton();
         ConsultarEstado = new javax.swing.JButton();
         ConsultarSaldoExtranjero = new javax.swing.JButton();
@@ -142,21 +151,18 @@ public class InterfazInfoCuenta extends javax.swing.JFrame {
         });
         getContentPane().add(ConsultarTransferencias, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 150, 170, -1));
 
-        ConsultarCompra.setText("Consultar compra");
+        ConsultarCompra.setText("Consultar Tipo de Cambio");
+        ConsultarCompra.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ConsultarCompraMouseClicked(evt);
+            }
+        });
         ConsultarCompra.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ConsultarCompraActionPerformed(evt);
             }
         });
-        getContentPane().add(ConsultarCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, 140, -1));
-
-        ConsultarVenta.setText("Consultar venta");
-        ConsultarVenta.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ConsultarVentaActionPerformed(evt);
-            }
-        });
-        getContentPane().add(ConsultarVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 190, 170, -1));
+        getContentPane().add(ConsultarCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, 330, -1));
 
         ConsultarSaldo.setText("Consultar saldo");
         ConsultarSaldo.addActionListener(new java.awt.event.ActionListener() {
@@ -190,7 +196,9 @@ public class InterfazInfoCuenta extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void ConsultarSaldoExtranjeroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConsultarSaldoExtranjeroActionPerformed
-        // TODO add your handling code here:
+
+        double Saldo=banco.convertirColonesADolares(cuenta.getSaldo());
+        JOptionPane.showMessageDialog(null,"Su saldo actual en dolares es: " + Saldo);
     }//GEN-LAST:event_ConsultarSaldoExtranjeroActionPerformed
 
     private void SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SalirActionPerformed
@@ -205,6 +213,7 @@ public class InterfazInfoCuenta extends javax.swing.JFrame {
                 double monto = Double.parseDouble(input);
                 cuenta.realizarDeposito(monto);
                 javax.swing.JOptionPane.showMessageDialog(this, "Depósito realizado exitosamente.");
+                
             } catch (NumberFormatException e) {
                 javax.swing.JOptionPane.showMessageDialog(this, "Por favor, ingrese un monto válido.");
             }
@@ -212,43 +221,73 @@ public class InterfazInfoCuenta extends javax.swing.JFrame {
     }//GEN-LAST:event_DepositarColonesActionPerformed
 
     private void RetirarColonesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RetirarColonesActionPerformed
-        String input = javax.swing.JOptionPane.showInputDialog("Ingrese el monto a retirar en colones:");
-        if (input != null && !input.isEmpty()) {
-            try {
-                double monto = Double.parseDouble(input);
-                boolean exito = cuenta.realizarRetiro(monto);
-                if (exito) {
-                    javax.swing.JOptionPane.showMessageDialog(this, "Retiro realizado exitosamente.");
-                } else {
-                    javax.swing.JOptionPane.showMessageDialog(this, "Fondos insuficientes.");
-                }
-            } catch (NumberFormatException e) {
-                javax.swing.JOptionPane.showMessageDialog(this, "Por favor, ingrese un monto válido.");
-            }
+        String input1 = javax.swing.JOptionPane.showInputDialog("Ingrese el PIN de su cuenta:");
+        if (cuenta.validarPin(input1)){
+            String PalabraSecreta=GeneradorContraseña.generarContraseña();
+            Mensaje mensaje = new Mensaje(cliente.getCorreo(), "Codigo de verificacion", PalabraSecreta);
+            mensaje.enviar();
+            String input2 = javax.swing.JOptionPane.showInputDialog("Ingrese el Codigo que ha resibido por correo: ");
+            if (PalabraSecreta.equals(input2)){
+                String input3 = javax.swing.JOptionPane.showInputDialog("Ingrese el monto a retirar en colones:");
+                if (input3 != null && !input3.isEmpty()) {
+                    try {
+                        double monto = Double.parseDouble(input3);
+                        boolean exito = cuenta.realizarRetiro(monto);
+                        if (exito) {
+                            javax.swing.JOptionPane.showMessageDialog(this, "Retiro realizado exitosamente.");
+                        } else {
+                            javax.swing.JOptionPane.showMessageDialog(this, "Fondos insuficientes.");
+                        }
+                    } catch (NumberFormatException e) {
+                        javax.swing.JOptionPane.showMessageDialog(this, "Por favor, ingrese un monto válido.");
+                    }
         }
+            
+        }else{
+            javax.swing.JOptionPane.showMessageDialog(this, "Codigo de verificacion Incorrecto");
+            }
+            }else {
+                javax.swing.JOptionPane.showMessageDialog(this, "PIN Incorrecto");
+            }
     }//GEN-LAST:event_RetirarColonesActionPerformed
 
+            
     private void RetirarDolaresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RetirarDolaresActionPerformed
-        // Obtener el monto ingresado en un JTextField
-        String input = javax.swing.JOptionPane.showInputDialog("Ingrese el monto a retirar en dolares:");
-        try {
-            double monto = Double.parseDouble(input);
-            Comision comision = new Comision();
-            if (monto > 0 && monto <= cuenta.getSaldo()) {
-                // Actualizar el saldo de la cuenta
-                double saldo = banco.convertirDolaresAColones(monto);
-                boolean exito = cuenta.realizarRetiro(saldo);
-                if (exito) {
-                    javax.swing.JOptionPane.showMessageDialog(this, "Retiro realizado exitosamente.");
-                } else {
-                    javax.swing.JOptionPane.showMessageDialog(this, "Fondos insuficientes.");
+
+        String input1 = javax.swing.JOptionPane.showInputDialog("Ingrese el PIN de su cuenta:");
+        if (cuenta.validarPin(input1)){
+            String PalabraSecreta=GeneradorContraseña.generarContraseña();
+            Mensaje mensaje = new Mensaje(cliente.getCorreo(), "Codigo de verificacion", PalabraSecreta);
+            mensaje.enviar();
+            String input2 = javax.swing.JOptionPane.showInputDialog("Ingrese el Codigo que ha resibido por correo: ");
+            if (PalabraSecreta.equals(input2)){
+                String input3 = javax.swing.JOptionPane.showInputDialog("Ingrese el monto a retirar en dolares:");
+                try {
+                    double monto = Double.parseDouble(input3);
+                    Comision comision = new Comision();
+                    if (monto > 0 && monto <= cuenta.getSaldo()) {
+                        // Actualizar el saldo de la cuenta
+                        double saldo = banco.convertirDolaresAColones(monto);
+                        boolean exito = cuenta.realizarRetiro(saldo);
+                        if (exito) {
+                            javax.swing.JOptionPane.showMessageDialog(this, "Retiro realizado exitosamente.");
+                        } else {
+                            javax.swing.JOptionPane.showMessageDialog(this, "Fondos insuficientes.");
+                            }
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Monto inválido o insuficiente saldo.");
                     }
-            } else {
-                JOptionPane.showMessageDialog(this, "Monto inválido o insuficiente saldo.");
+                } catch (NumberFormatException e) {
+                    JOptionPane.showMessageDialog(this, "Por favor, ingrese un monto válido.");
+                    }
+            
+        }else{
+            javax.swing.JOptionPane.showMessageDialog(this, "Codigo de verificacion Incorrecto");
+                    } 
+        }else {
+            javax.swing.JOptionPane.showMessageDialog(this, "PIN Incorrecto");
             }
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "Por favor, ingrese un monto válido.");
-        }
+
     }//GEN-LAST:event_RetirarDolaresActionPerformed
 
     private void DepositarDolaresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DepositarDolaresActionPerformed
@@ -280,24 +319,47 @@ public class InterfazInfoCuenta extends javax.swing.JFrame {
     }//GEN-LAST:event_ConsultarTransferenciasActionPerformed
 
     private void ConsultarCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConsultarCompraActionPerformed
-        // TODO add your handling code here:
+        String Venta=Cajero.consultarTipoCambio("venta");
+        String Compra=Cajero.consultarTipoCambio("compra");
+        JOptionPane.showMessageDialog(null, """
+                                            Tipo de cambio
+                                            Compra de dolares: """ + Compra + "\n"
+                                                + "Venta de dolares: " + Venta);
+              
     }//GEN-LAST:event_ConsultarCompraActionPerformed
 
-    private void ConsultarVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConsultarVentaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_ConsultarVentaActionPerformed
-
     private void CambiarPinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CambiarPinActionPerformed
-        // TODO add your handling code here:
+        String input1 = javax.swing.JOptionPane.showInputDialog("Ingrese su PIN actual:");
+        if (cuenta.validarPin(input1)){
+            String input2 = javax.swing.JOptionPane.showInputDialog("Ingrese su nuevo PIN:");
+            if (input2.length() < 4 || input2.length() > 6) {
+                JOptionPane.showMessageDialog(this, "El PIN debe tener entre 4 y 6 caracteres.");
+            }else{
+            cuenta.cambiarPin(input2);
+            XMLWriter.reemplazarPin(cliente.getIdentificacion(), cuenta.getNumeroCuenta(), input2, "clientes.xml");
+            }
+        }else{
+            JOptionPane.showMessageDialog(this, "El Pin ingresado es incorrecto");
+        }
+        
     }//GEN-LAST:event_CambiarPinActionPerformed
 
     private void ConsultarEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConsultarEstadoActionPerformed
-        // TODO add your handling code here:
+        if (cuenta.getEstatus()){
+            JOptionPane.showMessageDialog(null, "El Estado de su cuenta es: Activa");
+        }else{
+            JOptionPane.showMessageDialog(null, "El Estado de su cuenta es: Inactiva");
+    }
     }//GEN-LAST:event_ConsultarEstadoActionPerformed
 
     private void ConsultarSaldoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConsultarSaldoActionPerformed
-        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(null,"Su saldo actual: "+cuenta.getSaldo());
     }//GEN-LAST:event_ConsultarSaldoActionPerformed
+
+    private void ConsultarCompraMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ConsultarCompraMouseClicked
+        
+       
+    }//GEN-LAST:event_ConsultarCompraMouseClicked
 
     /**
      * @param args the command line arguments
@@ -343,7 +405,6 @@ public class InterfazInfoCuenta extends javax.swing.JFrame {
     private javax.swing.JButton ConsultarSaldo;
     private javax.swing.JButton ConsultarSaldoExtranjero;
     private javax.swing.JButton ConsultarTransferencias;
-    private javax.swing.JButton ConsultarVenta;
     private javax.swing.JButton DepositarColones;
     private javax.swing.JButton DepositarDolares;
     private javax.swing.JLabel LabelContenedor;
@@ -353,4 +414,8 @@ public class InterfazInfoCuenta extends javax.swing.JFrame {
     private javax.swing.JButton Salir;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
+
+    private double convertirColonesADolares(double Colones) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }

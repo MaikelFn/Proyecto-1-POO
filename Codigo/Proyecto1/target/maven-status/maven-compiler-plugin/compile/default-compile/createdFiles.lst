@@ -4,6 +4,7 @@ GUI\InterfazCliente$3.class
 GUI\Verificacion.class
 GUI\InterfazInfoCuenta$9.class
 GUI\RegistrarCliente$2.class
+GUI\ConsulartTrasacciones.class
 GUI\RegistrarCliente.class
 Clases\Mensaje$1.class
 GUI\IniciarSesion$1.class
@@ -66,6 +67,7 @@ GUI\InterfazInfoCuenta$11.class
 GUI\InterfazInfoCuenta$1.class
 Clases\Transaccion.class
 GUI\InterfazInfoCuenta$8.class
+GUI\ConsulartTrasacciones$1.class
 GUI\InterfazCliente$1.class
 GUI\ValidarIdCliente$2.class
 GUI\ConfigurarCliente$3.class

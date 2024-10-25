@@ -134,11 +134,5 @@ public class Cajero {
     }
     }
     
-    public void enviarMensajeTexto(String correoElectronico, String mensaje) {
-    
-    Mensaje Correo = new Mensaje(correoElectronico,"Codigo de Verificacion","Su codigo de verificacion es: "+mensaje);
-    Correo.enviar();
-    
-    }
 
 }

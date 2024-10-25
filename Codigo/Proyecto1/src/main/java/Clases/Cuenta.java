@@ -85,6 +85,7 @@ public class Cuenta {
     agregarTransaccion("DEPOSITO", pMonto, tieneComision);
 
     System.out.println("Depósito exitoso. Nuevo saldo: " + saldo + " colones.");
+    XMLWriter.reemplazarSaldo(cliente.getIdentificacion(), numeroCuenta, saldo, "clientes.xml");
   }
 
   /**
@@ -111,6 +112,8 @@ public class Cuenta {
     agregarTransaccion("RETIRO", pMonto, tieneComision);
     
     System.out.println("Retiro exitoso. Nuevo saldo: " + saldo + " colones.");
+    XMLWriter.reemplazarSaldo(cliente.getIdentificacion(), numeroCuenta, saldo, "clientes.xml");
+
     return true;
   }
 
