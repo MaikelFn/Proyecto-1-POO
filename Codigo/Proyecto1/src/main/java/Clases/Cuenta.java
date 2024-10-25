@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Clases;
 
 import java.time.LocalDate;
@@ -15,7 +11,7 @@ import java.util.List;
  */
 public class Cuenta {
 
-  private String numeroCuenta;
+  private final String numeroCuenta;
   private LocalDate fechaCreacion;
   private boolean estatus;  // Activa/Inactiva
   private double saldo;
@@ -33,7 +29,7 @@ public class Cuenta {
    * @param pNumeroCuenta Número de la cuenta.
    * @param pPin PIN de la cuenta (sin cifrar).
    * @param pSaldoInicial Saldo inicial de la cuenta.
-   * @param cliente Cliente dueño de la cuenta
+   * @param cliente Cliente dueño de la cuenta.
    */
   public Cuenta(String pNumeroCuenta, String pPin, double pSaldoInicial, Cliente cliente) {
     this.numeroCuenta = pNumeroCuenta;
@@ -193,8 +189,8 @@ public class Cuenta {
   }
   
   public Cliente getCliente() {
-        return cliente;
-    }
+    return cliente;
+  }
   
   //Setters
   public void setEstatus(boolean status){
@@ -202,6 +198,6 @@ public class Cuenta {
   }
   
   public void setFechaCreacion(LocalDate fecha) {
-      this.fechaCreacion = fecha;
+    this.fechaCreacion = fecha;
   }
 }

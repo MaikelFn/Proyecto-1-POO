@@ -54,7 +54,6 @@ GUI\RegistrarCliente$4.class
 GUI\ValidarIdCliente$1.class
 Clases\Mensaje.class
 GUI\RellenarDatosCuenta$2.class
-Clases\XMLmanager.class
 GUI\MenuPrincipal$3.class
 GUI\RegistrarCliente$3.class
 GUI\RegistrarCliente$6.class

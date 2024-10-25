@@ -109,11 +109,11 @@ public class Cliente {
   }
 
   public void setCorreo(String pCorreo) {
-      this.correo = pCorreo;
+    this.correo = pCorreo;
   }
   
   public void setTelefono(String pTelefono) {
-      this.telefono = pTelefono;
+    this.telefono = pTelefono;
   }
   
   // Getters

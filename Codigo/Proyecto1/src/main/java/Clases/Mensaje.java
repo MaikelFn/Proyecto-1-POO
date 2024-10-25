@@ -1,11 +1,5 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-
 package Clases;
 
-import static Clases.GeneradorContraseña.generarContraseña;
 import jakarta.mail.*;
 import jakarta.mail.internet.InternetAddress;
 import jakarta.mail.internet.MimeMessage;
@@ -20,6 +14,10 @@ public class Mensaje {
   private final String correoDestino;
   private final String asunto;
   private final String contenido;
+
+  // Constantes para la autenticación
+  private static final String CORREO_REMITENTE = "bancoprofit@gmail.com";
+  private static final String CONTRASENA = "w z a i o c r o u m h pl m i z"; // Considera almacenar esto de forma segura
 
   /**
    * Constructor para inicializar el mensaje.
@@ -46,20 +44,17 @@ public class Mensaje {
     propiedades.put("mail.smtp.starttls.enable", "true");
 
     // Autenticación del correo remitente
-    String correoRemitente = "bancoprofit@gmail.com";
-    String contraseña = "w z a i o c r o u m h pl m i z";
-
     Session sesion = Session.getInstance(propiedades, new Authenticator() {
       @Override
       protected PasswordAuthentication getPasswordAuthentication() {
-        return new PasswordAuthentication(correoRemitente, contraseña);
+        return new PasswordAuthentication(CORREO_REMITENTE, CONTRASENA);
       }
     });
 
     try {
       // Creación del mensaje
       Message mensaje = new MimeMessage(sesion);
-      mensaje.setFrom(new InternetAddress(correoRemitente));
+      mensaje.setFrom(new InternetAddress(CORREO_REMITENTE));
       mensaje.setRecipient(Message.RecipientType.TO, new InternetAddress(correoDestino));
       mensaje.setSubject(asunto);
       mensaje.setText(contenido);

@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Clases;
 
 import java.time.LocalDate;
@@ -11,6 +7,9 @@ import java.time.LocalDate;
  */
 public class Transaccion {
   // Atributos
+  public static final String TIPO_DEPOSITO = "DEPOSITO";
+  public static final String TIPO_RETIRO = "RETIRO";
+
   private final String tipoTransaccion;  // "DEPOSITO" o "RETIRO"
   private final double monto;
   private final LocalDate fecha;
@@ -19,11 +18,16 @@ public class Transaccion {
   /**
    * Constructor para inicializar una transacción.
    *
-   * @param pTipoTransaccion El tipo de transacción ("DEPOSITO" o "RETIRO").
+   * @param pTipoTransaccion El tipo de transacción (debe ser "DEPOSITO" o "RETIRO").
    * @param pMonto El monto de la transacción.
    * @param pTieneComision Indica si se aplicó una comisión.
+   * @throws IllegalArgumentException si el tipo de transacción no es válido.
    */
   public Transaccion(String pTipoTransaccion, double pMonto, boolean pTieneComision) {
+    if (!pTipoTransaccion.equals(TIPO_DEPOSITO) && !pTipoTransaccion.equals(TIPO_RETIRO)) {
+      throw new IllegalArgumentException("Tipo de transacción inválido. Debe ser 'DEPOSITO' o 'RETIRO'.");
+    }
+    
     this.tipoTransaccion = pTipoTransaccion;
     this.monto = pMonto;
     this.fecha = LocalDate.now();  // Fecha de creación automática
@@ -60,4 +64,3 @@ public class Transaccion {
            "Estado: " + estadoComision;
   }
 }
-

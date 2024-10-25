@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Clases;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -264,7 +260,6 @@ public class XMLWriter {
 
             System.out.println("Cliente con identificación " + pIdentificacion + " no encontrado.");
         } catch (IOException | ParserConfigurationException | SAXException | TransformerException e) {
-            e.printStackTrace();
         }
     }
 
@@ -301,7 +296,6 @@ public class XMLWriter {
 
             System.out.println("Cliente con identificación " + pIdentificacion + " no encontrado.");
         } catch (IOException | ParserConfigurationException | SAXException | TransformerException e) {
-            e.printStackTrace();
         }
     }
     /**
@@ -348,7 +342,6 @@ public class XMLWriter {
 
             System.out.println("Cliente con identificación " + pIdentificacion + " no encontrado.");
         } catch (IOException | ParserConfigurationException | SAXException | TransformerException e) {
-            e.printStackTrace();
         }
     }
 
@@ -396,7 +389,6 @@ public class XMLWriter {
 
             System.out.println("Cliente con identificación " + pIdentificacion + " no encontrado.");
         } catch (IOException | ParserConfigurationException | SAXException | TransformerException e) {
-            e.printStackTrace();
         }
     }
 
@@ -444,44 +436,6 @@ public class XMLWriter {
 
             System.out.println("Cliente con identificación " + pIdentificacion + " no encontrado.");
         } catch (IOException | ParserConfigurationException | SAXException | TransformerException e) {
-            e.printStackTrace();
         }
     }
-    
-    public static void modificarValor(String etiqueta, String valorAnterior, String nuevoValor, String pArchivoXML) {
-    try {
-
-        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-        DocumentBuilder builder = factory.newDocumentBuilder();
-        Document doc = builder.parse(new File(pArchivoXML));
-        
-        doc.getDocumentElement().normalize();
-
-        NodeList nodeList = doc.getElementsByTagName(etiqueta);
-
-        boolean encontrado = false;
-
-        for (int i = 0; i < nodeList.getLength(); i++) {
-            Node nodo = nodeList.item(i);
-            String contenidoActual = nodo.getTextContent();
-
-            if (contenidoActual.equals(valorAnterior)) {
-                nodo.setTextContent(nuevoValor); 
-                encontrado = true;
-                break; 
-            }
-        }
-
-        if (encontrado) {
-            guardarCambios(doc, new File(pArchivoXML));
-            System.out.println("Etiqueta '" + etiqueta + "' con valor '" + valorAnterior + "' modificada a '" + nuevoValor + "'.");
-        } else {
-            System.out.println("Etiqueta '" + etiqueta + "' con valor '" + valorAnterior + "' no encontrada.");
-        }
-
-    } catch (IOException | ParserConfigurationException | TransformerException | DOMException | SAXException e) {
-    }
-}
-
-
 }
