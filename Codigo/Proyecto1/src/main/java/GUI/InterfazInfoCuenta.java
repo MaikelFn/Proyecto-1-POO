@@ -12,6 +12,8 @@ import Clases.Cajero;
 import Clases.Cliente;
 import Clases.GeneradorContraseña;
 import Clases.Mensaje;
+import java.util.ArrayList;
+import java.util.List;
 /**
  *
  * @author Tayle
@@ -326,6 +328,37 @@ public class InterfazInfoCuenta extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "La cuenta está inactiva, no se puede realizar esta acción", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
+
+        List<Cuenta> cuentas = cliente.getCuentas();
+    
+        if (cuentas.size() == 1) {
+            JOptionPane.showMessageDialog(this, "No hay cuentas destino asociadas al cliente", "Advertencia", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        List<String> numerosCuentasDestino = new ArrayList<>();
+            for (Cuenta c : cuentas) {
+            if (!c.getNumeroCuenta().equals(cuenta.getNumeroCuenta())) { // Ignorar la cuenta origen
+                numerosCuentasDestino.add(c.getNumeroCuenta());
+            }
+        }
+
+        String numeroCuentaDestino = javax.swing.JOptionPane.showInputDialog("Ingrese el numero de cuenta destino");
+
+        if (numeroCuentaDestino.equals(cuenta.getNumeroCuenta())) {
+            JOptionPane.showMessageDialog(this, "No se puede realizar transferencias a sí mismo", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        if (!numerosCuentasDestino.contains(numeroCuentaDestino)) {
+            JOptionPane.showMessageDialog(this, "El número de cuenta destino no es válido", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // Aquí iría el código si pasa todas las restricciones
+        // Ejemplo: realizar la transferencia
+        // JOptionPane.showMessageDialog(this, "Transferencia realizada con éxito");
+        
     }//GEN-LAST:event_RealizarTransferenciaActionPerformed
 
     private void ConsultarTransferenciasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConsultarTransferenciasActionPerformed

@@ -3,6 +3,7 @@ package Clases;
 import java.time.LocalDate;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -133,6 +134,10 @@ public class Cuenta {
     Transaccion nuevaTransaccion = new Transaccion(pTipo, pMonto, pTieneComision);
     transacciones.add(nuevaTransaccion);
     contadorTransacciones++;
+    LocalDate fechaActual = LocalDate.now();
+    DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+    String fechaFormateada = fechaActual.format(formato);
+    XMLWriter.guardarTransaccion(this.getCliente().getIdentificacion(), pTipo, pMonto, fechaFormateada, pTieneComision, "clientes.xml");
   }
 
   /**
