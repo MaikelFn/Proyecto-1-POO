@@ -6,6 +6,7 @@ package GUI;
 import Clases.Cuenta;
 import Clases.Banco;
 import Clases.Comision;
+import Clases.XMLWriter;
 import javax.swing.JOptionPane;
 /**
  *
@@ -211,7 +212,6 @@ public class InterfazInfoCuenta extends javax.swing.JFrame {
     }//GEN-LAST:event_DepositarColonesActionPerformed
 
     private void RetirarColonesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RetirarColonesActionPerformed
-
         String input = javax.swing.JOptionPane.showInputDialog("Ingrese el monto a retirar en colones:");
         if (input != null && !input.isEmpty()) {
             try {
@@ -252,7 +252,6 @@ public class InterfazInfoCuenta extends javax.swing.JFrame {
     }//GEN-LAST:event_RetirarDolaresActionPerformed
 
     private void DepositarDolaresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DepositarDolaresActionPerformed
-        // 1. Obtener el monto ingresado en un JTextField
         String input = javax.swing.JOptionPane.showInputDialog("Ingrese el monto a depositar en dolares:");
     
         try {

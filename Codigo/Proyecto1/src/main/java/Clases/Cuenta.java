@@ -109,7 +109,7 @@ public class Cuenta {
 
     saldo -= pMonto + comision;
     agregarTransaccion("RETIRO", pMonto, tieneComision);
-
+    
     System.out.println("Retiro exitoso. Nuevo saldo: " + saldo + " colones.");
     return true;
   }

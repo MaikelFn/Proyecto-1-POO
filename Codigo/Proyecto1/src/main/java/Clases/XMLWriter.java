@@ -304,5 +304,148 @@ public class XMLWriter {
             e.printStackTrace();
         }
     }
+    /**
+    * Reemplaza el saldo de una cuenta de un cliente en el archivo XML.
+    *
+    * @param pIdentificacion Identificación del cliente.
+    * @param pNumeroCuenta Número de la cuenta a modificar.
+    * @param pNuevoSaldo Nuevo saldo de la cuenta.
+    * @param pArchivoXML Ruta del archivo XML.
+    */
+    public static void reemplazarSaldo(String pIdentificacion, String pNumeroCuenta, double pNuevoSaldo, String pArchivoXML) {
+        try {
+            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder builder = factory.newDocumentBuilder();
+            Document doc = builder.parse(new File(pArchivoXML));
+            NodeList clientes = doc.getElementsByTagName("Cliente");
+
+            for (int i = 0; i < clientes.getLength(); i++) {
+                Element cliente = (Element) clientes.item(i);
+                String id = cliente.getElementsByTagName("Identificacion").item(0).getTextContent();
+
+                if (id.equals(pIdentificacion)) {
+                    NodeList cuentas = cliente.getElementsByTagName("Cuenta");
+                    for (int j = 0; j < cuentas.getLength(); j++) {
+                        Element cuenta = (Element) cuentas.item(j);
+                        String numero = cuenta.getElementsByTagName("Numero").item(0).getTextContent();
+
+                        if (numero.equals(pNumeroCuenta)) {
+                            Element saldoElem = (Element) cuenta.getElementsByTagName("Saldo").item(0);
+                            if (saldoElem != null) {
+                                saldoElem.setTextContent(String.valueOf(pNuevoSaldo));
+                                guardarCambios(doc, new File(pArchivoXML));
+                                System.out.println("Saldo reemplazado con éxito para la cuenta: " + pNumeroCuenta);
+                            } else {
+                                System.out.println("No se encontró el elemento Saldo para la cuenta: " + pNumeroCuenta);
+                            }
+                            return;
+                        }
+                    }
+                    System.out.println("Cuenta con número " + pNumeroCuenta + " no encontrada para el cliente: " + pIdentificacion);
+                    return;
+                }
+            }
+
+            System.out.println("Cliente con identificación " + pIdentificacion + " no encontrado.");
+        } catch (IOException | ParserConfigurationException | SAXException | TransformerException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+    * Reemplaza el PIN de una cuenta de un cliente en el archivo XML.
+    *
+    * @param pIdentificacion Identificación del cliente.
+    * @param pNumeroCuenta Número de la cuenta a modificar.
+    * @param pNuevoPin Nuevo PIN de la cuenta.
+    * @param pArchivoXML Ruta del archivo XML.
+    */
+    public static void reemplazarPin(String pIdentificacion, String pNumeroCuenta, String pNuevoPin, String pArchivoXML) {
+        try {
+            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder builder = factory.newDocumentBuilder();
+            Document doc = builder.parse(new File(pArchivoXML));
+            NodeList clientes = doc.getElementsByTagName("Cliente");
+
+            for (int i = 0; i < clientes.getLength(); i++) {
+                Element cliente = (Element) clientes.item(i);
+                String id = cliente.getElementsByTagName("Identificacion").item(0).getTextContent();
+
+                if (id.equals(pIdentificacion)) {
+                    NodeList cuentas = cliente.getElementsByTagName("Cuenta");
+                    for (int j = 0; j < cuentas.getLength(); j++) {
+                        Element cuenta = (Element) cuentas.item(j);
+                        String numero = cuenta.getElementsByTagName("Numero").item(0).getTextContent();
+
+                        if (numero.equals(pNumeroCuenta)) {
+                            Element pinElem = (Element) cuenta.getElementsByTagName("Pin").item(0);
+                            if (pinElem != null) {
+                                pinElem.setTextContent(pNuevoPin);
+                                guardarCambios(doc, new File(pArchivoXML));
+                                System.out.println("PIN reemplazado con éxito para la cuenta: " + pNumeroCuenta);
+                            } else {
+                                System.out.println("No se encontró el elemento Pin para la cuenta: " + pNumeroCuenta);
+                            }
+                            return;
+                        }
+                    }
+                    System.out.println("Cuenta con número " + pNumeroCuenta + " no encontrada para el cliente: " + pIdentificacion);
+                    return;
+                }
+            }
+
+            System.out.println("Cliente con identificación " + pIdentificacion + " no encontrado.");
+        } catch (IOException | ParserConfigurationException | SAXException | TransformerException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+    * Reemplaza el estado de una cuenta de un cliente en el archivo XML.
+    *
+    * @param pIdentificacion Identificación del cliente.
+    * @param pNumeroCuenta Número de la cuenta a modificar.
+    * @param pNuevoEstado Nuevo estado de la cuenta.
+    * @param pArchivoXML Ruta del archivo XML.
+    */
+    public static void reemplazarEstado(String pIdentificacion, String pNumeroCuenta, String pNuevoEstado, String pArchivoXML) {
+        try {
+            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder builder = factory.newDocumentBuilder();
+            Document doc = builder.parse(new File(pArchivoXML));
+            NodeList clientes = doc.getElementsByTagName("Cliente");
+
+            for (int i = 0; i < clientes.getLength(); i++) {
+                Element cliente = (Element) clientes.item(i);
+                String id = cliente.getElementsByTagName("Identificacion").item(0).getTextContent();
+
+                if (id.equals(pIdentificacion)) {
+                    NodeList cuentas = cliente.getElementsByTagName("Cuenta");
+                    for (int j = 0; j < cuentas.getLength(); j++) {
+                        Element cuenta = (Element) cuentas.item(j);
+                        String numero = cuenta.getElementsByTagName("Numero").item(0).getTextContent();
+
+                        if (numero.equals(pNumeroCuenta)) {
+                            Element estadoElem = (Element) cuenta.getElementsByTagName("Estatus").item(0);
+                            if (estadoElem != null) {
+                                estadoElem.setTextContent(pNuevoEstado);
+                                guardarCambios(doc, new File(pArchivoXML));
+                                System.out.println("Estado reemplazado con éxito para la cuenta: " + pNumeroCuenta);
+                            } else {
+                                System.out.println("No se encontró el elemento Estatus para la cuenta: " + pNumeroCuenta);
+                            }
+                            return;
+                        }
+                    }
+                    System.out.println("Cuenta con número " + pNumeroCuenta + " no encontrada para el cliente: " + pIdentificacion);
+                    return;
+                }
+            }
+
+            System.out.println("Cliente con identificación " + pIdentificacion + " no encontrado.");
+        } catch (IOException | ParserConfigurationException | SAXException | TransformerException e) {
+            e.printStackTrace();
+        }
+    }
 
 }
