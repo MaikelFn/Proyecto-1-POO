@@ -3,18 +3,30 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package GUI;
-
+import Clases.Cuenta;
+import Clases.Banco;
+import Clases.Comision;
+import javax.swing.JOptionPane;
 /**
  *
  * @author Tayle
  */
 public class InterfazInfoCuenta extends javax.swing.JFrame {
 
+    private Cuenta cuenta;
+    private InterfazCliente ventana;
+    private Banco banco;
     /**
      * Creates new form interfazInfoCuenta
      */
-    public InterfazInfoCuenta() {
+    public InterfazInfoCuenta(Cuenta cuenta, InterfazCliente interfaz) {
         initComponents();
+        this.cuenta = cuenta;
+        this.ventana = interfaz;
+        this.setLocationRelativeTo(null);
+        Banco banco = new Banco();
+        banco.cargarClientes("clientes.xml");
+        this.banco = banco;
     }
 
     /**
@@ -49,6 +61,11 @@ public class InterfazInfoCuenta extends javax.swing.JFrame {
         Salir.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         Salir.setForeground(new java.awt.Color(255, 255, 255));
         Salir.setText("Salir");
+        Salir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SalirActionPerformed(evt);
+            }
+        });
         getContentPane().add(Salir, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 70, 30));
 
         jPanel1.setBackground(new java.awt.Color(1, 95, 209));
@@ -68,37 +85,92 @@ public class InterfazInfoCuenta extends javax.swing.JFrame {
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 0, 330, 550));
 
         CambiarPin.setText("Cambiar pin");
+        CambiarPin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CambiarPinActionPerformed(evt);
+            }
+        });
         getContentPane().add(CambiarPin, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 450, 110, -1));
 
         RetirarColones.setText("Retiro en colones");
         RetirarColones.setPreferredSize(new java.awt.Dimension(137, 23));
+        RetirarColones.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RetirarColonesActionPerformed(evt);
+            }
+        });
         getContentPane().add(RetirarColones, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 70, 170, -1));
 
         DepositarColones.setText("Deposito en colones");
+        DepositarColones.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DepositarColonesActionPerformed(evt);
+            }
+        });
         getContentPane().add(DepositarColones, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 140, -1));
 
         DepositarDolares.setText("Deposito en dolares");
+        DepositarDolares.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DepositarDolaresActionPerformed(evt);
+            }
+        });
         getContentPane().add(DepositarDolares, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 140, -1));
 
         RetirarDolares.setText("Retiro en dolares");
+        RetirarDolares.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RetirarDolaresActionPerformed(evt);
+            }
+        });
         getContentPane().add(RetirarDolares, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 110, 170, -1));
 
         RealizarTransferencia.setText("Realizar transferencia");
+        RealizarTransferencia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RealizarTransferenciaActionPerformed(evt);
+            }
+        });
         getContentPane().add(RealizarTransferencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, -1, -1));
 
         ConsultarTransferencias.setText("Consultar transacciones");
+        ConsultarTransferencias.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ConsultarTransferenciasActionPerformed(evt);
+            }
+        });
         getContentPane().add(ConsultarTransferencias, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 150, 170, -1));
 
         ConsultarCompra.setText("Consultar compra");
+        ConsultarCompra.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ConsultarCompraActionPerformed(evt);
+            }
+        });
         getContentPane().add(ConsultarCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, 140, -1));
 
         ConsultarVenta.setText("Consultar venta");
+        ConsultarVenta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ConsultarVentaActionPerformed(evt);
+            }
+        });
         getContentPane().add(ConsultarVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 190, 170, -1));
 
         ConsultarSaldo.setText("Consultar saldo");
+        ConsultarSaldo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ConsultarSaldoActionPerformed(evt);
+            }
+        });
         getContentPane().add(ConsultarSaldo, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 490, -1, -1));
 
         ConsultarEstado.setText("Consultar estado de cuenta");
+        ConsultarEstado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ConsultarEstadoActionPerformed(evt);
+            }
+        });
         getContentPane().add(ConsultarEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 450, 220, -1));
 
         ConsultarSaldoExtranjero.setText("Consultar saldo en divisa extranjera");
@@ -119,6 +191,114 @@ public class InterfazInfoCuenta extends javax.swing.JFrame {
     private void ConsultarSaldoExtranjeroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConsultarSaldoExtranjeroActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_ConsultarSaldoExtranjeroActionPerformed
+
+    private void SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SalirActionPerformed
+        this.dispose();
+        ventana.setVisible(true);
+    }//GEN-LAST:event_SalirActionPerformed
+
+    private void DepositarColonesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DepositarColonesActionPerformed
+        String input = javax.swing.JOptionPane.showInputDialog("Ingrese el monto a depositar en colones:");
+        if (input != null && !input.isEmpty()) {
+            try {
+                double monto = Double.parseDouble(input);
+                cuenta.realizarDeposito(monto);
+                javax.swing.JOptionPane.showMessageDialog(this, "Depósito realizado exitosamente.");
+            } catch (NumberFormatException e) {
+                javax.swing.JOptionPane.showMessageDialog(this, "Por favor, ingrese un monto válido.");
+            }
+        }
+    }//GEN-LAST:event_DepositarColonesActionPerformed
+
+    private void RetirarColonesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RetirarColonesActionPerformed
+
+        String input = javax.swing.JOptionPane.showInputDialog("Ingrese el monto a retirar en colones:");
+        if (input != null && !input.isEmpty()) {
+            try {
+                double monto = Double.parseDouble(input);
+                boolean exito = cuenta.realizarRetiro(monto);
+                if (exito) {
+                    javax.swing.JOptionPane.showMessageDialog(this, "Retiro realizado exitosamente.");
+                } else {
+                    javax.swing.JOptionPane.showMessageDialog(this, "Fondos insuficientes.");
+                }
+            } catch (NumberFormatException e) {
+                javax.swing.JOptionPane.showMessageDialog(this, "Por favor, ingrese un monto válido.");
+            }
+        }
+    }//GEN-LAST:event_RetirarColonesActionPerformed
+
+    private void RetirarDolaresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RetirarDolaresActionPerformed
+        // Obtener el monto ingresado en un JTextField
+        String input = javax.swing.JOptionPane.showInputDialog("Ingrese el monto a retirar en dolares:");
+        try {
+            double monto = Double.parseDouble(input);
+            Comision comision = new Comision();
+            if (monto > 0 && monto <= cuenta.getSaldo()) {
+                // Actualizar el saldo de la cuenta
+                double saldo = banco.convertirDolaresAColones(monto);
+                boolean exito = cuenta.realizarRetiro(saldo);
+                if (exito) {
+                    javax.swing.JOptionPane.showMessageDialog(this, "Retiro realizado exitosamente.");
+                } else {
+                    javax.swing.JOptionPane.showMessageDialog(this, "Fondos insuficientes.");
+                    }
+            } else {
+                JOptionPane.showMessageDialog(this, "Monto inválido o insuficiente saldo.");
+            }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Por favor, ingrese un monto válido.");
+        }
+    }//GEN-LAST:event_RetirarDolaresActionPerformed
+
+    private void DepositarDolaresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DepositarDolaresActionPerformed
+        // 1. Obtener el monto ingresado en un JTextField
+        String input = javax.swing.JOptionPane.showInputDialog("Ingrese el monto a depositar en dolares:");
+    
+        try {
+            double monto = Double.parseDouble(input);
+        
+            // Validar el monto (debe ser positivo)
+            if (monto > 0) {
+                // Actualizar el saldo de la cuenta
+                double saldo = banco.convertirDolaresAColones(monto); // Método que suma el saldo en la cuenta
+                cuenta.realizarDeposito(saldo);
+                JOptionPane.showMessageDialog(this, "Depósito exitoso.");
+            } else {
+                JOptionPane.showMessageDialog(this, "Ingrese un monto mayor a 0.");
+            }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Por favor, ingrese un monto válido.");
+        }
+    }//GEN-LAST:event_DepositarDolaresActionPerformed
+
+    private void RealizarTransferenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RealizarTransferenciaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_RealizarTransferenciaActionPerformed
+
+    private void ConsultarTransferenciasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConsultarTransferenciasActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ConsultarTransferenciasActionPerformed
+
+    private void ConsultarCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConsultarCompraActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ConsultarCompraActionPerformed
+
+    private void ConsultarVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConsultarVentaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ConsultarVentaActionPerformed
+
+    private void CambiarPinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CambiarPinActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_CambiarPinActionPerformed
+
+    private void ConsultarEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConsultarEstadoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ConsultarEstadoActionPerformed
+
+    private void ConsultarSaldoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConsultarSaldoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ConsultarSaldoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -151,7 +331,8 @@ public class InterfazInfoCuenta extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new InterfazInfoCuenta().setVisible(true);
+                Banco banco = new Banco();
+                banco.cargarClientes("clientes.xml");
             }
         });
     }

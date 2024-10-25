@@ -160,8 +160,8 @@ public class Cuenta {
       throw new RuntimeException("Error al cifrar el PIN", e);
     }
   }
-  
 
+  
   // Getters
 
   public double getSaldo() {

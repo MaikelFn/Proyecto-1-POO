@@ -42,6 +42,12 @@ public class InterfazCliente extends javax.swing.JFrame {
         String obtener = iniciarSesion.getTexto();
         return obtener;
     }
+     
+     public void crearVentana(Cuenta cuenta){
+         this.setVisible(false);
+         InterfazInfoCuenta interfaz = new InterfazInfoCuenta(cuenta, this);
+         interfaz.setVisible(true);
+     }
 
     private void cargarCuentas() {
     banco.cargarClientes("clientes.xml");
@@ -92,7 +98,7 @@ public class InterfazCliente extends javax.swing.JFrame {
                             if (cuenta.getNumeroCuenta().equals(pinIngresado)) {
                                 JOptionPane.showMessageDialog(ventanaVerificar, "¡Acceso concedido!");
                                 ventanaVerificar.dispose();
-                                
+                                crearVentana(cuenta);
                             } else {
                                 intentos++;
 

@@ -107,4 +107,18 @@ public class Banco {
     }
     return Optional.empty();
     }
+    
+    public double convertirDolaresAColones(double montoDolares) {
+        String tasaVentaStr = Cajero.consultarTipoCambio("venta");
+        double tasaVenta = tasaVentaStr != null ? Double.parseDouble(tasaVentaStr) : 540.0; // Valor por defecto en caso de fallo
+        return montoDolares * tasaVenta;
+    }
+
+    // Método para convertir de colones a dólares usando la tasa de compra
+    public double convertirColonesADolares(double montoColones) {
+        String tasaCompraStr = Cajero.consultarTipoCambio("compra");
+        double tasaCompra = tasaCompraStr != null ? Double.parseDouble(tasaCompraStr) : 540.0; // Valor por defecto en caso de fallo
+        return montoColones / tasaCompra;
+    }
+
 }
