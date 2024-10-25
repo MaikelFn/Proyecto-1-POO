@@ -70,7 +70,7 @@ public class InterfazCliente extends javax.swing.JFrame {
             yPosition += 40;
 
             botonCuenta.addActionListener(new ActionListener() {
-                int intentos = 0; // Contador de intentos
+                int intentos = 0;
 
                 @Override
                 public void actionPerformed(ActionEvent e) {
@@ -94,7 +94,6 @@ public class InterfazCliente extends javax.swing.JFrame {
                         public void actionPerformed(ActionEvent ev) {
                             String pinIngresado = textFieldNumero.getText();
                             
-                            // Comprobar si el PIN es correcto
                             if (cuenta.getNumeroCuenta().equals(pinIngresado)) {
                                 JOptionPane.showMessageDialog(ventanaVerificar, "¡Acceso concedido!");
                                 ventanaVerificar.dispose();
@@ -108,8 +107,8 @@ public class InterfazCliente extends javax.swing.JFrame {
                                     JOptionPane.showMessageDialog(ventanaVerificar, "Acceso denegado, 1 intento disponible");
                                 } else if (intentos == 3) {
                                     JOptionPane.showMessageDialog(ventanaVerificar, "La cuenta ha sido desactivada");
-                                    // Aqui hay que desactivar la cuenta
-                                    ventanaVerificar.dispose(); // Cerrar la ventana
+                                    cuenta.desactivarCuenta();
+                                    ventanaVerificar.dispose();
                                 }
                             }
                         }

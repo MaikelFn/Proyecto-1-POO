@@ -59,9 +59,12 @@ public class XMLReader {
                         String numeroCuenta = cuentaElement.getElementsByTagName("Numero").item(0).getTextContent();
                         String pinCifrado = cuentaElement.getElementsByTagName("Pin").item(0).getTextContent();
                         double saldo = Double.parseDouble(cuentaElement.getElementsByTagName("Saldo").item(0).getTextContent());
-                        boolean estatus = Boolean.parseBoolean(cuentaElement.getElementsByTagName("Estatus").item(0).getTextContent());
+                        String estado = cuentaElement.getElementsByTagName("Estatus").item(0).getTextContent();
+                        boolean estatus;
+                        estatus = estado.equals("Activa");
                         String fechaCreacionStr = cuentaElement.getElementsByTagName("FechaCreacion").item(0).getTextContent();
-
+                        
+                        
                         // Crear la cuenta y agregarla al cliente
                         Cuenta cuenta = new Cuenta(numeroCuenta, pinCifrado, saldo, nuevoCliente);
                         cuenta.setEstatus(estatus);  // Establecer el estado de la cuenta

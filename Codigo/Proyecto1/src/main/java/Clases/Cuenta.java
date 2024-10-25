@@ -120,7 +120,8 @@ public class Cuenta {
   /**
    * Elimina la cuenta marcándola como inactiva.
    */
-  public void eliminarCuenta() {
+  public void desactivarCuenta() {
+    XMLWriter.reemplazarEstado(this.getCliente().getIdentificacion(), this.getNumeroCuenta(), "Inactiva", "clientes.xml");
     this.estatus = false;
     System.out.println("La cuenta ha sido eliminada.");
   }

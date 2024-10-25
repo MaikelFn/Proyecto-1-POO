@@ -196,7 +196,10 @@ public class InterfazInfoCuenta extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void ConsultarSaldoExtranjeroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConsultarSaldoExtranjeroActionPerformed
-
+        if (!cuenta.getEstatus()) {
+            JOptionPane.showMessageDialog(this, "La cuenta está inactiva, no se puede realizar esta acción", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         double Saldo=banco.convertirColonesADolares(cuenta.getSaldo());
         JOptionPane.showMessageDialog(null,"Su saldo actual en dolares es: " + Saldo);
     }//GEN-LAST:event_ConsultarSaldoExtranjeroActionPerformed
@@ -207,6 +210,10 @@ public class InterfazInfoCuenta extends javax.swing.JFrame {
     }//GEN-LAST:event_SalirActionPerformed
 
     private void DepositarColonesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DepositarColonesActionPerformed
+        if (!cuenta.getEstatus()) {
+            JOptionPane.showMessageDialog(this, "La cuenta está inactiva, no se puede realizar esta acción", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         String input = javax.swing.JOptionPane.showInputDialog("Ingrese el monto a depositar en colones:");
         if (input != null && !input.isEmpty()) {
             try {
@@ -221,6 +228,10 @@ public class InterfazInfoCuenta extends javax.swing.JFrame {
     }//GEN-LAST:event_DepositarColonesActionPerformed
 
     private void RetirarColonesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RetirarColonesActionPerformed
+        if (!cuenta.getEstatus()) {
+            JOptionPane.showMessageDialog(this, "La cuenta está inactiva, no se puede realizar esta acción", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         String input1 = javax.swing.JOptionPane.showInputDialog("Ingrese el PIN de su cuenta:");
         if (cuenta.validarPin(input1)){
             String PalabraSecreta=GeneradorContraseña.generarContraseña();
@@ -253,7 +264,10 @@ public class InterfazInfoCuenta extends javax.swing.JFrame {
 
             
     private void RetirarDolaresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RetirarDolaresActionPerformed
-
+        if (!cuenta.getEstatus()) {
+            JOptionPane.showMessageDialog(this, "La cuenta está inactiva, no se puede realizar esta acción", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         String input1 = javax.swing.JOptionPane.showInputDialog("Ingrese el PIN de su cuenta:");
         if (cuenta.validarPin(input1)){
             String PalabraSecreta=GeneradorContraseña.generarContraseña();
@@ -291,15 +305,17 @@ public class InterfazInfoCuenta extends javax.swing.JFrame {
     }//GEN-LAST:event_RetirarDolaresActionPerformed
 
     private void DepositarDolaresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DepositarDolaresActionPerformed
+        if (!cuenta.getEstatus()) {
+            JOptionPane.showMessageDialog(this, "La cuenta está inactiva, no se puede realizar esta acción", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         String input = javax.swing.JOptionPane.showInputDialog("Ingrese el monto a depositar en dolares:");
     
         try {
             double monto = Double.parseDouble(input);
         
-            // Validar el monto (debe ser positivo)
             if (monto > 0) {
-                // Actualizar el saldo de la cuenta
-                double saldo = banco.convertirDolaresAColones(monto); // Método que suma el saldo en la cuenta
+                double saldo = banco.convertirDolaresAColones(monto);
                 cuenta.realizarDeposito(saldo);
                 JOptionPane.showMessageDialog(this, "Depósito exitoso.");
             } else {
@@ -311,14 +327,27 @@ public class InterfazInfoCuenta extends javax.swing.JFrame {
     }//GEN-LAST:event_DepositarDolaresActionPerformed
 
     private void RealizarTransferenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RealizarTransferenciaActionPerformed
-        // TODO add your handling code here:
+        if (!cuenta.getEstatus()) {
+            JOptionPane.showMessageDialog(this, "La cuenta está inactiva, no se puede realizar esta acción", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
     }//GEN-LAST:event_RealizarTransferenciaActionPerformed
 
     private void ConsultarTransferenciasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConsultarTransferenciasActionPerformed
-        // TODO add your handling code here:
+        if (!cuenta.getEstatus()) {
+            JOptionPane.showMessageDialog(this, "La cuenta está inactiva, no se puede realizar esta acción", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        this.setVisible(false);
+        ConsultarTransacciones transacciones = new ConsultarTransacciones(cuenta, this);
+        transacciones.setVisible(true);
     }//GEN-LAST:event_ConsultarTransferenciasActionPerformed
 
     private void ConsultarCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConsultarCompraActionPerformed
+        if (!cuenta.getEstatus()) {
+            JOptionPane.showMessageDialog(this, "La cuenta está inactiva, no se puede realizar esta acción", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         String Venta=Cajero.consultarTipoCambio("venta");
         String Compra=Cajero.consultarTipoCambio("compra");
         JOptionPane.showMessageDialog(null, """
@@ -329,6 +358,10 @@ public class InterfazInfoCuenta extends javax.swing.JFrame {
     }//GEN-LAST:event_ConsultarCompraActionPerformed
 
     private void CambiarPinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CambiarPinActionPerformed
+        if (!cuenta.getEstatus()) {
+            JOptionPane.showMessageDialog(this, "La cuenta está inactiva, no se puede realizar esta acción", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         String input1 = javax.swing.JOptionPane.showInputDialog("Ingrese su PIN actual:");
         if (cuenta.validarPin(input1)){
             String input2 = javax.swing.JOptionPane.showInputDialog("Ingrese su nuevo PIN:");
@@ -353,11 +386,18 @@ public class InterfazInfoCuenta extends javax.swing.JFrame {
     }//GEN-LAST:event_ConsultarEstadoActionPerformed
 
     private void ConsultarSaldoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConsultarSaldoActionPerformed
+        if (!cuenta.getEstatus()) {
+            JOptionPane.showMessageDialog(this, "La cuenta está inactiva, no se puede realizar esta acción", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         JOptionPane.showMessageDialog(null,"Su saldo actual: "+cuenta.getSaldo());
     }//GEN-LAST:event_ConsultarSaldoActionPerformed
 
     private void ConsultarCompraMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ConsultarCompraMouseClicked
-        
+        if (!cuenta.getEstatus()) {
+            JOptionPane.showMessageDialog(this, "La cuenta está inactiva, no se puede realizar esta acción", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
        
     }//GEN-LAST:event_ConsultarCompraMouseClicked
 
