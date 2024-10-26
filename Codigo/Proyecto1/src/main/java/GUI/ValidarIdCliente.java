@@ -43,6 +43,7 @@ public class ValidarIdCliente extends javax.swing.JFrame {
         txtId = new javax.swing.JTextField();
         Cancelar = new javax.swing.JButton();
         Verificar = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -51,7 +52,7 @@ public class ValidarIdCliente extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Identificación :");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 190, -1, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 230, -1, -1));
 
         txtId.setBackground(new java.awt.Color(0, 0, 51));
         txtId.setForeground(new java.awt.Color(255, 255, 255));
@@ -61,7 +62,7 @@ public class ValidarIdCliente extends javax.swing.JFrame {
                 txtIdActionPerformed(evt);
             }
         });
-        getContentPane().add(txtId, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 190, 140, -1));
+        getContentPane().add(txtId, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 230, 140, -1));
 
         Cancelar.setBackground(new java.awt.Color(0, 0, 51));
         Cancelar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -83,7 +84,11 @@ public class ValidarIdCliente extends javax.swing.JFrame {
                 VerificarActionPerformed(evt);
             }
         });
-        getContentPane().add(Verificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 240, -1, -1));
+        getContentPane().add(Verificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 260, -1, -1));
+
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/iniciarsesion.png"))); // NOI18N
+        jLabel3.setText("jLabel3");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 0, 210, 230));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Fondo.jpeg"))); // NOI18N
         jLabel1.setText("jLabel1");
@@ -202,6 +207,7 @@ public class ValidarIdCliente extends javax.swing.JFrame {
     private javax.swing.JButton Verificar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JTextField txtId;
     // End of variables declaration//GEN-END:variables
 }

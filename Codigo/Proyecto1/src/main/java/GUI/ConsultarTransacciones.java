@@ -71,8 +71,10 @@ public class ConsultarTransacciones extends javax.swing.JFrame {
         LabelInfoTransacciones.setForeground(new java.awt.Color(255, 255, 255));
         LabelInfoTransacciones.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         LabelInfoTransacciones.setText("Transacciones realizadas por esta cuenta");
-        getContentPane().add(LabelInfoTransacciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 20, 370, 40));
+        getContentPane().add(LabelInfoTransacciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 0, 370, 40));
 
+        Regresar.setBackground(new java.awt.Color(0, 0, 51));
+        Regresar.setForeground(new java.awt.Color(255, 255, 255));
         Regresar.setText("Regresar");
         Regresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -88,7 +90,7 @@ public class ConsultarTransacciones extends javax.swing.JFrame {
         TransaccionesLayout.setHorizontalGroup(
             TransaccionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, TransaccionesLayout.createSequentialGroup()
-                .addGap(0, 458, Short.MAX_VALUE)
+                .addGap(0, 628, Short.MAX_VALUE)
                 .addComponent(jScrollBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         TransaccionesLayout.setVerticalGroup(
@@ -107,7 +109,7 @@ public class ConsultarTransacciones extends javax.swing.JFrame {
             .addComponent(Transacciones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        getContentPane().add(InternalFrameContenedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 50, 480, 340));
+        getContentPane().add(InternalFrameContenedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, 650, 350));
 
         JLabelFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Fondo.jpeg"))); // NOI18N
         getContentPane().add(JLabelFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 400));
