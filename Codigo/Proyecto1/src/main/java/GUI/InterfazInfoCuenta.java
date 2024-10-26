@@ -518,11 +518,21 @@ public class InterfazInfoCuenta extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "La cuenta está inactiva, no se puede realizar esta acción", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        
+
         String input1 = javax.swing.JOptionPane.showInputDialog("Ingrese su PIN actual:");
+
+        if (input1 == null || input1.trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Acción cancelada", "Información", JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
 
         if (cuenta.validarPin(input1)) {
             String input2 = javax.swing.JOptionPane.showInputDialog("Ingrese su nuevo PIN:");
+
+            if (input2 == null || input2.trim().isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Acción cancelada", "Información", JOptionPane.INFORMATION_MESSAGE);
+                return;
+            }
 
             if (input2.length() < 4 || input2.length() > 6) {
                 JOptionPane.showMessageDialog(this, "El PIN debe tener entre 4 y 6 caracteres.");
@@ -534,7 +544,7 @@ public class InterfazInfoCuenta extends javax.swing.JFrame {
                     "Estimado usuario: " + cliente.getNombreCompleto() + ", le informamos que se ha cambiado satisfactoriamente el PIN de su cuenta " + cuenta.getNumeroCuenta() + ".");
             }
         } else {
-            JOptionPane.showMessageDialog(this, "El Pin ingresado es incorrecto");
+            JOptionPane.showMessageDialog(this, "El PIN ingresado es incorrecto");
         }
     }//GEN-LAST:event_CambiarPinActionPerformed
 
