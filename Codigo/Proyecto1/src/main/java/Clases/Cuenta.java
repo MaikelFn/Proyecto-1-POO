@@ -17,7 +17,7 @@ public class Cuenta {
   private boolean estatus;  // Activa/Inactiva
   private double saldo;
   private String pinCifrado;  // Almacena el PIN cifrado
-  private final ArrayList<Transaccion> transacciones;
+  private ArrayList<Transaccion> transacciones;
   private final Comision gestionComisiones;  // Gestión de comisiones
   private int contadorTransacciones;  // Controla el número de transacciones
   private final Cliente cliente;
@@ -166,7 +166,9 @@ public class Cuenta {
     }
   }
 
-  
+  public void agregarTransacciones(){
+     this.transacciones = XMLReader.leerTransaccionesPorNumeroCuenta("clientes.xml", this.getNumeroCuenta());
+  }
   // Getters
   
   public Comision getComiciones(){

@@ -16,6 +16,9 @@ import Clases.Transaccion;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.DecimalFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JButton;
@@ -30,6 +33,7 @@ public class InterfazInfoCuenta extends javax.swing.JFrame {
     private Cuenta cuenta;
     private InterfazCliente ventana;
     private Banco banco;
+    private Comision comision;
     /**
      * Creates new form interfazInfoCuenta
      */
@@ -42,6 +46,7 @@ public class InterfazInfoCuenta extends javax.swing.JFrame {
         banco.cargarClientes("clientes.xml");
         this.banco = banco;
         this.cliente = cuenta.getCliente();
+        this.comision = new Comision();
     }
 
     /**
@@ -54,7 +59,6 @@ public class InterfazInfoCuenta extends javax.swing.JFrame {
     private void initComponents() {
 
         Salir = new javax.swing.JButton();
-        jPanel1 = new javax.swing.JPanel();
         CambiarPin = new javax.swing.JButton();
         RetirarColones = new javax.swing.JButton();
         DepositarColones = new javax.swing.JButton();
@@ -62,7 +66,7 @@ public class InterfazInfoCuenta extends javax.swing.JFrame {
         RetirarDolares = new javax.swing.JButton();
         RealizarTransferencia = new javax.swing.JButton();
         ConsultarTransferencias = new javax.swing.JButton();
-        ConsultarCompra = new javax.swing.JButton();
+        ConsultarCompraYVenta = new javax.swing.JButton();
         ConsultarSaldo = new javax.swing.JButton();
         ConsultarEstado = new javax.swing.JButton();
         ConsultarSaldoExtranjero = new javax.swing.JButton();
@@ -84,131 +88,143 @@ public class InterfazInfoCuenta extends javax.swing.JFrame {
         });
         getContentPane().add(Salir, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 70, 30));
 
-        jPanel1.setBackground(new java.awt.Color(1, 95, 209));
-        jPanel1.setPreferredSize(new java.awt.Dimension(300, 300));
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 0, 330, 550));
-
+        CambiarPin.setBackground(new java.awt.Color(0, 0, 51));
+        CambiarPin.setForeground(new java.awt.Color(255, 255, 255));
         CambiarPin.setText("Cambiar pin");
         CambiarPin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CambiarPinActionPerformed(evt);
             }
         });
-        getContentPane().add(CambiarPin, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 450, 110, -1));
+        getContentPane().add(CambiarPin, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 450, 120, -1));
 
+        RetirarColones.setBackground(new java.awt.Color(0, 0, 51));
+        RetirarColones.setForeground(new java.awt.Color(255, 255, 255));
         RetirarColones.setText("Retiro en colones");
+        RetirarColones.setMaximumSize(new java.awt.Dimension(137, 23));
+        RetirarColones.setMinimumSize(new java.awt.Dimension(137, 23));
         RetirarColones.setPreferredSize(new java.awt.Dimension(137, 23));
         RetirarColones.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 RetirarColonesActionPerformed(evt);
             }
         });
-        getContentPane().add(RetirarColones, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 70, 170, -1));
+        getContentPane().add(RetirarColones, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 70, 170, -1));
 
+        DepositarColones.setBackground(new java.awt.Color(0, 0, 51));
+        DepositarColones.setForeground(new java.awt.Color(255, 255, 255));
         DepositarColones.setText("Deposito en colones");
         DepositarColones.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 DepositarColonesActionPerformed(evt);
             }
         });
-        getContentPane().add(DepositarColones, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 140, -1));
+        getContentPane().add(DepositarColones, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 160, -1));
 
+        DepositarDolares.setBackground(new java.awt.Color(0, 0, 51));
+        DepositarDolares.setForeground(new java.awt.Color(255, 255, 255));
         DepositarDolares.setText("Deposito en dolares");
         DepositarDolares.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 DepositarDolaresActionPerformed(evt);
             }
         });
-        getContentPane().add(DepositarDolares, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 140, -1));
+        getContentPane().add(DepositarDolares, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 160, -1));
 
+        RetirarDolares.setBackground(new java.awt.Color(0, 0, 51));
+        RetirarDolares.setForeground(new java.awt.Color(255, 255, 255));
         RetirarDolares.setText("Retiro en dolares");
         RetirarDolares.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 RetirarDolaresActionPerformed(evt);
             }
         });
-        getContentPane().add(RetirarDolares, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 110, 170, -1));
+        getContentPane().add(RetirarDolares, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 110, 170, -1));
 
+        RealizarTransferencia.setBackground(new java.awt.Color(0, 0, 51));
+        RealizarTransferencia.setForeground(new java.awt.Color(255, 255, 255));
         RealizarTransferencia.setText("Realizar transferencia");
         RealizarTransferencia.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 RealizarTransferenciaActionPerformed(evt);
             }
         });
-        getContentPane().add(RealizarTransferencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, -1, -1));
+        getContentPane().add(RealizarTransferencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, 160, -1));
 
+        ConsultarTransferencias.setBackground(new java.awt.Color(0, 0, 51));
+        ConsultarTransferencias.setForeground(new java.awt.Color(255, 255, 255));
         ConsultarTransferencias.setText("Consultar transacciones");
         ConsultarTransferencias.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ConsultarTransferenciasActionPerformed(evt);
             }
         });
-        getContentPane().add(ConsultarTransferencias, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 150, 170, -1));
+        getContentPane().add(ConsultarTransferencias, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 150, 170, -1));
 
-        ConsultarCompra.setText("Consultar Tipo de Cambio");
-        ConsultarCompra.addMouseListener(new java.awt.event.MouseAdapter() {
+        ConsultarCompraYVenta.setBackground(new java.awt.Color(0, 0, 51));
+        ConsultarCompraYVenta.setForeground(new java.awt.Color(255, 255, 255));
+        ConsultarCompraYVenta.setText("Consultar Tipo de Cambio");
+        ConsultarCompraYVenta.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                ConsultarCompraMouseClicked(evt);
+                ConsultarCompraYVentaMouseClicked(evt);
             }
         });
-        ConsultarCompra.addActionListener(new java.awt.event.ActionListener() {
+        ConsultarCompraYVenta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ConsultarCompraActionPerformed(evt);
+                ConsultarCompraYVentaActionPerformed(evt);
             }
         });
-        getContentPane().add(ConsultarCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, 330, -1));
+        getContentPane().add(ConsultarCompraYVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, 390, -1));
 
+        ConsultarSaldo.setBackground(new java.awt.Color(0, 0, 51));
+        ConsultarSaldo.setForeground(new java.awt.Color(255, 255, 255));
         ConsultarSaldo.setText("Consultar saldo");
         ConsultarSaldo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ConsultarSaldoActionPerformed(evt);
             }
         });
-        getContentPane().add(ConsultarSaldo, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 490, -1, -1));
+        getContentPane().add(ConsultarSaldo, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 190, 170, -1));
 
+        ConsultarEstado.setBackground(new java.awt.Color(0, 0, 51));
+        ConsultarEstado.setForeground(new java.awt.Color(255, 255, 255));
         ConsultarEstado.setText("Consultar estado de cuenta");
         ConsultarEstado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ConsultarEstadoActionPerformed(evt);
             }
         });
-        getContentPane().add(ConsultarEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 450, 220, -1));
+        getContentPane().add(ConsultarEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 450, 250, -1));
 
+        ConsultarSaldoExtranjero.setBackground(new java.awt.Color(0, 0, 51));
+        ConsultarSaldoExtranjero.setForeground(new java.awt.Color(255, 255, 255));
         ConsultarSaldoExtranjero.setText("Consultar saldo en divisa extranjera");
         ConsultarSaldoExtranjero.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ConsultarSaldoExtranjeroActionPerformed(evt);
             }
         });
-        getContentPane().add(ConsultarSaldoExtranjero, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 490, 220, -1));
+        getContentPane().add(ConsultarSaldoExtranjero, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 490, 250, -1));
 
+        EliminarCuenta.setBackground(new java.awt.Color(0, 0, 51));
+        EliminarCuenta.setForeground(new java.awt.Color(255, 255, 255));
         EliminarCuenta.setText("Eliminar Cuenta");
         EliminarCuenta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 EliminarCuentaActionPerformed(evt);
             }
         });
-        getContentPane().add(EliminarCuenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 190, 170, -1));
+        getContentPane().add(EliminarCuenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 490, 120, -1));
 
+        ConsultarComiciones.setBackground(new java.awt.Color(0, 0, 51));
+        ConsultarComiciones.setForeground(new java.awt.Color(255, 255, 255));
         ConsultarComiciones.setText("Consultar Comisiones");
         ConsultarComiciones.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ConsultarComicionesActionPerformed(evt);
             }
         });
-        getContentPane().add(ConsultarComiciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, -1, -1));
+        getContentPane().add(ConsultarComiciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, 160, -1));
 
         LabelContenedor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Fondo Redimensionado.jpeg"))); // NOI18N
         LabelContenedor.setPreferredSize(new java.awt.Dimension(100, 550));
@@ -232,19 +248,30 @@ public class InterfazInfoCuenta extends javax.swing.JFrame {
     }//GEN-LAST:event_SalirActionPerformed
 
     private void DepositarColonesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DepositarColonesActionPerformed
+
         if (!cuenta.getEstatus()) {
             JOptionPane.showMessageDialog(this, "La cuenta está inactiva, no se puede realizar esta acción", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
+
         String input = javax.swing.JOptionPane.showInputDialog("Ingrese el monto a depositar en colones:");
+
         if (input != null && !input.isEmpty()) {
             try {
                 double monto = Double.parseDouble(input);
+
                 cuenta.realizarDeposito(monto);
-                javax.swing.JOptionPane.showMessageDialog(this, "Depósito realizado exitosamente.");
-                
+                LocalDate fecha = LocalDate.now();
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                String fechaComoString = fecha.format(formatter);
+                XMLWriter.guardarTransaccion(cliente.getIdentificacion(), "DEPOSITO", monto, fechaComoString, true, "clientes.xml");
+                JOptionPane.showMessageDialog(this, 
+                    "Estimado usuario: " + cliente.getNombreCompleto() + ", se han depositado correctamente " + monto + ".00 colones.\n" +
+                    "[El monto real depositado a su cuenta CTAX es de " + String.format("%.2f", monto) + " colones]\n" +
+                    "[El monto cobrado por concepto de comisión fue de " + String.format("%.2f", comision.calcularComision(monto, "D")) + " colones, que fueron rebajados automáticamente de su saldo actual]");
+
             } catch (NumberFormatException e) {
-                javax.swing.JOptionPane.showMessageDialog(this, "Por favor, ingrese un monto válido.");
+                JOptionPane.showMessageDialog(this, "Por favor, ingrese un monto válido (sin decimales).");
             }
         }
     }//GEN-LAST:event_DepositarColonesActionPerformed
@@ -254,34 +281,52 @@ public class InterfazInfoCuenta extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "La cuenta está inactiva, no se puede realizar esta acción", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
+
         String input1 = javax.swing.JOptionPane.showInputDialog("Ingrese el PIN de su cuenta:");
-        if (cuenta.validarPin(input1)){
-            String PalabraSecreta=GeneradorContraseña.generarContraseña();
-            Mensaje mensaje = new Mensaje(cliente.getCorreo(), "Codigo de verificacion", PalabraSecreta);
+        if (cuenta.validarPin(input1)) {
+            String palabraSecreta = GeneradorContraseña.generarContraseña();
+            Mensaje mensaje = new Mensaje(cliente.getTelefono(), "Código de verificación", palabraSecreta); // Enviando al teléfono
             mensaje.enviar();
-            String input2 = javax.swing.JOptionPane.showInputDialog("Ingrese el Codigo que ha resibido por correo: ");
-            if (PalabraSecreta.equals(input2)){
-                String input3 = javax.swing.JOptionPane.showInputDialog("Ingrese el monto a retirar en colones:");
+
+            JOptionPane.showMessageDialog(this, "Estimado usuario: " + cliente.getNombreCompleto() + 
+                ", se ha enviado una palabra por mensaje de texto, por favor revise sus mensajes y proceda a digitar la palabra enviada.");
+
+            String input2 = javax.swing.JOptionPane.showInputDialog("Ingrese el código que ha recibido por mensaje de texto: ");
+            if (palabraSecreta.equals(input2)) {
+                String input3 = javax.swing.JOptionPane.showInputDialog("Ingrese el monto a retirar (XXXXX.00):");
                 if (input3 != null && !input3.isEmpty()) {
                     try {
                         double monto = Double.parseDouble(input3);
-                        boolean exito = cuenta.realizarRetiro(monto);
-                        if (exito) {
-                            javax.swing.JOptionPane.showMessageDialog(this, "Tome el dinero que ha sido dispensado");
+                        if (monto > 0 && monto <= cuenta.getSaldo()) {
+                            boolean exito = cuenta.realizarRetiro(monto);
+                            if (exito) {
+                                cuenta.realizarRetiro(monto);
+                                LocalDate fecha = LocalDate.now();
+                                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                                String fechaComoString = fecha.format(formatter);
+                                XMLWriter.guardarTransaccion(cliente.getIdentificacion(), "RETIRO", monto, fechaComoString, true, "clientes.xml");
+                                JOptionPane.showMessageDialog(this, 
+                                    "Estimado usuario: " + cliente.getNombreCompleto() + 
+                                    ", el monto de este retiro de su cuenta CTAX es " + String.format("%.2f", monto) + 
+                                    " colones, por favor tome el dinero dispensado.\n" +
+                                    "[El monto cobrado por concepto de comisión fue de " + String.format("%.2f", comision.calcularComision(monto, "R")) + 
+                                    " colones, que fueron rebajados automáticamente de su saldo actual.]");
+                            } else {
+                                JOptionPane.showMessageDialog(this, "Fondos insuficientes.");
+                            }
                         } else {
-                            javax.swing.JOptionPane.showMessageDialog(this, "Fondos insuficientes.");
+                            JOptionPane.showMessageDialog(this, "Monto inválido o insuficiente saldo.");
                         }
                     } catch (NumberFormatException e) {
-                        javax.swing.JOptionPane.showMessageDialog(this, "Por favor, ingrese un monto válido.");
+                        JOptionPane.showMessageDialog(this, "Por favor, ingrese un monto válido (sin decimales).");
                     }
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "Código de verificación incorrecto.");
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "PIN incorrecto.");
         }
-            
-        }else{
-            javax.swing.JOptionPane.showMessageDialog(this, "Codigo de verificacion Incorrecto");
-            }
-            }else {
-                javax.swing.JOptionPane.showMessageDialog(this, "PIN Incorrecto");
-            }
     }//GEN-LAST:event_RetirarColonesActionPerformed
 
             
@@ -290,40 +335,32 @@ public class InterfazInfoCuenta extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "La cuenta está inactiva, no se puede realizar esta acción", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        String input1 = javax.swing.JOptionPane.showInputDialog("Ingrese el PIN de su cuenta:");
-        if (cuenta.validarPin(input1)){
-            String PalabraSecreta=GeneradorContraseña.generarContraseña();
-            Mensaje mensaje = new Mensaje(cliente.getCorreo(), "Codigo de verificacion", PalabraSecreta);
-            mensaje.enviar();
-            String input2 = javax.swing.JOptionPane.showInputDialog("Ingrese el Codigo que ha resibido por correo: ");
-            if (PalabraSecreta.equals(input2)){
-                String input3 = javax.swing.JOptionPane.showInputDialog("Ingrese el monto a retirar en dolares:");
-                try {
-                    double monto = Double.parseDouble(input3);
-                    Comision comision = new Comision();
-                    if (monto > 0 && monto <= cuenta.getSaldo()) {
-                        // Actualizar el saldo de la cuenta
-                        double saldo = banco.convertirDolaresAColones(monto);
-                        boolean exito = cuenta.realizarRetiro(saldo);
-                        if (exito) {
-                            javax.swing.JOptionPane.showMessageDialog(this, "Tome el dinero que ha sido dispensado");
-                        } else {
-                            javax.swing.JOptionPane.showMessageDialog(this, "Fondos insuficientes.");
-                            }
-                    } else {
-                        JOptionPane.showMessageDialog(this, "Monto inválido o insuficiente saldo.");
-                    }
-                } catch (NumberFormatException e) {
-                    JOptionPane.showMessageDialog(this, "Por favor, ingrese un monto válido.");
-                    }
-            
-        }else{
-            javax.swing.JOptionPane.showMessageDialog(this, "Codigo de verificacion Incorrecto");
-                    } 
-        }else {
-            javax.swing.JOptionPane.showMessageDialog(this, "PIN Incorrecto");
-            }
 
+        String input = javax.swing.JOptionPane.showInputDialog("Ingrese el monto a depositar en dólares:");
+
+        if (input != null && !input.isEmpty()) {
+            try {
+                double monto = Double.parseDouble(input);
+
+                double tipoCambio = banco.convertirDolaresAColones(monto);
+                double montoEnColones = monto * tipoCambio;
+
+                cuenta.realizarDeposito(montoEnColones); 
+                LocalDate fecha = LocalDate.now();
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                String fechaComoString = fecha.format(formatter);
+                XMLWriter.guardarTransaccion(cliente.getIdentificacion(), "RETIRO", monto, fechaComoString, true, "clientes.xml");
+                JOptionPane.showMessageDialog(this, 
+                    "Estimado usuario: " + cliente.getNombreCompleto() + ", se han recibido correctamente " + monto + ".00 dólares.\n" +
+                    "[Según el BCCR, el tipo de cambio de compra del dólar de hoy " + LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) + " es: " + String.format("%.2f", tipoCambio) + "]\n" +
+                    "[El monto equivalente en colones es " + String.format("%.2f", montoEnColones) + "]\n" +
+                    "[El monto real depositado a su cuenta CTAX es de " + String.format("%.2f", montoEnColones - comision.calcularComision(monto, "R")) + " colones]\n" +
+                    "[El monto cobrado por concepto de comisión fue de " + String.format("%.2f", comision.calcularComision(monto, "R")) + " colones, que fueron rebajados automáticamente de su saldo actual]");
+
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(this, "Por favor, ingrese un monto válido (sin decimales).");
+            }
+        }
     }//GEN-LAST:event_RetirarDolaresActionPerformed
 
     private void DepositarDolaresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DepositarDolaresActionPerformed
@@ -339,6 +376,10 @@ public class InterfazInfoCuenta extends javax.swing.JFrame {
             if (monto > 0) {
                 double saldo = banco.convertirDolaresAColones(monto);
                 cuenta.realizarDeposito(saldo);
+                LocalDate fecha = LocalDate.now();
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                String fechaComoString = fecha.format(formatter);
+                XMLWriter.guardarTransaccion(cliente.getIdentificacion(), "DEPOSITO", monto, fechaComoString, true, "clientes.xml");
                 JOptionPane.showMessageDialog(this, "Depósito exitoso.");
             } else {
                 JOptionPane.showMessageDialog(this, "Ingrese un monto mayor a 0.");
@@ -353,49 +394,19 @@ public class InterfazInfoCuenta extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "La cuenta está inactiva, no se puede realizar esta acción", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
+
         String input1 = javax.swing.JOptionPane.showInputDialog("Ingrese el PIN de su cuenta:");
-        if (cuenta.validarPin(input1)){
-            String PalabraSecreta=GeneradorContraseña.generarContraseña();
-            Mensaje mensaje = new Mensaje(cliente.getCorreo(), "Codigo de verificacion", PalabraSecreta);
+        if (cuenta.validarPin(input1)) {
+            String palabraSecreta = GeneradorContraseña.generarContraseña();
+            Mensaje mensaje = new Mensaje(cliente.getTelefono(), "Código de verificación", palabraSecreta); // Enviando al teléfono
             mensaje.enviar();
-            String input2 = javax.swing.JOptionPane.showInputDialog("Ingrese el Codigo que ha resibido por correo: ");
-            if (PalabraSecreta.equals(input2)){
-                
-                List<Cuenta> cuentas = cliente.getCuentas();
 
-                if (cuentas.size() == 1) {
-                    JOptionPane.showMessageDialog(this, "No hay cuentas destino asociadas al cliente", "Advertencia", JOptionPane.WARNING_MESSAGE);
-                    return;
-                }
+            JOptionPane.showMessageDialog(this, "Estimado usuario: " + cliente.getNombreCompleto() + 
+                ", se ha enviado una palabra por mensaje de texto, por favor revise sus mensajes y proceda a digitar la palabra enviada.");
 
-                List<String> numerosCuentasDestino = new ArrayList<>();
-                    for (Cuenta c : cuentas) {
-                    if (!c.getNumeroCuenta().equals(cuenta.getNumeroCuenta())) {
-                        numerosCuentasDestino.add(c.getNumeroCuenta());
-                    }
-                }
-
-                String numeroCuentaDestino = javax.swing.JOptionPane.showInputDialog("Ingrese el número de cuenta destino");
-
-                if (numeroCuentaDestino.equals(cuenta.getNumeroCuenta())) {
-                    JOptionPane.showMessageDialog(this, "No se puede realizar transferencias a sí mismo", "Error", JOptionPane.ERROR_MESSAGE);
-                    return;
-                }
-
-                Cuenta cuentaDestino = null;
-                for (Cuenta c : cliente.getCuentas()) {
-                    if (c.getNumeroCuenta().equals(numeroCuentaDestino)) {
-                        cuentaDestino = c;
-                        break;
-                    }
-                }
-
-                if (cuentaDestino == null) {
-                    JOptionPane.showMessageDialog(this, "El número de cuenta destino no es válido", "Error", JOptionPane.ERROR_MESSAGE);
-                    return;
-                }
-
-                String cantidadMonto = javax.swing.JOptionPane.showInputDialog("Ingrese la cantidad a transferir en colones");
+            String input2 = javax.swing.JOptionPane.showInputDialog("Ingrese el código que ha recibido por mensaje de texto: ");
+            if (palabraSecreta.equals(input2)) {
+                String cantidadMonto = javax.swing.JOptionPane.showInputDialog("Ingrese la cantidad a transferir en colones:");
 
                 try {
                     double monto = Double.parseDouble(cantidadMonto);
@@ -405,25 +416,47 @@ public class InterfazInfoCuenta extends javax.swing.JFrame {
                         return;
                     }
 
+                    String numeroCuentaDestino = javax.swing.JOptionPane.showInputDialog("Ingrese el número de cuenta destino:");
+
+                    Cuenta cuentaDestino = null;
+                    for (Cuenta c : cliente.getCuentas()) {
+                        if (c.getNumeroCuenta().equals(numeroCuentaDestino)) {
+                            cuentaDestino = c;
+                            break;
+                        }
+                    }
+
+                    if (cuentaDestino == null || cuentaDestino.getNumeroCuenta().equals(cuenta.getNumeroCuenta())) {
+                        JOptionPane.showMessageDialog(this, "El número de cuenta destino no es válido o es la misma que la cuenta de origen", "Error", JOptionPane.ERROR_MESSAGE);
+                        return;
+                    }
+
                     if (cuenta.realizarRetiro(monto)) {
                         cuenta.realizarRetiro(monto);
+                        LocalDate fecha = LocalDate.now();
+                        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                        String fechaComoString = fecha.format(formatter);
                         cuentaDestino.realizarDeposito(monto);
-                        XMLWriter.reemplazarSaldo(cuentaDestino.getCliente().getIdentificacion(), cuentaDestino.getNumeroCuenta(), cuentaDestino.getSaldo(), "clientes.xml");
                         XMLWriter.reemplazarSaldo(cliente.getIdentificacion(), cuenta.getNumeroCuenta(), cuenta.getSaldo(), "clientes.xml");
-                        JOptionPane.showMessageDialog(this, "Transferencia realizada con éxito", "Información", JOptionPane.INFORMATION_MESSAGE);
+                        XMLWriter.reemplazarSaldo(cuentaDestino.getCliente().getIdentificacion(), cuentaDestino.getNumeroCuenta(), cuentaDestino.getSaldo(), "clientes.xml");
+                        XMLWriter.guardarTransaccion(cliente.getIdentificacion(), "RETIRO", monto, fechaComoString, true, "clientes.xml");
+                        JOptionPane.showMessageDialog(this, "Estimado usuario: " + cliente.getNombreCompleto() + 
+                            ", la transferencia de fondos se ejecutó satisfactoriamente.\n" +
+                            "El monto retirado de la cuenta origen CTAX y depositado en la cuenta destino CTAX es de " + String.format("%.2f", monto) + 
+                            " colones.\n" +
+                            "[El monto cobrado por concepto de comisión a la cuenta origen fue de " + String.format("%.2f", comision.calcularComision(monto, "R")) + 
+                            " colones, que fueron rebajados automáticamente de su saldo actual.]");
                     } else {
-                        JOptionPane.showMessageDialog(this, "Fondos insuficientes", "Error", JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(this, "Fondos insuficientes para realizar la transferencia.", "Error", JOptionPane.ERROR_MESSAGE);
                     }
                 } catch (NumberFormatException e) {
-                    JOptionPane.showMessageDialog(this, "Ingrese una cantidad válida", "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(this, "Por favor, ingrese una cantidad válida (sin decimales).", "Error", JOptionPane.ERROR_MESSAGE);
                 }
+            } else {
+                JOptionPane.showMessageDialog(this, "Código de verificación incorrecto.", "Error", JOptionPane.ERROR_MESSAGE);
             }
-            else{
-                JOptionPane.showMessageDialog(this, "Código Incorrecto", "Error", JOptionPane.ERROR_MESSAGE);
-            }
-        }
-        else{
-            JOptionPane.showMessageDialog(this, "PIN Incorrecto", "Error", JOptionPane.ERROR_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(this, "PIN incorrecto.", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_RealizarTransferenciaActionPerformed
 
@@ -437,7 +470,7 @@ public class InterfazInfoCuenta extends javax.swing.JFrame {
         transacciones.setVisible(true);
     }//GEN-LAST:event_ConsultarTransferenciasActionPerformed
 
-    private void ConsultarCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConsultarCompraActionPerformed
+    private void ConsultarCompraYVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConsultarCompraYVentaActionPerformed
         if (!cuenta.getEstatus()) {
             JOptionPane.showMessageDialog(this, "La cuenta está inactiva, no se puede realizar esta acción", "Error", JOptionPane.ERROR_MESSAGE);
             return;
@@ -449,34 +482,61 @@ public class InterfazInfoCuenta extends javax.swing.JFrame {
                                             Compra de dolares: """ + Compra + "\n"
                                                 + "Venta de dolares: " + Venta);
               
-    }//GEN-LAST:event_ConsultarCompraActionPerformed
+    }//GEN-LAST:event_ConsultarCompraYVentaActionPerformed
 
     private void CambiarPinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CambiarPinActionPerformed
         if (!cuenta.getEstatus()) {
             JOptionPane.showMessageDialog(this, "La cuenta está inactiva, no se puede realizar esta acción", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
+        
         String input1 = javax.swing.JOptionPane.showInputDialog("Ingrese su PIN actual:");
-        if (cuenta.validarPin(input1)){
+
+        if (cuenta.validarPin(input1)) {
             String input2 = javax.swing.JOptionPane.showInputDialog("Ingrese su nuevo PIN:");
+
             if (input2.length() < 4 || input2.length() > 6) {
                 JOptionPane.showMessageDialog(this, "El PIN debe tener entre 4 y 6 caracteres.");
-            }else{
-            cuenta.cambiarPin(input2);
-            XMLWriter.reemplazarPin(cliente.getIdentificacion(), cuenta.getNumeroCuenta(), input2, "clientes.xml");
+            } else {
+                cuenta.cambiarPin(input2);
+                XMLWriter.reemplazarPin(cliente.getIdentificacion(), cuenta.getNumeroCuenta(), input2, "clientes.xml");
+
+                JOptionPane.showMessageDialog(this, 
+                    "Estimado usuario: " + cliente.getNombreCompleto() + ", le informamos que se ha cambiado satisfactoriamente el PIN de su cuenta " + cuenta.getNumeroCuenta() + ".");
             }
-        }else{
+        } else {
             JOptionPane.showMessageDialog(this, "El Pin ingresado es incorrecto");
         }
-        
     }//GEN-LAST:event_CambiarPinActionPerformed
 
     private void ConsultarEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConsultarEstadoActionPerformed
-        if (cuenta.getEstatus()){
-            JOptionPane.showMessageDialog(null, "El Estado de su cuenta es: Activa");
-        }else{
-            JOptionPane.showMessageDialog(null, "El Estado de su cuenta es: Inactiva");
-    }
+        String numeroCuenta = cuenta.getNumeroCuenta();
+        String titular = cuenta.getCliente().getNombreCompleto();
+        String fechaCreacion = cuenta.getFechaCreacion().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        double saldoLocal = cuenta.getSaldo();
+        double saldoEnDolares = banco.convertirColonesADolares(saldoLocal);
+        String estadoCuenta = cuenta.getEstatus() ? "Activa" : "Inactiva";
+
+        DecimalFormat df = new DecimalFormat("#.00");
+
+        StringBuilder estadoInfo = new StringBuilder();
+        estadoInfo.append("Número de Cuenta: ").append(numeroCuenta).append("\n")
+                  .append("Titular de la Cuenta: ").append(titular).append("\n")
+                  .append("Fecha de Creación: ").append(fechaCreacion).append("\n")
+                  .append("Saldo Actual: ₡").append(df.format(saldoLocal)).append("\n")
+                  .append("Saldo en Dólares: $").append(df.format(saldoEnDolares)).append("\n")
+                  .append("Estado de la Cuenta: ").append(estadoCuenta).append("\n\n")
+                  .append("Transacciones Recientes:\n");
+
+        for (Transaccion transaccion : cuenta.getTransacciones()) {
+            estadoInfo.append("- ")
+                      .append(transaccion.getTipoTransaccion()).append(": ₡").append(df.format(transaccion.getMonto()))
+                      .append(" ($").append(df.format(banco.convertirColonesADolares(transaccion.getMonto()))).append(")")
+                      .append(" - Fecha: ").append(transaccion.getFecha().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")))
+                      .append("\n");
+        }
+
+        JOptionPane.showMessageDialog(null, estadoInfo.toString(), "Estado de Cuenta", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_ConsultarEstadoActionPerformed
 
     private void ConsultarSaldoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConsultarSaldoActionPerformed
@@ -487,13 +547,13 @@ public class InterfazInfoCuenta extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(null,"Su saldo actual: "+cuenta.getSaldo());
     }//GEN-LAST:event_ConsultarSaldoActionPerformed
 
-    private void ConsultarCompraMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ConsultarCompraMouseClicked
+    private void ConsultarCompraYVentaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ConsultarCompraYVentaMouseClicked
         if (!cuenta.getEstatus()) {
             JOptionPane.showMessageDialog(this, "La cuenta está inactiva, no se puede realizar esta acción", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
        
-    }//GEN-LAST:event_ConsultarCompraMouseClicked
+    }//GEN-LAST:event_ConsultarCompraYVentaMouseClicked
 
     private void EliminarCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminarCuentaActionPerformed
         if(cuenta.getEstatus()){
@@ -587,7 +647,7 @@ public class InterfazInfoCuenta extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton CambiarPin;
     private javax.swing.JButton ConsultarComiciones;
-    private javax.swing.JButton ConsultarCompra;
+    private javax.swing.JButton ConsultarCompraYVenta;
     private javax.swing.JButton ConsultarEstado;
     private javax.swing.JButton ConsultarSaldo;
     private javax.swing.JButton ConsultarSaldoExtranjero;
@@ -600,7 +660,6 @@ public class InterfazInfoCuenta extends javax.swing.JFrame {
     private javax.swing.JButton RetirarColones;
     private javax.swing.JButton RetirarDolares;
     private javax.swing.JButton Salir;
-    private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 
     private double convertirColonesADolares(double Colones) {

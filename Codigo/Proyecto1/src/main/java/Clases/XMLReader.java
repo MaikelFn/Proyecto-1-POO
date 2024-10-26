@@ -110,7 +110,7 @@ public class XMLReader {
    * @return Una lista de objetos {@link Transaccion} asociadas a la cuenta buscada.
    * @throws IllegalArgumentException Si el archivo XML no existe.
    */
-  public static ArrayList<Transaccion> leerTransaccionesPorNumeroCuenta(String xmlPath, int numeroCuentaBuscado) {
+  public static ArrayList<Transaccion> leerTransaccionesPorNumeroCuenta(String xmlPath, String numeroCuentaBuscado) {
     ArrayList<Transaccion> transacciones = new ArrayList<>();
 
     File inputFile = new File(xmlPath);
@@ -132,9 +132,9 @@ public class XMLReader {
         Element cuentaElement = (Element) cuentasList.item(i);
 
         // Leer el número de cuenta y verificar si coincide con el buscado
-        int numeroCuenta = Integer.parseInt(cuentaElement.getElementsByTagName("Numero").item(0).getTextContent());
+        String numeroCuenta = cuentaElement.getElementsByTagName("Numero").item(0).getTextContent();
 
-        if (numeroCuenta == numeroCuentaBuscado) {
+        if (numeroCuenta.equalsIgnoreCase(numeroCuentaBuscado)) {
           // Si coincide, leer las transacciones de la cuenta
           NodeList transaccionesList = cuentaElement.getElementsByTagName("Transaccion");
 
@@ -158,6 +158,6 @@ public class XMLReader {
       System.err.println("Error al leer las transacciones: " + e.getMessage());
     }
 
-    return transacciones; // Devolver la lista de transacciones
+    return transacciones;
   }
 }

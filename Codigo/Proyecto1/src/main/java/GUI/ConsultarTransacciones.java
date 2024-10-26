@@ -27,26 +27,24 @@ public class ConsultarTransacciones extends javax.swing.JFrame {
 
     private void mostrarTransacciones() {
         Transacciones.removeAll();
+        Transacciones.setLayout(new java.awt.GridLayout(0, 1, 0, 10));
 
         if (cuenta.getTransacciones().isEmpty()) {
             JLabel labelSinTransacciones = new JLabel("¡No has realizado ninguna transacción!");
             labelSinTransacciones.setFont(new java.awt.Font("Arial", java.awt.Font.BOLD, 20));
             labelSinTransacciones.setForeground(java.awt.Color.BLACK);
             labelSinTransacciones.setHorizontalAlignment(JLabel.CENTER);
-            Transacciones.setLayout(new java.awt.FlowLayout(FlowLayout.CENTER));
             Transacciones.add(labelSinTransacciones);
         } else {
-            Transacciones.setLayout(new java.awt.GridLayout(0, 1, 0, 10));
             for (Transaccion transaccion : cuenta.getTransacciones()) {
-                JLabel labelTransaccion = new JLabel(
-                    "Transacción: " + transaccion.obtenerDetalle());
+                JLabel labelTransaccion = new JLabel(transaccion.obtenerDetalle());
                 labelTransaccion.setFont(new java.awt.Font("Arial", java.awt.Font.PLAIN, 16));
                 labelTransaccion.setForeground(java.awt.Color.BLACK);
                 Transacciones.add(labelTransaccion);
             }
         }
 
-        Transacciones.revalidate();
+        Transacciones.revalidate(); 
         Transacciones.repaint();
     }
 

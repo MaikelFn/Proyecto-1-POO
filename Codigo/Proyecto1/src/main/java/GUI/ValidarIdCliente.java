@@ -110,29 +110,48 @@ public class ValidarIdCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_CancelarActionPerformed
 
     private void VerificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VerificarActionPerformed
-        String idUsuario = txtId.getText();
+        String idUsuario = txtId.getText().trim();
+
         if (idUsuario.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Por favor, ingrese su identificación.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
         }
-        
-        else {
-            Cliente clienteEncontrado = null;
 
-            for (Cliente cliente : banco.getClientes()) {
-                if (cliente.getIdentificacion().equals(idUsuario)) {
-                    clienteEncontrado = cliente;
-                    break;
-                }
+        Cliente clienteEncontrado = null;
+
+        for (Cliente cliente : banco.getClientes()) {
+            if (cliente.getIdentificacion().equals(idUsuario)) {
+                clienteEncontrado = cliente;
+                break;
             }
-            if (clienteEncontrado != null) {
-                clienteAutenticado = clienteEncontrado;
+        }
+
+        if (clienteEncontrado != null) {
+            clienteAutenticado = clienteEncontrado;
+
+            String infoCliente = String.format(
+                "Cliente encontrado:\n\nNombre: %s\nIdentificación: %s\nTeléfono: %s\nCorreo electrónico: %s",
+                clienteAutenticado.getNombreCompleto(),
+                clienteAutenticado.getIdentificacion(),
+                clienteAutenticado.getTelefono(),
+                clienteAutenticado.getCorreo()
+            );
+
+            int confirmacion = JOptionPane.showConfirmDialog(
+                this,
+                infoCliente + "\n\n¿Deseas proceder con la creación de la cuenta?",
+                "Confirmar Cliente",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.INFORMATION_MESSAGE
+            );
+
+            if (confirmacion == JOptionPane.YES_OPTION) {
                 this.setVisible(false);
                 RellenarDatosCuenta redireccionar = new RellenarDatosCuenta(clienteAutenticado);
                 redireccionar.setVisible(true);
-                }
-            else {
-            JOptionPane.showMessageDialog(this, "Cliente no encontrado o no registrado", "Error", JOptionPane.ERROR_MESSAGE);
             }
+        } else {
+            JOptionPane.showMessageDialog(this, "Cliente no encontrado o no registrado", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_VerificarActionPerformed
 

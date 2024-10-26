@@ -66,7 +66,7 @@ public class InterfazCliente extends javax.swing.JFrame {
             for (Cuenta cuenta : cliente.getCuentas()) {
                 String textoCuenta = "Cuenta " + index + ": Número de cuenta: " + cuenta.getNumeroCuenta() + ", Saldo: " + cuenta.getSaldo();
                 JLabel labelTransaccion = new JLabel(textoCuenta);
-                labelTransaccion.setFont(new java.awt.Font("Arial", java.awt.Font.PLAIN, 10));
+                labelTransaccion.setFont(new java.awt.Font("Arial", java.awt.Font.PLAIN, 20));
                 labelTransaccion.setForeground(java.awt.Color.BLACK);
                 PanelCuentas.add(labelTransaccion);
                 index++;
@@ -88,7 +88,7 @@ public class InterfazCliente extends javax.swing.JFrame {
             PanelCuentas.setLayout(new java.awt.FlowLayout(FlowLayout.CENTER));
             PanelCuentas.add(labelSinCuentas);
         } else {
-            int yPosition = 20;
+            int yPosition = 10;
             int contador = 1;
 
             for (Cuenta cuenta : cliente.getCuentas()) {
@@ -147,7 +147,6 @@ public class InterfazCliente extends javax.swing.JFrame {
                 contador++;
             }
         }
-
         PanelCuentas.revalidate();
         PanelCuentas.repaint();
     }
