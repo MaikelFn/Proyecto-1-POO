@@ -108,28 +108,58 @@ public class Cliente {
     return Pattern.matches(REGEX_CORREO, pCorreo);
   }
 
+  /**
+ * Establece la dirección de correo electrónico del cliente.
+ *
+ * @param pCorreo la nueva dirección de correo electrónico a establecer.
+ */
   public void setCorreo(String pCorreo) {
     this.correo = pCorreo;
   }
   
+  /**
+ * Establece el número de teléfono del cliente.
+ *
+ * @param pTelefono el nuevo número de teléfono a establecer.
+ */
   public void setTelefono(String pTelefono) {
     this.telefono = pTelefono;
   }
   
   // Getters
 
+  /**
+ * Obtiene el nombre completo del cliente.
+ *
+ * @return el nombre completo del cliente.
+ */
   public String getNombreCompleto() {
     return nombreCompleto;
   }
 
+  /**
+ * Obtiene la identificación del cliente.
+ *
+ * @return la identificación del cliente.
+ */
   public String getIdentificacion() {
     return identificacion;
   }
 
+  /**
+ * Obtiene el número de teléfono del cliente.
+ *
+ * @return el número de teléfono del cliente.
+ */
   public String getTelefono() {
     return telefono;
   }
 
+  /**
+ * Obtiene la dirección de correo electrónico del cliente.
+ *
+ * @return la dirección de correo electrónico del cliente.
+ */
   public String getCorreo() {
     return correo;
   }

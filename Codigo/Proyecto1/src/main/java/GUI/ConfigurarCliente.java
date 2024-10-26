@@ -88,6 +88,7 @@ public class ConfigurarCliente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void CambiarTelefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CambiarTelefonoActionPerformed
+        String telefonoAnterior = cliente.getTelefono();
         String nuevoTelefono;
         boolean telefonoValido = false;
 
@@ -110,14 +111,19 @@ public class ConfigurarCliente extends javax.swing.JFrame {
 
             telefonoValido = true;
             cliente.setTelefono(nuevoTelefono);
+
             XMLWriter.reemplazarTelefono(cliente.getIdentificacion(), nuevoTelefono, "clientes.xml");
-            JOptionPane.showMessageDialog(null, "Teléfono cambiado con éxito.");
+
+            JOptionPane.showMessageDialog(null, 
+                "Estimado usuario: " + cliente.getNombreCompleto() + ", usted ha cambiado el número de teléfono " + 
+                telefonoAnterior + " por el nuevo número " + nuevoTelefono + ".");
         }
     }//GEN-LAST:event_CambiarTelefonoActionPerformed
 
     private void CambiarCorreoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CambiarCorreoActionPerformed
-         String nuevoCorreo;
-         boolean correoValido = false;
+        String correoAnterior = cliente.getCorreo();
+        String nuevoCorreo;
+        boolean correoValido = false;
 
         while (!correoValido) { 
             nuevoCorreo = JOptionPane.showInputDialog(null, "Ingrese el nuevo correo electrónico:");
@@ -138,8 +144,12 @@ public class ConfigurarCliente extends javax.swing.JFrame {
 
             correoValido = true;
             cliente.setCorreo(nuevoCorreo);
+
             XMLWriter.reemplazarCorreo(cliente.getIdentificacion(), nuevoCorreo, "clientes.xml");
-            JOptionPane.showMessageDialog(null, "Correo cambiado con éxito.");
+
+            JOptionPane.showMessageDialog(null, 
+                "Estimado usuario: " + cliente.getNombreCompleto() + ", usted ha cambiado la dirección de correo " + 
+                correoAnterior + " por " + nuevoCorreo + ".");
         }
     }//GEN-LAST:event_CambiarCorreoActionPerformed
 

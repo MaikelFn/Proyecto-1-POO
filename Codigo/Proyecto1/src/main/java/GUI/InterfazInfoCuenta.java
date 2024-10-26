@@ -465,9 +465,38 @@ public class InterfazInfoCuenta extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "La cuenta está inactiva, no se puede realizar esta acción", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        this.setVisible(false);
-        ConsultarTransacciones transacciones = new ConsultarTransacciones(cuenta, this);
-        transacciones.setVisible(true);
+
+        String inputPin = JOptionPane.showInputDialog(null, "Ingrese el PIN de la cuenta:");
+
+        if (inputPin == null || !cuenta.validarPin(inputPin)) {
+            JOptionPane.showMessageDialog(null, "PIN incorrecto. Intente de nuevo.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        String palabraSecreta = GeneradorContraseña.generarContraseña();
+        Mensaje mensaje = new Mensaje(cliente.getTelefono(), "Código de verificación", palabraSecreta); // Simula el envío al teléfono
+        mensaje.enviar();
+
+        JOptionPane.showMessageDialog(this, "Estimado usuario: " + cliente.getNombreCompleto() + 
+            ", se ha enviado una palabra por mensaje de texto, por favor revise sus mensajes y proceda a digitar la palabra enviada.");
+
+        String inputPalabra = javax.swing.JOptionPane.showInputDialog("Ingrese el código que ha recibido por mensaje de texto:");
+        if (palabraSecreta == null || !palabraSecreta.equals(inputPalabra)) {
+            JOptionPane.showMessageDialog(null, "La palabra ingresada no coincide. Intente de nuevo.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        StringBuilder detallesTransacciones = new StringBuilder("Estimado usuario: " + cliente.getNombreCompleto() +
+            ", el detalle de todos los depósitos y retiros que se han realizado sobre su cuenta " + cuenta.getNumeroCuenta() + " es:\n\n");
+
+        for (Transaccion transaccion : cuenta.getTransacciones()) {
+            detallesTransacciones.append("Tipo de transacción: ").append(transaccion.getTipoTransaccion())
+                .append(", Monto: ").append(String.format("%.2f", transaccion.getMonto()))
+                .append(", Fecha: ").append(transaccion.getFecha())
+                .append(", Generó comisión: ").append(transaccion.tieneComision() ? "Sí" : "No").append("\n");
+        }
+
+        JOptionPane.showMessageDialog(null, detallesTransacciones.toString());
     }//GEN-LAST:event_ConsultarTransferenciasActionPerformed
 
     private void ConsultarCompraYVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConsultarCompraYVentaActionPerformed
@@ -544,7 +573,21 @@ public class InterfazInfoCuenta extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "La cuenta está inactiva, no se puede realizar esta acción", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        JOptionPane.showMessageDialog(null,"Su saldo actual: "+cuenta.getSaldo());
+
+        String pinIngresado = JOptionPane.showInputDialog(null, "Ingrese el PIN de la cuenta:");
+
+        if (pinIngresado == null) {
+            return;
+        }
+
+        if (!pinIngresado.equals(cuenta.getPin())) {
+            JOptionPane.showMessageDialog(null, "PIN incorrecto. Intente de nuevo.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        JOptionPane.showMessageDialog(null, 
+            "Estimado usuario: " + cliente.getNombreCompleto() + ", el saldo actual de su cuenta " + cuenta.getNumeroCuenta() + 
+            " es de " + String.format("%.2f", cuenta.getSaldo()) + " colones.");
     }//GEN-LAST:event_ConsultarSaldoActionPerformed
 
     private void ConsultarCompraYVentaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ConsultarCompraYVentaMouseClicked

@@ -35,21 +35,49 @@ public class Transaccion {
   }
 
   // Getters
+  
+  /**
+ * Obtiene el tipo de transacción.
+ *
+ * @return Una cadena que representa el tipo de transacción (DEPOSITO o RETIRO).
+ */
   public String getTipoTransaccion() {
     return tipoTransaccion;
   }
 
+  /**
+ * Obtiene el monto de la transacción.
+ *
+ * @return El monto de la transacción como un valor de tipo double.
+ */
   public double getMonto() {
     return monto;
   }
 
+  /**
+ * Obtiene la fecha de la transacción.
+ *
+ * @return La fecha de la transacción como un objeto LocalDate.
+ */
   public LocalDate getFecha() {
     return fecha;
   }
 
+  /**
+ * Indica si la transacción tiene una comisión asociada.
+ *
+ * @return Verdadero si la transacción tiene una comisión, falso en caso contrario.
+ */
   public boolean tieneComision() {
     return tieneComision;
   }
+  
+  /**
+ * Obtiene los detalles de la transacción como una cadena de texto.
+ *
+ * @return Una representación en formato de texto que incluye el tipo de transacción, 
+ *         monto, fecha y estado de la comisión.
+ */
    public String obtenerDetalle() {
     String estadoComision = tieneComision ? "Con comisión" : "Sin comisión";
     return "Transacción: " + tipoTransaccion + "\n" +

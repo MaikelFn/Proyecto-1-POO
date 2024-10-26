@@ -166,48 +166,103 @@ public class Cuenta {
     }
   }
 
+  /**
+ * Agrega las transacciones asociadas a la cuenta desde el archivo XML.
+ * Se obtiene la lista de transacciones mediante el lector XML, utilizando el número de cuenta actual.
+ */
   public void agregarTransacciones(){
      this.transacciones = XMLReader.leerTransaccionesPorNumeroCuenta("clientes.xml", this.getNumeroCuenta());
   }
   // Getters
   
+  /**
+ * Obtiene el objeto Comision asociado a la cuenta.
+ *
+ * @return Un objeto Comision que gestiona las comisiones generadas por la cuenta.
+ */
   public Comision getComiciones(){
       return gestionComisiones;
   }
 
+  /**
+ * Obtiene el saldo actual de la cuenta.
+ *
+ * @return El saldo actual de la cuenta como un valor de tipo double.
+ */
   public double getSaldo() {
     return saldo;
   }
 
+  /**
+ * Obtiene el número de cuenta.
+ *
+ * @return Una cadena que representa el número de cuenta.
+ */
   public String getNumeroCuenta() {
     return numeroCuenta;
   }
   
+  /**
+ * Obtiene el PIN cifrado de la cuenta.
+ *
+ * @return Una cadena que representa el PIN cifrado de la cuenta.
+ */
   public String getPin(){
       return pinCifrado;
   }
 
+  /**
+ * Obtiene la lista de transacciones realizadas en la cuenta.
+ *
+ * @return Una lista de objetos Transaccion asociada a la cuenta.
+ */
   public List<Transaccion> getTransacciones() {
     return transacciones;
   }
 
+  /**
+ * Obtiene el estado actual de la cuenta.
+ *
+ * @return Verdadero si la cuenta está activa, falso si está inactiva.
+ */
   public boolean getEstatus() {
     return estatus;
   }
   
+  /**
+ * Obtiene la fecha de creación de la cuenta.
+ *
+ * @return La fecha de creación de la cuenta como un objeto LocalDate.
+ */
   public LocalDate getFechaCreacion(){
     return fechaCreacion;
   }
   
+  /**
+ * Obtiene el cliente asociado a la cuenta.
+ *
+ * @return Un objeto Cliente que representa al propietario de la cuenta.
+ */
   public Cliente getCliente() {
     return cliente;
   }
   
   //Setters
+  
+  /**
+ * Establece el estado de la cuenta (activa/inactiva).
+ *
+ * @param status El nuevo estado de la cuenta, verdadero para activa y falso para inactiva.
+ */
   public void setEstatus(boolean status){
     this.estatus = status;
   }
   
+  /**
+ * Establece la fecha de creación de la cuenta.
+ *
+ * @param fecha La nueva fecha de creación de la cuenta como un objeto LocalDate.
+ */
   public void setFechaCreacion(LocalDate fecha) {
     this.fechaCreacion = fecha;
   }

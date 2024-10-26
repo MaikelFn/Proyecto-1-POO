@@ -10,7 +10,10 @@ public class Comision {
   private double comisionesRetiros;
   private double comisionesDepositos;
   
-  
+  /**
+     * Constructor de la clase Comision.
+     * Inicializa las comisiones totales, comisiones por retiros y comisiones por depósitos en cero.
+     */
   public Comision(){
       this.totalComisiones=0;
       this.comisionesRetiros=0;

@@ -21,12 +21,21 @@ import org.w3c.dom.Document;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
+/**
+ * Clase que representa un cajero en el sistema bancario, con funcionalidad para
+ * realizar transacciones y consultar el tipo de cambio del dólar a través de un servicio externo.
+ */
 public class Cajero {
   
   private final Banco banco;
   private static final String URL_VENTA = "https://gee.bccr.fi.cr/Indicadores/Suscripciones/WS/wsindicadoreseconomicos.asmx/ObtenerIndicadoresEconomicosXML?Indicador=317&FechaInicio=%s&FechaFinal=%s&Nombre=Profit&SubNiveles=N&CorreoElectronico=bancoprofit@gmail.com&Token=7OORAALCP0";
   private static final String URL_COMPRA = "https://gee.bccr.fi.cr/Indicadores/Suscripciones/WS/wsindicadoreseconomicos.asmx/ObtenerIndicadoresEconomicosXML?Indicador=318&FechaInicio=%s&FechaFinal=%s&Nombre=Profit&SubNiveles=N&CorreoElectronico=bancoprofit@gmail.com&Token=7OORAALCP0";
   
+  /**
+ * Constructor de la clase Cajero.
+ *
+ * @param pBanco instancia de Banco que contiene la lista de clientes y sus cuentas.
+ */
   public Cajero(Banco pBanco) {
     this.banco = pBanco;
   }
@@ -48,6 +57,12 @@ public class Cajero {
     return Optional.empty();
   }
   
+  /**
+ * Consulta el tipo de cambio (compra o venta) del dólar mediante un servicio web.
+ *
+ * @param tipo tipo de cambio a consultar, puede ser "compra" o "venta".
+ * @return el tipo de cambio en formato String, o null en caso de error.
+ */
   public static String consultarTipoCambio(String tipo) {
     try {
       LocalDate fechaInicio = LocalDate.now();
@@ -85,6 +100,12 @@ public class Cajero {
     return null;
   }
   
+  /**
+ * Extrae el valor del tipo de cambio desde el XML devuelto por el servicio web.
+ *
+ * @param xmlString el contenido XML en formato String.
+ * @return el valor del tipo de cambio en formato String, o null si ocurre algún error.
+ */
   public static String leerValorNumDesdeXML(String xmlString) {
     try {
       // Preparar el analizador de XML sin manejar namespaces
@@ -106,6 +127,13 @@ public class Cajero {
     }
   }
   
+  /**
+ * Verifica si el PIN ingresado por el usuario corresponde al PIN registrado para una cuenta específica.
+ *
+ * @param pNumeroCuenta el número de cuenta a verificar.
+ * @param pPinIngresado el PIN ingresado por el usuario.
+ * @return true si el PIN es correcto, false en caso contrario.
+ */
   public boolean validarPin(String pNumeroCuenta, String pPinIngresado) {
     Optional<Cuenta> cuentaOpt = buscarCuenta(pNumeroCuenta);
     if (cuentaOpt.isPresent()) {
@@ -117,6 +145,13 @@ public class Cajero {
     }
   }
   
+  /**
+ * Realiza una transacción de depósito o retiro en una cuenta específica.
+ *
+ * @param pNumeroCuenta el número de la cuenta en la que se realizará la transacción.
+ * @param pMonto el monto de la transacción.
+ * @param pTipoTransaccion el tipo de transacción, puede ser "deposito" o "retiro".
+ */
   public void realizarTransaccion(String pNumeroCuenta, double pMonto, String pTipoTransaccion) {
     Optional<Cuenta> cuentaOpt = buscarCuenta(pNumeroCuenta);
     if (cuentaOpt.isPresent()) {
