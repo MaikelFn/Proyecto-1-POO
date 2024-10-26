@@ -328,37 +328,78 @@ public class InterfazInfoCuenta extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "La cuenta está inactiva, no se puede realizar esta acción", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
+        String input1 = javax.swing.JOptionPane.showInputDialog("Ingrese el PIN de su cuenta:");
+        if (cuenta.validarPin(input1)){
+            String PalabraSecreta=GeneradorContraseña.generarContraseña();
+            Mensaje mensaje = new Mensaje(cliente.getCorreo(), "Codigo de verificacion", PalabraSecreta);
+            mensaje.enviar();
+            String input2 = javax.swing.JOptionPane.showInputDialog("Ingrese el Codigo que ha resibido por correo: ");
+            if (PalabraSecreta.equals(input2)){
+                
+                List<Cuenta> cuentas = cliente.getCuentas();
 
-        List<Cuenta> cuentas = cliente.getCuentas();
-    
-        if (cuentas.size() == 1) {
-            JOptionPane.showMessageDialog(this, "No hay cuentas destino asociadas al cliente", "Advertencia", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
+                if (cuentas.size() == 1) {
+                    JOptionPane.showMessageDialog(this, "No hay cuentas destino asociadas al cliente", "Advertencia", JOptionPane.WARNING_MESSAGE);
+                    return;
+                }
 
-        List<String> numerosCuentasDestino = new ArrayList<>();
-            for (Cuenta c : cuentas) {
-            if (!c.getNumeroCuenta().equals(cuenta.getNumeroCuenta())) { // Ignorar la cuenta origen
-                numerosCuentasDestino.add(c.getNumeroCuenta());
+                List<String> numerosCuentasDestino = new ArrayList<>();
+                    for (Cuenta c : cuentas) {
+                    if (!c.getNumeroCuenta().equals(cuenta.getNumeroCuenta())) {
+                        numerosCuentasDestino.add(c.getNumeroCuenta());
+                    }
+                }
+
+                String numeroCuentaDestino = javax.swing.JOptionPane.showInputDialog("Ingrese el número de cuenta destino");
+
+                if (numeroCuentaDestino.equals(cuenta.getNumeroCuenta())) {
+                    JOptionPane.showMessageDialog(this, "No se puede realizar transferencias a sí mismo", "Error", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+
+                Cuenta cuentaDestino = null;
+                for (Cuenta c : cliente.getCuentas()) {
+                    if (c.getNumeroCuenta().equals(numeroCuentaDestino)) {
+                        cuentaDestino = c;
+                        break;
+                    }
+                }
+
+                if (cuentaDestino == null) {
+                    JOptionPane.showMessageDialog(this, "El número de cuenta destino no es válido", "Error", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+
+                String cantidadMonto = javax.swing.JOptionPane.showInputDialog("Ingrese la cantidad a transferir en colones");
+
+                try {
+                    double monto = Double.parseDouble(cantidadMonto);
+
+                    if (monto <= 0) {
+                        JOptionPane.showMessageDialog(this, "El monto debe ser mayor a 0", "Error", JOptionPane.ERROR_MESSAGE);
+                        return;
+                    }
+
+                    if (cuenta.realizarRetiro(monto)) {
+                        cuenta.realizarRetiro(monto);
+                        cuentaDestino.realizarDeposito(monto);
+                        XMLWriter.reemplazarSaldo(cuentaDestino.getCliente().getIdentificacion(), cuentaDestino.getNumeroCuenta(), cuentaDestino.getSaldo(), "clientes.xml");
+                        XMLWriter.reemplazarSaldo(cliente.getIdentificacion(), cuenta.getNumeroCuenta(), cuenta.getSaldo(), "clientes.xml");
+                        JOptionPane.showMessageDialog(this, "Transferencia realizada con éxito", "Información", JOptionPane.INFORMATION_MESSAGE);
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Fondos insuficientes", "Error", JOptionPane.ERROR_MESSAGE);
+                    }
+                } catch (NumberFormatException e) {
+                    JOptionPane.showMessageDialog(this, "Ingrese una cantidad válida", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+            else{
+                JOptionPane.showMessageDialog(this, "Código Incorrecto", "Error", JOptionPane.ERROR_MESSAGE);
             }
         }
-
-        String numeroCuentaDestino = javax.swing.JOptionPane.showInputDialog("Ingrese el numero de cuenta destino");
-
-        if (numeroCuentaDestino.equals(cuenta.getNumeroCuenta())) {
-            JOptionPane.showMessageDialog(this, "No se puede realizar transferencias a sí mismo", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
+        else{
+            JOptionPane.showMessageDialog(this, "PIN Incorrecto", "Error", JOptionPane.ERROR_MESSAGE);
         }
-
-        if (!numerosCuentasDestino.contains(numeroCuentaDestino)) {
-            JOptionPane.showMessageDialog(this, "El número de cuenta destino no es válido", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-
-        // Aquí iría el código si pasa todas las restricciones
-        // Ejemplo: realizar la transferencia
-        // JOptionPane.showMessageDialog(this, "Transferencia realizada con éxito");
-        
     }//GEN-LAST:event_RealizarTransferenciaActionPerformed
 
     private void ConsultarTransferenciasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConsultarTransferenciasActionPerformed
