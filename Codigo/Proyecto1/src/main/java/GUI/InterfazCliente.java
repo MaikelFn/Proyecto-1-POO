@@ -141,6 +141,7 @@ public class InterfazCliente extends javax.swing.JFrame {
         ScrollBarCuentas = new javax.swing.JScrollBar();
         BotonVolver = new javax.swing.JButton();
         Configuracion = new javax.swing.JButton();
+        ConsultarCuentas = new javax.swing.JButton();
         LabelFondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -205,7 +206,17 @@ public class InterfazCliente extends javax.swing.JFrame {
                 ConfiguracionActionPerformed(evt);
             }
         });
-        getContentPane().add(Configuracion, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, -1, 60));
+        getContentPane().add(Configuracion, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 90, 130, 60));
+
+        ConsultarCuentas.setBackground(new java.awt.Color(0, 0, 51));
+        ConsultarCuentas.setForeground(new java.awt.Color(255, 255, 255));
+        ConsultarCuentas.setText("Consultar Cuentas");
+        ConsultarCuentas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ConsultarCuentasActionPerformed(evt);
+            }
+        });
+        getContentPane().add(ConsultarCuentas, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 260, -1, 60));
 
         LabelFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Fondo.jpeg"))); // NOI18N
         getContentPane().add(LabelFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -224,6 +235,10 @@ public class InterfazCliente extends javax.swing.JFrame {
         iniciarSesion.setVisible(true);
     }//GEN-LAST:event_BotonVolverActionPerformed
 
+    private void ConsultarCuentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConsultarCuentasActionPerformed
+    
+    }//GEN-LAST:event_ConsultarCuentasActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -240,6 +255,7 @@ public class InterfazCliente extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BotonVolver;
     private javax.swing.JButton Configuracion;
+    private javax.swing.JButton ConsultarCuentas;
     private javax.swing.JInternalFrame FrameCuentas;
     private javax.swing.JLabel LabelFondo;
     private javax.swing.JPanel PanelCuentas;

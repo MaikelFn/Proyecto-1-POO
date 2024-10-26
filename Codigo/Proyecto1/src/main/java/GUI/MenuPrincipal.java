@@ -17,6 +17,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private final Banco banco;
     /**
      * Creates new form MenuPrincipal
+     * @param banco
      */
     public MenuPrincipal(Banco banco) {
         initComponents();

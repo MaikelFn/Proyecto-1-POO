@@ -1,7 +1,5 @@
 GUI\MenuPrincipal$4.class
-GUI\Verificacion$1.class
 GUI\InterfazCliente$3.class
-GUI\Verificacion.class
 GUI\InterfazInfoCuenta$9.class
 GUI\ConsultarTransacciones.class
 GUI\RegistrarCliente$2.class
@@ -34,6 +32,7 @@ GUI\ValidarIdCliente.class
 GUI\InterfazInfoCuenta$6.class
 GUI\ConsultarTransacciones$1.class
 GUI\MenuPrincipal$5.class
+GUI\InterfazInfoCuenta$16.class
 GUI\InterfazInfoCuenta$3.class
 GUI\RellenarDatosCuenta.class
 GUI\InterfazInfoCuenta$4.class
@@ -41,13 +40,13 @@ GUI\Transacciones$1.class
 GUI\IniciarSesion$3.class
 GUI\ValidarIdCliente$4.class
 GUI\MenuPrincipal$2.class
-GUI\Verificacion$3.class
 GUI\InterfazCliente$1$1.class
 GUI\IniciarSesion.class
 GUI\RellenarDatosCuenta$1.class
 Clases\Cajero.class
 GUI\InterfazInfoCuenta$14.class
 GUI\InterfazInfoCuenta$7.class
+GUI\InterfazInfoCuenta$17.class
 Clases\XMLReader.class
 GUI\ConfigurarCliente$2.class
 GUI\RegistrarCliente$4.class
@@ -55,10 +54,11 @@ GUI\ValidarIdCliente$1.class
 Clases\Mensaje.class
 GUI\RellenarDatosCuenta$2.class
 GUI\MenuPrincipal$3.class
+GUI\InterfazInfoCuenta$15.class
 GUI\RegistrarCliente$3.class
+GUI\InterfazInfoCuenta$18.class
 GUI\RegistrarCliente$6.class
 Clases\Banco.class
-GUI\Verificacion$2.class
 GUI\InterfazCliente.class
 Clases\XMLWriter.class
 GUI\InterfazInfoCuenta$5.class

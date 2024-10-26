@@ -168,6 +168,10 @@ public class Cuenta {
 
   
   // Getters
+  
+  public Comision getComiciones(){
+      return gestionComisiones;
+  }
 
   public double getSaldo() {
     return saldo;

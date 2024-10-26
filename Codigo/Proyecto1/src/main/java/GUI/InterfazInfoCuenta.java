@@ -12,8 +12,15 @@ import Clases.Cajero;
 import Clases.Cliente;
 import Clases.GeneradorContraseña;
 import Clases.Mensaje;
+import Clases.Transaccion;
+import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
 /**
  *
  * @author Tayle
@@ -59,6 +66,8 @@ public class InterfazInfoCuenta extends javax.swing.JFrame {
         ConsultarSaldo = new javax.swing.JButton();
         ConsultarEstado = new javax.swing.JButton();
         ConsultarSaldoExtranjero = new javax.swing.JButton();
+        EliminarCuenta = new javax.swing.JButton();
+        ConsultarComiciones = new javax.swing.JButton();
         LabelContenedor = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -82,11 +91,11 @@ public class InterfazInfoCuenta extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 330, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 550, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 0, 330, 550));
@@ -159,7 +168,7 @@ public class InterfazInfoCuenta extends javax.swing.JFrame {
                 ConsultarCompraActionPerformed(evt);
             }
         });
-        getContentPane().add(ConsultarCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, 330, -1));
+        getContentPane().add(ConsultarCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, 330, -1));
 
         ConsultarSaldo.setText("Consultar saldo");
         ConsultarSaldo.addActionListener(new java.awt.event.ActionListener() {
@@ -184,6 +193,22 @@ public class InterfazInfoCuenta extends javax.swing.JFrame {
             }
         });
         getContentPane().add(ConsultarSaldoExtranjero, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 490, 220, -1));
+
+        EliminarCuenta.setText("Eliminar Cuenta");
+        EliminarCuenta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EliminarCuentaActionPerformed(evt);
+            }
+        });
+        getContentPane().add(EliminarCuenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 190, 170, -1));
+
+        ConsultarComiciones.setText("Consultar Comisiones");
+        ConsultarComiciones.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ConsultarComicionesActionPerformed(evt);
+            }
+        });
+        getContentPane().add(ConsultarComiciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, -1, -1));
 
         LabelContenedor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Fondo Redimensionado.jpeg"))); // NOI18N
         LabelContenedor.setPreferredSize(new java.awt.Dimension(100, 550));
@@ -242,7 +267,7 @@ public class InterfazInfoCuenta extends javax.swing.JFrame {
                         double monto = Double.parseDouble(input3);
                         boolean exito = cuenta.realizarRetiro(monto);
                         if (exito) {
-                            javax.swing.JOptionPane.showMessageDialog(this, "Retiro realizado exitosamente.");
+                            javax.swing.JOptionPane.showMessageDialog(this, "Tome el dinero que ha sido dispensado");
                         } else {
                             javax.swing.JOptionPane.showMessageDialog(this, "Fondos insuficientes.");
                         }
@@ -281,7 +306,7 @@ public class InterfazInfoCuenta extends javax.swing.JFrame {
                         double saldo = banco.convertirDolaresAColones(monto);
                         boolean exito = cuenta.realizarRetiro(saldo);
                         if (exito) {
-                            javax.swing.JOptionPane.showMessageDialog(this, "Retiro realizado exitosamente.");
+                            javax.swing.JOptionPane.showMessageDialog(this, "Tome el dinero que ha sido dispensado");
                         } else {
                             javax.swing.JOptionPane.showMessageDialog(this, "Fondos insuficientes.");
                             }
@@ -470,6 +495,58 @@ public class InterfazInfoCuenta extends javax.swing.JFrame {
        
     }//GEN-LAST:event_ConsultarCompraMouseClicked
 
+    private void EliminarCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminarCuentaActionPerformed
+        if(cuenta.getEstatus()){
+        String input1 = javax.swing.JOptionPane.showInputDialog("Ingrese el PIN de su cuenta:");
+        if (cuenta.validarPin(input1)){
+            JFrame ventanaConfirmacion = new JFrame("Confirmar eliminación de cuenta");
+            ventanaConfirmacion.setSize(400, 150);
+            ventanaConfirmacion.setLayout(new FlowLayout());
+            ventanaConfirmacion.setLocationRelativeTo(null);
+
+            JLabel labelConfirmacion = new JLabel("Estimado " + cliente.getNombreCompleto()+ 
+                ", usted está a punto de eliminar su cuenta. Saldo actual: " + cuenta.getSaldo());
+            JButton botonAceptar = new JButton("Aceptar");
+            JButton botonCancelar = new JButton("Cancelar");
+
+            ventanaConfirmacion.add(labelConfirmacion);
+            ventanaConfirmacion.add(botonAceptar);
+            ventanaConfirmacion.add(botonCancelar);
+
+            ventanaConfirmacion.setVisible(true);
+
+            botonAceptar.addActionListener(new ActionListener() {
+              @Override
+              public void actionPerformed(ActionEvent e) {
+                ventanaConfirmacion.dispose();
+                if (cuenta.getSaldo()!=0){
+                    javax.swing.JOptionPane.showMessageDialog(ventanaConfirmacion, "Tome el dinero que ha sido dispensado");
+                }
+                cuenta.desactivarCuenta();
+                JOptionPane.showMessageDialog(ventanaConfirmacion, "La cuenta ah sido eliminada con exito");
+                
+              }
+            });
+
+            botonCancelar.addActionListener(new ActionListener() {
+              @Override
+              public void actionPerformed(ActionEvent e) {
+                ventanaConfirmacion.dispose();
+              }
+            });
+            
+        }
+        }else{
+            JOptionPane.showMessageDialog(this, "La cuenta esta desactivada", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_EliminarCuentaActionPerformed
+
+    private void ConsultarComicionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConsultarComicionesActionPerformed
+        Comision comisiones=cuenta.getComiciones();
+        JOptionPane.showMessageDialog(null, "Total Comiciones: "+comisiones.getTotalComisiones()+"\n"+
+        "Comiciones Por Retiro: "+comisiones.getComisionesRetiros()+"\n"+"Comiciones Por Deposito: "+comisiones.getComisionesDepositos());
+    }//GEN-LAST:event_ConsultarComicionesActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -509,6 +586,7 @@ public class InterfazInfoCuenta extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton CambiarPin;
+    private javax.swing.JButton ConsultarComiciones;
     private javax.swing.JButton ConsultarCompra;
     private javax.swing.JButton ConsultarEstado;
     private javax.swing.JButton ConsultarSaldo;
@@ -516,6 +594,7 @@ public class InterfazInfoCuenta extends javax.swing.JFrame {
     private javax.swing.JButton ConsultarTransferencias;
     private javax.swing.JButton DepositarColones;
     private javax.swing.JButton DepositarDolares;
+    private javax.swing.JButton EliminarCuenta;
     private javax.swing.JLabel LabelContenedor;
     private javax.swing.JButton RealizarTransferencia;
     private javax.swing.JButton RetirarColones;

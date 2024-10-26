@@ -9,7 +9,13 @@ public class Comision {
   private double totalComisiones;
   private double comisionesRetiros;
   private double comisionesDepositos;
-
+  
+  
+  public Comision(){
+      this.totalComisiones=0;
+      this.comisionesRetiros=0;
+      this.comisionesDepositos=0;
+  }
   /**
    * Calcula la comisión correspondiente según el tipo de transacción.
    *
@@ -28,6 +34,7 @@ public class Comision {
 
     totalComisiones += total;
     return total;
+    
   }
 
   /**
@@ -36,6 +43,7 @@ public class Comision {
    * @return El total de comisiones.
    */
   public double getTotalComisiones() {
+    System.out.println("Si se hizo mamon");
     return totalComisiones;
   }
 

@@ -50,13 +50,7 @@ public class Transaccion {
   public boolean tieneComision() {
     return tieneComision;
   }
-
-  /**
-   * Método para obtener los detalles de la transacción en formato String.
-   *
-   * @return Cadena con el detalle completo de la transacción.
-   */
-  public String obtenerDetalle() {
+   public String obtenerDetalle() {
     String estadoComision = tieneComision ? "Con comisión" : "Sin comisión";
     return "Transacción: " + tipoTransaccion + "\n" +
            "Monto: " + monto + " colones\n" +
