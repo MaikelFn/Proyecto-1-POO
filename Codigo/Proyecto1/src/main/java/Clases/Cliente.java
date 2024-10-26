@@ -76,7 +76,7 @@ public class Cliente {
    */
   public void agregarCuenta(Cuenta pCuenta) {
     this.cuentas.add(pCuenta);
-    System.out.println("Cuenta agregada con éxito al cliente.");
+
   }
 
   /**
