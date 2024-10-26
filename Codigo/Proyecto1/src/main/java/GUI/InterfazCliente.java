@@ -49,81 +49,108 @@ public class InterfazCliente extends javax.swing.JFrame {
          interfaz.setVisible(true);
      }
 
-    private void cargarCuentas() {
-    banco.cargarClientes("clientes.xml");
-    PanelCuentas.removeAll();
+    private void mostrarCuentas() { 
+        banco.cargarClientes("clientes.xml");
+        PanelCuentas.removeAll();
 
-    if (cliente.getCuentas().isEmpty()) {
-        JLabel labelSinCuentas = new JLabel("¡No posees ninguna cuenta!");
-        labelSinCuentas.setFont(new java.awt.Font("Arial", java.awt.Font.BOLD, 20));
-        labelSinCuentas.setForeground(java.awt.Color.BLACK);
-        labelSinCuentas.setHorizontalAlignment(JLabel.CENTER);
-        PanelCuentas.setLayout(new java.awt.FlowLayout(FlowLayout.CENTER));
-        PanelCuentas.add(labelSinCuentas);
-    } else {
-        int yPosition = 20;
-        int contador = 1;
-
-        for (Cuenta cuenta : cliente.getCuentas()) {
-            JButton botonCuenta = new JButton("Cuenta " + contador);
-            botonCuenta.setBounds(20, yPosition, 200, 30);
-            yPosition += 40;
-
-            botonCuenta.addActionListener(new ActionListener() {
-                int intentos = 0;
-
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    JFrame ventanaVerificar = new JFrame("Verificar cuenta");
-                    ventanaVerificar.setSize(350, 120);
-                    ventanaVerificar.setLayout(new FlowLayout());
-                    ventanaVerificar.setLocationRelativeTo(null);
-                    
-                    JLabel labelIngresarNumero = new JLabel("Ingrese el numero de cuenta:");
-                    JTextField textFieldNumero = new JTextField(10);
-                    JButton botonVerificar = new JButton("Verificar cuenta");
-                    
-                    ventanaVerificar.add(labelIngresarNumero);
-                    ventanaVerificar.add(textFieldNumero);
-                    ventanaVerificar.add(botonVerificar);
-                    
-                    ventanaVerificar.setVisible(true);
-                    
-                    botonVerificar.addActionListener(new ActionListener() {
-                        @Override
-                        public void actionPerformed(ActionEvent ev) {
-                            String pinIngresado = textFieldNumero.getText();
-                            
-                            if (cuenta.getNumeroCuenta().equals(pinIngresado)) {
-                                JOptionPane.showMessageDialog(ventanaVerificar, "¡Acceso concedido!");
-                                ventanaVerificar.dispose();
-                                crearVentana(cuenta);
-                            } else {
-                                intentos++;
-
-                                if (intentos == 1) {
-                                    JOptionPane.showMessageDialog(ventanaVerificar, "Acceso denegado, 2 intentos disponibles");
-                                } else if (intentos == 2) {
-                                    JOptionPane.showMessageDialog(ventanaVerificar, "Acceso denegado, 1 intento disponible");
-                                } else if (intentos == 3) {
-                                    JOptionPane.showMessageDialog(ventanaVerificar, "La cuenta ha sido desactivada");
-                                    cuenta.desactivarCuenta();
-                                    ventanaVerificar.dispose();
-                                }
-                            }
-                        }
-                    });
-                }
-            });
-
-            PanelCuentas.add(botonCuenta);
-            contador++;
+        if (cliente.getCuentas().isEmpty()) {
+            JLabel labelSinCuentas = new JLabel("¡No posees ninguna cuenta!");
+            labelSinCuentas.setFont(new java.awt.Font("Arial", java.awt.Font.BOLD, 20));
+            labelSinCuentas.setForeground(java.awt.Color.BLACK);
+            labelSinCuentas.setHorizontalAlignment(JLabel.CENTER);
+            PanelCuentas.setLayout(new java.awt.FlowLayout(FlowLayout.CENTER));
+            PanelCuentas.add(labelSinCuentas);
+        } else {
+            int index = 1;
+            PanelCuentas.setLayout(new java.awt.GridLayout(0, 1, 0, 10));
+            for (Cuenta cuenta : cliente.getCuentas()) {
+                String textoCuenta = "Cuenta " + index + ": Número de cuenta: " + cuenta.getNumeroCuenta() + ", Saldo: " + cuenta.getSaldo();
+                JLabel labelTransaccion = new JLabel(textoCuenta);
+                labelTransaccion.setFont(new java.awt.Font("Arial", java.awt.Font.PLAIN, 10));
+                labelTransaccion.setForeground(java.awt.Color.BLACK);
+                PanelCuentas.add(labelTransaccion);
+                index++;
+            }
+            PanelCuentas.revalidate();
+            PanelCuentas.repaint();   
         }
     }
 
-    PanelCuentas.revalidate();
-    PanelCuentas.repaint();
-}
+    private void cargarCuentas() {
+        banco.cargarClientes("clientes.xml");
+        PanelCuentas.removeAll();
+
+        if (cliente.getCuentas().isEmpty()) {
+            JLabel labelSinCuentas = new JLabel("¡No posees ninguna cuenta!");
+            labelSinCuentas.setFont(new java.awt.Font("Arial", java.awt.Font.BOLD, 20));
+            labelSinCuentas.setForeground(java.awt.Color.BLACK);
+            labelSinCuentas.setHorizontalAlignment(JLabel.CENTER);
+            PanelCuentas.setLayout(new java.awt.FlowLayout(FlowLayout.CENTER));
+            PanelCuentas.add(labelSinCuentas);
+        } else {
+            int yPosition = 20;
+            int contador = 1;
+
+            for (Cuenta cuenta : cliente.getCuentas()) {
+                JButton botonCuenta = new JButton("Cuenta " + contador);
+                botonCuenta.setBounds(20, yPosition, 200, 30);
+                yPosition += 40;
+
+                botonCuenta.addActionListener(new ActionListener() {
+                    int intentos = 0;
+
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        JFrame ventanaVerificar = new JFrame("Verificar cuenta");
+                        ventanaVerificar.setSize(350, 120);
+                        ventanaVerificar.setLayout(new FlowLayout());
+                        ventanaVerificar.setLocationRelativeTo(null);
+
+                        JLabel labelIngresarNumero = new JLabel("Ingrese el numero de cuenta:");
+                        JTextField textFieldNumero = new JTextField(10);
+                        JButton botonVerificar = new JButton("Verificar cuenta");
+
+                        ventanaVerificar.add(labelIngresarNumero);
+                        ventanaVerificar.add(textFieldNumero);
+                        ventanaVerificar.add(botonVerificar);
+
+                        ventanaVerificar.setVisible(true);
+
+                        botonVerificar.addActionListener(new ActionListener() {
+                            @Override
+                            public void actionPerformed(ActionEvent ev) {
+                                String pinIngresado = textFieldNumero.getText();
+
+                                if (cuenta.getNumeroCuenta().equals(pinIngresado)) {
+                                    JOptionPane.showMessageDialog(ventanaVerificar, "¡Acceso concedido!");
+                                    ventanaVerificar.dispose();
+                                    crearVentana(cuenta);
+                                } else {
+                                    intentos++;
+
+                                    if (intentos == 1) {
+                                        JOptionPane.showMessageDialog(ventanaVerificar, "Acceso denegado, 2 intentos disponibles");
+                                    } else if (intentos == 2) {
+                                        JOptionPane.showMessageDialog(ventanaVerificar, "Acceso denegado, 1 intento disponible");
+                                    } else if (intentos == 3) {
+                                        JOptionPane.showMessageDialog(ventanaVerificar, "La cuenta ha sido desactivada");
+                                        cuenta.desactivarCuenta();
+                                        ventanaVerificar.dispose();
+                                    }
+                                }
+                            }
+                        });
+                    }
+                });
+
+                PanelCuentas.add(botonCuenta);
+                contador++;
+            }
+        }
+
+        PanelCuentas.revalidate();
+        PanelCuentas.repaint();
+    }
 
 
 
@@ -142,6 +169,7 @@ public class InterfazCliente extends javax.swing.JFrame {
         BotonVolver = new javax.swing.JButton();
         Configuracion = new javax.swing.JButton();
         ConsultarCuentas = new javax.swing.JButton();
+        Recargar = new javax.swing.JButton();
         LabelFondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -216,7 +244,17 @@ public class InterfazCliente extends javax.swing.JFrame {
                 ConsultarCuentasActionPerformed(evt);
             }
         });
-        getContentPane().add(ConsultarCuentas, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 260, -1, 60));
+        getContentPane().add(ConsultarCuentas, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, -1, 60));
+
+        Recargar.setBackground(new java.awt.Color(0, 0, 51));
+        Recargar.setForeground(new java.awt.Color(255, 255, 255));
+        Recargar.setText("Recargar cuentas");
+        Recargar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RecargarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(Recargar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 260, -1, 60));
 
         LabelFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Fondo.jpeg"))); // NOI18N
         getContentPane().add(LabelFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -236,8 +274,12 @@ public class InterfazCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_BotonVolverActionPerformed
 
     private void ConsultarCuentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConsultarCuentasActionPerformed
-    
+        mostrarCuentas();
     }//GEN-LAST:event_ConsultarCuentasActionPerformed
+
+    private void RecargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RecargarActionPerformed
+        cargarCuentas();
+    }//GEN-LAST:event_RecargarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -259,6 +301,7 @@ public class InterfazCliente extends javax.swing.JFrame {
     private javax.swing.JInternalFrame FrameCuentas;
     private javax.swing.JLabel LabelFondo;
     private javax.swing.JPanel PanelCuentas;
+    private javax.swing.JButton Recargar;
     private javax.swing.JScrollBar ScrollBarCuentas;
     // End of variables declaration//GEN-END:variables
 }

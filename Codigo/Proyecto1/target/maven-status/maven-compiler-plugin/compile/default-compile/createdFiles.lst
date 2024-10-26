@@ -20,6 +20,7 @@ Clases\Comision.class
 GUI\ConfigurarCliente$4.class
 GUI\InterfazInfoCuenta$13.class
 GUI\RegistrarCliente$1.class
+GUI\InterfazCliente$6.class
 Clases\GeneradorContraseña.class
 GUI\IniciarSesion$2.class
 GUI\InterfazInfoCuenta$10.class
@@ -39,6 +40,7 @@ GUI\InterfazInfoCuenta$4.class
 GUI\Transacciones$1.class
 GUI\IniciarSesion$3.class
 GUI\ValidarIdCliente$4.class
+GUI\InterfazCliente$5.class
 GUI\MenuPrincipal$2.class
 GUI\InterfazCliente$1$1.class
 GUI\IniciarSesion.class
